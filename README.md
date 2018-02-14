@@ -9,3 +9,5 @@
 3) In every case where you are asked to enter a command,  the command is on a single line, and the entire command may not be visible on your screen.   If you wish to copy and paste the command, and it looks like the command may not be completely visible hold the mouse and sweep to the right and you can pick up the entire command.  If you do this, make sure you don't accidentally "over-select" and accidentally copy some of the command output.
 
 4) Within a PuTTY session, you can paste the clipboard's contents by right-clicking the mouse.  This will insert the clipboard contents where your cursor is within the PuTTY session.
+
+5) *Step 2.10* of the Composer Smorgasboard lab should show *0.17.4* in the output, not *0.17.3* as shown in the lab.  (This has been corrected so you may be seeing *0.17.4* already).
