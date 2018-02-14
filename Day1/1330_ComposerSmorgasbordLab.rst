@@ -91,8 +91,8 @@ Note that, in accordance with the note from the prior step, you are specifying t
 **Step 2.10** Enter this *grep* command now to verify that the changes you intended to make in the prior step were made successfully::
 
  bcuser@ubuntu16043:~/composer-sample-applications/packages/digitalproperty-app$ grep 0\.17\.4 package.json 
-     "composer-cli": "^0.17.3",
-     "composer-client": "^0.17.3",
+     "composer-cli": "^0.17.4",
+     "composer-client": "^0.17.4",
 
 **Important:** If you do not see the output as shown above, now would be a really good time to ask an instructor for help, because if you don't get this step right, things will get, shall we say, "challenging" for you later.
 
