@@ -52,4 +52,4 @@ as their IP address:
 **Note:** The first *pscp* command in the above screenshot shows what might happen to you if you forget to specify your PuTTY Private Key- it won't
 work!
 
-**You can now return to *Step 4.2* in the Composer Smorgasboard lab**
+**You can now return to *Step 4.32* in the Composer Smorgasboard lab**
