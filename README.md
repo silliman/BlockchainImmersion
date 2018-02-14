@@ -11,3 +11,5 @@
 4) Within a PuTTY session, you can paste the clipboard's contents by right-clicking the mouse.  This will insert the clipboard contents where your cursor is within the PuTTY session.
 
 5) *Step 2.10* of the Composer Smorgasboard lab should show *0.17.4* in the output, not *0.17.3* as shown in the lab.  (This has been corrected so you may be seeing *0.17.4* already).
+
+6) The very last sentence of the PuTTY SCP Instructions should point you back to *Step 4.32*, not *Step 4.2*.  (This has been corrected so you may be seeing the corrected version already).
