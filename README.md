@@ -7,3 +7,5 @@
 2) Almost all cases where you should enter commands on the command line will be ```formatted like this```.  In many cases the command to be entered is followed by output from that command.  It should be clear what the command is and what the output is but if not ask an instructor for help.  In most cases the command prompt is shown-  make sure you do not copy the command prompt into the clipboard- just copy the command.  Ask an instructor for help if necessary.
 
 3) In every case where you are asked to enter a command,  the command is on a single line, and the entire command may not be visible on your screen.   If you wish to copy and paste the command, and it looks like the command may not be completely visible hold the mouse and sweep to the right and you can pick up the entire command.  If you do this, make sure you don't accidentally "over-select" and accidentally copy some of the command output.
+
+4) Within a PuTTY session, you can paste the clipboard's contents by right-clicking the mouse.  This will insert the clipboard contents where your cursor is within the PuTTY session.
