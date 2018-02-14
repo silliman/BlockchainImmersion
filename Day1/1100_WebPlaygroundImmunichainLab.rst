@@ -26,7 +26,7 @@ The Hyperledger Composer Playground is way to produce Blockchain applications qu
 Part 1: Starting and Creating Your Hyperledger Composer Network
 ===============================================================
 
-**1.** Go to the workshop's GitHub repository (*****) and download contents.
+**1.** Go to this workshop's GitHub repository  https://github.com/silliman/BlockchainImmersion and download the Web_immunichain.bna and permissions.acl files.  **Tip:** Right-click on the link in this step and select *Open new tab* or *Open new window* so that these instructions stay open for as you are downloading these two files.
 
 **2.** From your web browser, go to https://composer-playground.mybluemix.net/ -- this is the web version of Hyperledger Composer.
 
