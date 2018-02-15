@@ -113,11 +113,11 @@ This step will create a user named blockchain with the password of password. Aga
 
 	bcuser@ubuntu16043:~$ CREATE USER 'blockchain@localhost' IDENTIFIED by 'password';
 
-**8.** With your new user created, enter GRANT ALL PRIVILEDGES  ON '.' TO blockchain@localhost';
+**8.** With your new user created, enter GRANT ALL PRIVILEGES  ON '.' TO 'blockchain@localhost';
 
 This step grants our user, blockchain, to have all privileges to all databases.::
 
-	bcuser@ubuntu16043:~$ GRANT ALL PRIVILEDGES  ON '.' TO blockchain@localhost';
+	bcuser@ubuntu16043:~$ GRANT ALL PRIVILEGES  ON '.' TO 'blockchain@localhost';
 
 **9.** Exit mysql as root and log in as blockchain by entering
 mysql -ublockchain -p. When prompted for the password, it is password if you followed step 7.::
