@@ -111,13 +111,13 @@ When you get prompted, always say YES - Except when it asks if you want to chang
 
 This step will create a user named blockchain with the password of password. Again, security is our top priority here.::
 
-	bcuser@ubuntu16043:~$ CREATE USER 'blockchain@localhost' IDENTIFIED by 'password';
+	mysql> CREATE USER 'blockchain'@'localhost' IDENTIFIED by 'password';
 
 **8.** With your new user created, enter GRANT ALL PRIVILEGES  ON '.' TO 'blockchain@localhost';
 
 This step grants our user, blockchain, to have all privileges to all databases.::
 
-	bcuser@ubuntu16043:~$ GRANT ALL PRIVILEGES  ON '.' TO 'blockchain@localhost';
+	mysql> GRANT ALL PRIVILEGES  ON fabricexplorer.* to 'blockchain'@'localhost';
 
 **9.** Exit mysql as root and log in as blockchain by entering
 mysql -ublockchain -p. When prompted for the password, it is password if you followed step 7.::
@@ -209,7 +209,9 @@ mysql -ublockchain -p < db/fabricexplorer.sql. You will be prompt to enter the p
 
 .. image:: images/explorer/2.3-p.png
 
-**11.** If your file looks the same as the picture, enter npm install from the blockchain-explorer directory. This will create a node_modules directory and a log.log file to give out information on Explorer
+**11.** If your file looks the same as the picture, enter npm install from the blockchain-explorer directory. This will create a node_modules directory and a log.log file to give out information on Explorer::
+
+	bcuser@ubuntu16043:~$ npm install
 
 **12.** Now you are ready to start Explorer by entering ./start.sh - You will be given your command prompt right away meaning that it is running in the background::
 
