@@ -159,7 +159,9 @@ This part is dependent on you accomplishing the Hyperledger Fabric installation 
 
 .. image:: images/explorer/2.2-p.png
 
-**3.** Now run this command to get the needed documentation for Blockchain Explorer. wget htps://raw.githubusercontent.com/****
+**3.** Now run this command to get the needed documentation for Blockchain Explorer::
+
+ wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/blockchain-explorer.tar.gz
 
 **4.** Extract the file you just pulled down from GitHub, by entering tar -xvf blockchain-explorer.tar.gz::
 
