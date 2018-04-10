@@ -269,7 +269,8 @@ Once you’ve made the changes, try adding new Vehicle assets to the registry to
 
 For more information on the Hyperledger Composer modelling language please refer to: https://hyperledger.github.io/composer/reference/cto_language.html
 
-Part 9: Export the Business Network Archive
+Part 9: Export the Business Network Archive (Optional)
+======================================================
 
 **1.** Exporting to a Business Network Archive will save the Read Me, Model File(s), Script File(s) and Access Control rules that can be easily imported to a local developer enviroment, handed to a network operator to deploy to a live network or saved asa backup. More details on local installation at https://hyperledger.github.io/composer/installing/installing-index.html.
 
