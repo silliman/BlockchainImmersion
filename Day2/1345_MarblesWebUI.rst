@@ -485,6 +485,6 @@ advanced assignments:
 •	Look at the peer or orderer logs while you work with the Marbles UI
 *	Click the **Setup** button in the upper left in the Marbles UI and then under **Register Marble Owners** at the top right click the **Edit** link.  Edit the list of names at the bottom and click **Register**.  Do your new users show up in both companies’ sessions?  What happens if you add a name that exists already?
  
-** Leave the system in this state for the final lab, the Hyperledger Explorer lab **
+**Leave the system in this state for the final lab, the Hyperledger Explorer lab**
 
 **End of lab!**
