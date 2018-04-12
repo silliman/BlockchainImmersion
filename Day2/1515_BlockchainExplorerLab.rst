@@ -7,7 +7,7 @@ Blockchain Explorer is a simple way to monitor, at a channel level, what is happ
 
 **Pre-Requisites** 
 
-*	Nodejs 6.9.x (Nodejs v7.x is not yet supported)
+*	Node.js 6.9.x (Nodejs v7.x is not yet supported)
 *	Mysql 5.7 or greater
 *	Docker 17.06.2-ce
 *	Docker Compose 1.14 or greater
