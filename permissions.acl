@@ -1,192 +1,159 @@
 rule UpdatePersonal {
     description: "Allow the guardian update the child's personal info"
     participant(g): "ibm.wsc.immunichain.Guardian"
-    operation: ALL
-    resource(c): "ibm.wsc.immunichain.Childform"
-    transaction(tx): "ibm.wsc.immunichain.updateChildForm"
-    condition: (c.guardian.getIdentifier() == g.getIdentifier())
-    action: ALLOW
+      operation: ALL
+      resource(c): "ibm.wsc.immunichain.Childform"
+      transaction(tx): "ibm.wsc.immunichain.updateChildForm"
+      condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      action: ALLOW
 }
 
 rule txUpdatePersonal {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.Guardian"
-    operation: ALL
-    resource: "ibm.wsc.immunichain.updateChildForm"
-    action: ALLOW
+      description: "Allow the guardian to update the child assets"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: ALL
+      resource: "ibm.wsc.immunichain.updateChildForm"
+      action: ALLOW
 }
 
 rule AssignProvider {
-    description: "Allow the guardian to add medical providers"
-    participant(g): "ibm.wsc.immunichain.Guardian"
-    operation: UPDATE
-    resource(c): "ibm.wsc.immunichain.Childform"
-    transaction(tx): "ibm.wsc.immunichain.assignMedProvider"
-    condition: (c.guardian.getIdentifier() == g.getIdentifier())
-    action: ALLOW
+      description: "Allow the guardian to assign and update medical providers"
+      participant(g): "ibm.wsc.immunichain.Guardian"
+      operation: UPDATE
+      resource(c): "ibm.wsc.immunichain.Childform"
+      transaction(tx): "ibm.wsc.immunichain.assignMedProvider"
+      condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      action: ALLOW
 }
 
 rule txAssignProvider {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.Guardian"
-    operation: ALL
-    resource: "ibm.wsc.immunichain.assignMedProvider"
-    action: ALLOW
+      description: "Allow the guardian to assign and update medical providers"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: ALL
+      resource: "ibm.wsc.immunichain.assignMedProvider"
+      action: ALLOW
 }
 
 rule AuthMembers {
-    description: "Allow the guardian to authorize member organizations"
-    participant(g): "ibm.wsc.immunichain.Guardian"
-    operation: UPDATE
-    resource(c): "ibm.wsc.immunichain.Childform"
-    transaction(tx): "ibm.wsc.immunichain.authMember"
-    condition: (c.guardian.getIdentifier() == g.getIdentifier())
-    action: ALLOW
+      description: "Allow the guardian to authorize member organizations"
+      participant(g): "ibm.wsc.immunichain.Guardian"
+      operation: UPDATE
+      resource(c): "ibm.wsc.immunichain.Childform"
+      transaction(tx): "ibm.wsc.immunichain.authMember"
+      condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      action: ALLOW
 }
 
-rule txAuthMembers {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.Guardian"
-    operation: ALL
-    resource: "ibm.wsc.immunichain.authMember"
-    action: ALLOW
-}
-
-rule medAuthMembers {
-    description: "Allow the guardian to authorize member organizations"
-    participant(g): "ibm.wsc.immunichain.MedProvider"
-    operation: UPDATE
-    resource(c): "ibm.wsc.immunichain.Childform"
-    transaction(tx): "ibm.wsc.immunichain.authMember"
-    condition: (c.guardian.getIdentifier() == g.getIdentifier())
-    action: ALLOW
-}
-
-rule txMedAuthMembers {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.MedProvider"
-    operation: ALL
-    resource: "ibm.wsc.immunichain.authMember"
-    action: ALLOW
+rule txUAuthMembers {
+      description: "Allow the guardian to authorize member organizations"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: ALL
+      resource: "ibm.wsc.immunichain.authMember"
+      action: ALLOW
 }
 
 rule DeauthMembers {
-    description: "Allow the guardian to deauthorize member organizations"
-    participant(g): "ibm.wsc.immunichain.Guardian"
-    operation: UPDATE
-    resource(c): "ibm.wsc.immunichain.Childform"
-    transaction(tx): "ibm.wsc.immunichain.removeMemberAuth"
-    condition: (c.guardian.getIdentifier() == g.getIdentifier())
-    action: ALLOW
+      description: "Allow the guardian to deauthorize member organizations"
+      participant(g): "ibm.wsc.immunichain.Guardian"
+      operation: UPDATE
+      resource(c): "ibm.wsc.immunichain.Childform"
+      transaction(tx): "ibm.wsc.immunichain.removeMemberAuth"
+      condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      action: ALLOW
 }
 
 rule txDeauthMembers {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.Guardian"
-    operation: ALL
-    resource: "ibm.wsc.immunichain.removeMemberAuth"
-    action: ALLOW
-}
-
-rule medDeauthMembers {
-    description: "Allow the guardian to deauthorize member organizations"
-    participant(g): "ibm.wsc.immunichain.MedProvider"
-    operation: UPDATE
-    resource(c): "ibm.wsc.immunichain.Childform"
-    transaction(tx): "ibm.wsc.immunichain.removeMemberAuth"
-    condition: (c.guardian.getIdentifier() == g.getIdentifier())
-    action: ALLOW
-}
-
-rule txMedDeauthMembers {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.MedProvider"
-    operation: ALL
-    resource: "ibm.wsc.immunichain.removeMemberAuth"
-    action: ALLOW
+      description: "Allow the guardian to deauthorize member organizations"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: ALL
+      resource: "ibm.wsc.immunichain.removeMemberAuth"
+      action: ALLOW
 }
 
 rule Reassign {
-    description: "Allow the guardian to reassign their children (if of age)"
-    participant(g): "ibm.wsc.immunichain.Guardian"
-    operation: UPDATE
-    resource(c): "ibm.wsc.immunichain.Childform"
-    transaction(tx): "ibm.wsc.immunichain.reassignGuardian"
-    condition: (c.guardian.getIdentifier() == g.getIdentifier())
-    action: ALLOW
+      description: "Allow the guardian to reassign their children (if of age)"
+        participant(g): "ibm.wsc.immunichain.Guardian"
+      operation: UPDATE
+      resource(c): "ibm.wsc.immunichain.Childform"
+      transaction(tx): "ibm.wsc.immunichain.reassignGuardian"
+      condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      action: ALLOW
 }
 
 rule txReassign {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.Guardian"
-    operation: ALL
-    resource: "ibm.wsc.immunichain.reassignGuardian"
-    action: ALLOW
+      description: "Allow the guardian to reassign their children (if of age)"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: ALL
+      resource: "ibm.wsc.immunichain.reassignGuardian"
+      action: ALLOW
 }
 
 rule GuardianRead {
-    description: "Allow guardians to view their own child record"
-    participant(g): "ibm.wsc.immunichain.Guardian"
-    operation: UPDATE, READ
-    resource(c): "ibm.wsc.immunichain.Childform"
-    condition: (c.guardian.getIdentifier() == g.getIdentifier())
-    action: ALLOW
+      description: "Allow guardians to view their own child's health record"
+      participant(g): "ibm.wsc.immunichain.Guardian"
+      operation: UPDATE, READ
+      resource(c): "ibm.wsc.immunichain.Childform"
+      condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      action: ALLOW
 }
 
 rule readMembers {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.Guardian"
-    operation: READ
-    resource: "ibm.wsc.immunichain.Member"
-    action: ALLOW
+      description: "Allow Guardian to view the Member"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: READ
+      resource: "ibm.wsc.immunichain.Member"
+      action: ALLOW
 }
 
 rule readMedicalProviders {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.Guardian"
-    operation: READ
-    resource: "ibm.wsc.immunichain.MedProvider"
-    action: ALLOW
+    description: "Allow the Guardian to read the Medical Providers in the network"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: READ
+      resource: "ibm.wsc.immunichain.MedProvider"
+      action: ALLOW
 }
 
 rule addChild {
-    description: "Allow the guardian to reassign their children (if of age)"
-    participant: "ibm.wsc.immunichain.MedProvider"
-    operation: CREATE
-    resource: "ibm.wsc.immunichain.Childform"
-    action: ALLOW
+      description: "Allow the Medical Provider to add a child in the network"
+      participant: "ibm.wsc.immunichain.MedProvider"
+      operation: CREATE
+      resource: "ibm.wsc.immunichain.Childform"
+      action: ALLOW
 }
 
 rule CreateChild {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.Guardian"
-    operation: CREATE
-    resource: "ibm.wsc.immunichain.Childform"
-    action: ALLOW
+      description: "Allow the Guardian to add a child in the network"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: CREATE
+      resource: "ibm.wsc.immunichain.Childform"
+      action: ALLOW
 }
 
-rule readChildren {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.MedProvider"
-    operation: READ
-    resource: "ibm.wsc.immunichain.Childform"
-    action: ALLOW
+rule MedicalProviderRead {
+    description: "Allow Medical Providers to view children that have them as a medical provider"
+      participant(g): "ibm.wsc.immunichain.MedProvider"
+      operation: UPDATE, READ
+      resource(c): "ibm.wsc.immunichain.Childform"
+      condition: (c.medproviders.some(function(MedProvider) {
+      return MedProvider.getIdentifier() == g.getIdentifier();
+      }))
+      action: ALLOW
 }
 
-rule readMember {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.MedProvider"
-    operation: READ
-    resource: "ibm.wsc.immunichain.Member"
-    action: ALLOW
+rule medRead1 {
+    description: "Allow the Medical Providers to read all the members available in the network"
+      participant: "ibm.wsc.immunichain.MedProvider"
+      operation: READ
+      resource: "ibm.wsc.immunichain.Member"
+      action: ALLOW
 }
 
-rule readGuardian {
-    description: "Allow the guardian to create child assets in the network"
-    participant: "ibm.wsc.immunichain.MedProvider"
-    operation: READ
-    resource: "ibm.wsc.immunichain.Guardian"
-    action: ALLOW
+rule medRead2 {
+    description: "Allow the Medical provider to view all the guardian's in the network"
+      participant: "ibm.wsc.immunichain.MedProvider"
+      operation: READ
+      resource: "ibm.wsc.immunichain.Guardian"
+      action: ALLOW
 }
 
 rule memberRead {
@@ -196,4 +163,41 @@ rule memberRead {
     resource: "ibm.wsc.immunichain.Childform"
     action: ALLOW
 }
+
+rule MemberRead {
+      description: "Allow members to view children that have them as a member"
+        participant(g): "ibm.wsc.immunichain.Member"
+      operation: UPDATE, READ
+      resource(c): "ibm.wsc.immunichain.Childform"
+        condition: (c.members.some(function (member) {
+      return member.getIdentifier() == g.getIdentifier();
+      }))
+      action: ALLOW
+}
+
+rule medUser {
+    description: "Allow the Medical provider to access the network"
+      participant: "ibm.wsc.immunichain.MedProvider"
+      operation: READ
+      resource: "org.hyperledger.composer.system.*"
+      action: ALLOW
+}
+
+  rule memberUser {
+    description: "Allow the Member to access the network"
+      participant: "ibm.wsc.immunichain.Member"
+      operation: READ
+      resource: "org.hyperledger.composer.system.*"
+      action: ALLOW
+}
+
+rule GuardanUser {
+    description: "Allow the Guardian to access the network"
+      participant: "ibm.wsc.immunichain.Guardian"
+      operation: READ
+      resource: "org.hyperledger.composer.system.*"
+      action: ALLOW
+}
+
+
 
