@@ -257,7 +257,9 @@ That basically says, assign medical provider #1 (Healthquest) to Child #1 (Emily
 
 **15.** We have submitted some transactions, but now let's actually add some immunizations to a child
 
-**16.** Click on Submit Transaction and then change the transaction type to addImmunizations. The format to add an immunization is a little different. In the Vaccine section put { "name" : "immunization", "provider" : "medical provider", "imdate" : "date" } inbetween the brackets. Replace the immunization, medical provider and date with whatever you would like. Here is what my transaction looks like: 
+**16.** Click on Submit Transaction and then change the transaction type to addImmunizations. The format to add an immunization is a little different. In the Vaccine section put { "name" : "immunization", "provider" : "medical provider", "imdate" : "date" } inbetween the brackets. Replace the immunization, medical provider and date with whatever you would like. Here is what my transaction looks like::
+
+	{ "name" : "immunization", "provider" : "medical provider", "imdate" : "date" }
 
 .. image:: images/composer/4.11.png
 
