@@ -182,17 +182,15 @@ By the way, if you enter a command and end it with #, everything after the # is 
 So, if you see me place comments after any commands you do not have to enter them but if you do, it will not hurt anything.  
 
 This script calls two Hyperledger Fabric utilites- *cryptogen*, which creates security material (certificates and keys) 
-and *configtxgen* (Configuration Transaction Generator), which is called four times, to create four things::
+and *configtxgen* (Configuration Transaction Generator), which is called four times, to create four things:
 
- 1.	An **orderer genesis block** – this will be the first block on the orderer’s system channel. The location of this block is 
- specified to the Orderer when it is started up via the ORDERER_GENERAL_GENESISFILE environment variable.
+1.	An **orderer genesis block** – this will be the first block on the orderer’s system channel. The location of this block is specified to the Orderer when it is started up via the ORDERER_GENERAL_GENESISFILE environment variable.
 
- 2.	A **channel transaction** – later in the lab, this is sent to the orderer and will cause a new channel to be created when you run the **peer channel create** command.
+2.	A **channel transaction** – later in the lab, this is sent to the orderer and will cause a new channel to be created when you run the **peer channel create** command.
 
- 3.	An **anchor peer update** for Org0MSP.  An anchor peer is a peer that is set up so that peers from other organizations may 
- communicate with it.  The concept of anchor peers allows an organization to create multiple peers, perhaps to provide extra capacity or throughput or resilience (or all the above) but not have to advertise this to outside organizations.
+3.	An **anchor peer update** for Org0MSP.  An anchor peer is a peer that is set up so that peers from other organizations may communicate with it.  The concept of anchor peers allows an organization to create multiple peers, perhaps to provide extra capacity or throughput or resilience (or all the above) but not have to advertise this to outside organizations.
 
- 4.	An anchor peer update for Org1MSP.   You will perform the anchor peer updates for both Org0MSP and Org1MSP later in the lab via **peer channel create** commands.
+4.	An anchor peer update for Org1MSP.   You will perform the anchor peer updates for both Org0MSP and Org1MSP later in the lab via **peer channel create** commands.
 
 **Step 4.3:**	Issue the following command which will show you all files that were created by the *configtxgen* utility when it was called from inside *generateArtifacts.sh*::
 
