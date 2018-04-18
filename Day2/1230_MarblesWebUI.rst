@@ -101,7 +101,7 @@ vincent**::
      "last_startup_hash": ""
  }
  
- **NOTE:** Your file will look different if you choose to skip the optional *Step 2.9* or if you made changes other than the example change I showed.  The purpose of this step is to ensure that your file changed the way you intended it to (if it changed at all).
+**NOTE:** Your file will look different if you choose to skip the optional *Step 2.9* or if you made changes other than the example change I showed.  The purpose of this step is to ensure that your file changed the way you intended it to (if it changed at all).
 
 The other key thing to note is the port number.  It is *3001* here.  In the *marbles2.json* file for *Marbles Inc*, port *3002* will be 
 specified.  This is how, later in this lab, you will pretend to be a user of one company or the other-  by using port 3001 in the URL to pretend to be a “United Marbles” user and by using port 3002 in the URL to pretend to be a “Marbles Inc” user.
