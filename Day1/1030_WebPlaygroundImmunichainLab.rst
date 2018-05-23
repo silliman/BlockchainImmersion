@@ -20,15 +20,14 @@ The Hyperledger Composer Playground is way to produce Blockchain applications qu
 *   Web Browser (Chrome preferably)
 *   Internet connectively
 *   Command line
-*   PuTTY and PuTTYgen
 
 
 Part 1: Starting and Creating Your Hyperledger Composer Network
 ===============================================================
 
-**1.** Go to this workshop's GitHub repository  https://github.com/silliman/BlockchainImmersion and download the Web_immunichain.bna and permissions.acl files.  **Tip:** Right-click on the link in this step and select *Open new tab* or *Open new window* so that these instructions stay open for as you are downloading these two files.
+**1.** Go to this workshop's GitHub repository  https://github.com/silliman/BlockchainImmersion and download the immunichain.bna and permissions.acl files.  **Novice Tip:** Right-click on the link in this step and select *Open new tab* or *Open new window* so that these instructions stay open for as you are downloading these two files.
 
-**2.** From your web browser, go to https://composer-playground.mybluemix.net/ -- this is the web version of Hyperledger Composer.
+**2.** From your web browser, go to https://composer-playground.mybluemix.net/ -- this is the web version of Hyperledger Composer running in a Kubernetes environment.
 
 **3.** You will get a Welcome pop-up box with a graphic and a few words. Click on Let's Blockchain
 
@@ -36,25 +35,21 @@ Part 1: Starting and Creating Your Hyperledger Composer Network
 
 **4.** Then you will be in the Composer Playground homepage. Click on Deploy a New Business Network.
 
-**5.** You have to give a name for your Blockchain Network. Give it a description as well. Then finish off by dragging the Web_immunichain.bna file - that you downloaded - to the upload box.
+**5.** You have to give a name for your Blockchain Network. Give it a description as well. Then finish off by dragging the immunichain.bna file - that you downloaded - to the upload box.
 
 .. image:: images/composer/1.2.png
 
 **6.** Then click on Deploy 
 
-**7.** Afterwards, you can come back to the Composer Playground play with some of the other sample business network applications, like animal tracking or vehicle lifecycles.
+**7.** Afterwards, you can come back to the Composer Playground play with some of the other sample business network applications, like animal tracking or vehicle lifecycle.
 
-**8.** You will then be taken to Your Wallet. Your wallet is basically a quick, seamless connection to multiple connections that you can jump around with. You will see later how easy it is. Click on Connect now in order to get connected to your Immunichain network
+**8.** You will then be taken to Your Wallet. Your wallet is basically a quick, seamless connection to multiple Blockchain connections you might have. You will see later how easy it is. Click on Connect now in order to get connected to your Immunichain network
 
 .. image:: images/composer/1.3.png
 
 **9.** After you have done that, your screen should look like this. If it does, then we are in business (get it? In business, business network - great!)
 
 .. image:: images/composer/1.4.png
-
-**What did you just accomplish?**
-
-You went to the web version of Hyperledger Composer and imported the Immunichain Blockchain network. Then you connected to the network by way of the ID card in your Composer wallet. 
 
 Part 2: Creating Assets and Participants
 ========================================
@@ -69,7 +64,7 @@ Before we create assets and participants, we need to know what each asset and pa
 *   MedProvider is simply a medical provider, like a doctor
 *   Childform is simply the child or the asset in this business network
 
-**2.** Now create a Guardian by clicking on +Create New Participant. Give the Guardian a number. I stick to 1, 2, 3 or low numbers that you can remember, but you can create any ID number you want. I suggest writing your ID numbers down as we move along. Once you have filled in the information click on Create
+**2.** Now create a Guardian by clicking Guardian on the left and then +Create New Participant in the top right. Give the Guardian a number. I stick to 1, 2, 3 or low numbers that you can remember, but you can create any ID number you want. I suggest writing your ID numbers down as we move along. Once you have filled in the information click on Create
 
 .. image:: images/composer/2.2.png
 
@@ -79,11 +74,11 @@ Before we create assets and participants, we need to know what each asset and pa
 
 .. image:: images/composer/2.4.png
 
-**5.** Go ahead and make a Medical Provider. Remember the Medical Provider number you create
+**5.** Go ahead and make a Medical Provider. Same process as the guardian; click on Medical Provider on the left and +Create New Participant in the top right. Remember the Medical Provider number you create.
 
 .. image:: images/composer/2.5.png
 
-**6.** Now, let's make a child. Click on optional properties at the bottom first. Assign him to the guardian you just created a step ago
+**6.** Now, let's make a child. **Click on optional properties at the bottom first.** Assign your new child to the guardian you just created two steps ago
 
 .. image:: images/composer/2.6.png
 
@@ -91,18 +86,14 @@ Before we create assets and participants, we need to know what each asset and pa
 
 .. image:: images/composer/2.7.png
 
-**8.** Go ahead and create more medical providers, members, guardians and children. Just to remember to write down the ID numbers. This will make more sense when we submit transactions. 
-
-**What did you just accomplish?**
-
-You created various participants within the Composer Playground as well as assets, which are the children in this business network. 
+**8.** Go ahead and create more medical providers, guardians and children. Just to remember to write down the ID numbers. This will make more sense when we submit transactions. 
 
 Part 3: Adding Participants and Transactions
 ============================================
 
 So far, everything has been a bit easy. Now, we are going to add a participant and some transaction code for that new participant. It is important to notice where I am adding in code in relation to the other lines of code.
 
-**1.** Head into your model file by going to the Define section and clicking on the Model File
+**1.** Head into your model file by going to the Define section and clicking on the Model File, found on the left hand side
 
 .. image:: images/composer/3.1.png
 
@@ -133,7 +124,7 @@ So far, everything has been a bit easy. Now, we are going to add a participant a
 
 .. image:: images/composer/3.5.png
 
-**6.** Then click on Update, if successful you will get a success message in the top right
+**6.** Then click on Deploy Changes (the 0.19.0 release of Composer changes this button from Update to Deploy Changes. Both do the same thing, but the wording is different), if successful you will get a success message in the top right
 
 .. image:: images/composer/3.6.png
 
@@ -194,20 +185,16 @@ See picture below to get a sense of what to do.
 
 .. image:: images/composer/3.9.png
 
-**10.** Again, click on Update to update your Script File
-
-**What did you just accomplish?**
-
-What you just did was add in the participant named Member. Member is basically just an organization you want to grant access to your child's healthcare record. Think of granting a summer camp access to your child's healthcare record to make sure that they have taken all their shots or immunizations. Another way to think about this is having the High School Athletic Department as a member and they can tell that the athlete has passed their physical. You also created some transaction logic into your Script File, which is comprised of JavaScript. 
+**10.** Again, click on Deploy Changes to update your Script File
 
 Part 4: Submitting Transactions
 ===============================
 
-**1.** Now that we have a new participant, let's create a Member. Jump to the test section and click on Member on the left. 
+**1.** Now that we have a new participant, let's create a Member. Jump to the Test section and click on Member on the left. 
 
 .. image:: images/composer/4.1.png
 
-**2.** Click on Create New Participant and follow the steps below to add a Member.
+**2.** Click on +Create New Participant, found in the top right, and follow the steps below to add a Member.
 
 .. image:: images/composer/4.2.png
 
@@ -215,7 +202,7 @@ Part 4: Submitting Transactions
 
 .. image:: images/composer/4.3.png
 
-**4.** Click on Optional Properties. You will notice the member section appearing now. Then click on Update.
+**4.** Click on Optional Properties first. You will notice the member section appearing now. Then click on Update.
 
 .. image:: images/composer/4.4.png
 
@@ -229,15 +216,15 @@ Part 4: Submitting Transactions
 
 My transaction says let member #1 (Fairmont High School) have Child #1's (Emily) health record. This would be extremely useful when every year thousands of kids get physicals in order to play a sport. Imagine having your medical provider authorize your child's health record to approve them playing a sport. I know my mom would've enjoyed not going up to the High School an additional time. 
 
-**7.** You can view this transaction by clicking on childform on the left and then Show All on Emily. Notice that member 1 is now in Emily's description
+**7.** You can view this transaction by clicking on Childform on the left and then Show All on Emily or whatever name you gave your child. Notice that member 1 is now in Emily's description
 
 .. image:: images/composer/4.7.png
 
 **8.** Click on Submit Transaction in the bottom left.
 
-**9.** A pop-up will appear with the transaction of assigning a Medical Provider to one of the children you've created
+**9.** A pop-up will appear. Change the transaction type to assignMedProvider to one of the children you've created
 
-**10.** Now, replace the ID Numbers to replicate the guardian, medical provider and child. Look at the below picture to get a sense of what to do
+**10.** Now, replace the ID Numbers to represent the guardian, medical provider and child you have within your network. Look at the below picture to get a sense of what to do
 
 .. image:: images/composer/4.8.png
 
@@ -245,7 +232,7 @@ That basically says, assign medical provider #1 (Healthquest) to Child #1 (Emily
 
 **11.** Click Submit once you have the ID Numbers you want
 
-**12.** Once you submit the transaction and it is good, click on All Transactions in the bottom left. This is what Composer likes to call the Historian. Now is a good time to tell you about the Historian. The Historian is the sequence of transactions or addition or removal of participants or assets. I didn't tell you to look at the Historian when you were creating the Participants and Assets, but the Historian kept track of when and what type of participant or asset you created. You can scroll to the bottom to view the first transaction you created, which should be the Medical Provider - HealthQuest - or whatever you called it. You can see by clicking on view record. 
+**12.** Once you submit the transaction and it is good, click on All Transactions in the bottom left. This is what Composer likes to call the Historian. Now is a good time to tell you about this feature. The Historian is the sequence of transactions or addition or removal of participants or assets. I didn't tell you to look at the Historian when you were creating the Participants and Assets, but the Historian kept track of when and what type of participant or asset you created. You can scroll to the bottom to view the first transaction you created. You can see by clicking on view record. 
 
 .. image:: images/composer/4.9.png
 
@@ -269,10 +256,6 @@ That basically says, assign medical provider #1 (Healthquest) to Child #1 (Emily
 
 **18.** Continue to make various transactions that you want
 
-**What did you just accomplish?**
-
-You submitted transactions against participants and the assets within Composer. You understand the value of authorizing members, such as various high school athletics or even summer camps. Most importantly, you added Immunizations to your child, which is the whole point of Immunichain. 
-
 Part 5: Modifying Permissions
 =============================
 
@@ -282,13 +265,13 @@ If you were to go to the permissions.acl file in the Define section, you would n
 
 .. image:: images/composer/5.1.png
 
-**2.** We are doing great if this is what your page looks like
+**2.** We are doing great if this is what your page looks like. Don't be alarm by the two different sections.
 
 .. image:: images/composer/5.2.png
 
 **3.** Click on Issue New ID
 
-**4.** A pop-up will appear. Give your identity a name (disclaimer: the identity will be tied to a participant you created earlier in the lab; ie: Guardian Austin, Medical Provider HealthQuest). Then type in the number 1. You should now see the various participants that have an ID number of 1. If you gave your participants a different ID number, you won't see anything by typing in 1. Instead, type in the number you gave to your participants. Here is what I did below:
+**4.** A pop-up will appear. Give your identity a name (disclaimer: the identity will be tied to a participant you created earlier in the lab; ie: Guardian: Austin, Medical Provider: HealthQuest). Then type in the number 1. You should now see the various participants that have an ID number of 1. If you gave your participants a different ID number, you won't see anything by typing in 1. Instead, type in the number you gave to your participants. Also, if you have multiple participants with the same ID number, there will be multiple options based on the ID number. Click on the participant that you trying to create. Here is what I did below:
 
 .. image:: images/composer/5.3.png
 
@@ -298,7 +281,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 
 **6.** Go ahead and create other identities for your participants
 
-**7.** I have a total of 4 identities in my business network. Here is what my screen looks like. You could have more identities if you created more, depending on how many participants your created in Part 2
+**7.** I have a total of 4 identities in my business network. Here is what my screen looks like. You could have more identities if you created more participants your created in Part 2
 
 .. image:: images/composer/5.5.png
 
@@ -306,15 +289,15 @@ If you were to go to the permissions.acl file in the Define section, you would n
 
 .. image:: images/composer/5.6.png
 
-**9.** Open up the permissions.acl file that you downloaded from Github. Select all and copy the content in that file. 
+**9.** Open up the permissions.acl file that you downloaded from Github. Select all and copy the contents in that file. 
 
 .. image:: images/composer/5.7.png
 
-**10.** Then paste that content above the other commands in the Access Control file. Here is what I my screen looks like now:
+**10.** Then paste that content **above** the other rules in the Access Control file. Here is what I my screen looks like now:
 
 .. image:: images/composer/5.8.png
 
-**11.** Once you are good to go, click on Update in the bottom left and that will make changes across the entire business network. Read through some of the rules that we just implemented. What do you think will change as we go through the various identities?
+**11.** Once you are good to go, click on Deploy Changes in the bottom left and that will make changes across the entire business network. Read through some of the rules that we just implemented. What do you think will change as we go through the various identities?
 
 .. image:: images/composer/5.9.png
 
@@ -362,7 +345,7 @@ What did you notice about the permissions here? From the Guardian perspective, y
 
 From the Guardian perspective, you are able to do a lot of different things. First, you can view the Children in the network that the Guardian has ownership of. Also, the guardian can create additional children with the way the permissions are set up. Do you think this is a viable option in a production environment? I would say no, but you can have the Medical Provider, who administered the birth of the Child, create the Child asset. In a production environment, this would be negotiated between all the participants in the business network. Also, as the Guardian you can also view all the Members and Medical Providers. Why do you think that is so? When you have a child as a guardian you want to be able to view all the options you have as possible Medical Providers and Members. In a real-world scenario, maybe the Guardian would only view and allow all the Medical Providers that are tied to their Health Insurance, but that would require an Insurer in this Immunichain business network. Maybe in the future :) 
 
-**19.** I think you're getting the sense from the Guardian perspective. Before we jump to another perspective, delete all Members. You previously did this from step 16 in this part. Once you have successfully done that, go ahead and switch to the Medical Provider perspective. Click on My Business Networks in the top right. Then click on Connect Now on the Medical Provider
+**19.** I think you're getting the sense from the Guardian perspective. Before we jump to another perspective, delete all Members. When I say delete all the members, I mean to delete the contents within the brackets - []. You previously did this from step 16 in this part. Once you have successfully done that, go ahead and switch to the Medical Provider perspective. Click on My Business Networks in the top right. Then click on Connect Now on the Medical Provider
 
 .. image:: images/composer/5.19.png
 
@@ -417,9 +400,5 @@ Child:
 Is this a good thing - that Bobbie appeared to this member? Absolutely not. This would be a non-negotiable in the business network. You wouldn't want a Member to be able to see a Child, unless it has authorization. Could you imagine a Member being able to read all the Immunization records of every Child? We have to modify the permissions in our Access Control file. 
 
 See if you can modify the rule in the Access Control file in the Define section. 
-
-**What did you just accomplish?**
-
-In this section you modified the permissions for the Immunichain business network. Once you added a few rules, you created various identities for the participants you created earlier in this lab. Based off the new permissions you were either able to successfully or unsuccessfully submit transactions and create assets. Also, we brought up good questions around security and what participant can do what in the Immunichain business network. 
 
 **End of Lab!**
