@@ -28,7 +28,7 @@ Observe that there is no output from the command- you are simply presented with 
 
 **Step 2.2:** Install Hyperledger Composer using *npm*.  Enter this command::
 
- bcuser@ubuntu16044:~$ npm install -g composer-cli@0.19.5
+ bcuser@ubuntu16044:~$ npm install -g composer-cli
 
 This will take a few minutes to run, and will produce a lot of output.  If you do not see any error messages at the end of the output, chances are you are in good shape.  Warning messages are okay.
 
