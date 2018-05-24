@@ -1,3 +1,6 @@
+Under Construction- Please do not use yet
+=========================================
+
 Section 1:  Lab Overview
 ========================
 
@@ -28,7 +31,7 @@ Observe that there is no output from the command- you are simply presented with 
 
 **Step 2.2:** Install Hyperledger Composer using *npm*.  Enter this command::
 
- bcuser@ubuntu16044:~$ npm install -g composer-cli@0.19.0
+ bcuser@ubuntu16044:~$ npm install -g composer-cli@0.19.5
 
 This will take a few minutes to run, and will produce a lot of output.  If you do not see any error messages at the end of the output, chances are you are in good shape.  Warning messages are okay.
 
@@ -42,7 +45,7 @@ Notice that now the location within your environment's PATH where the *composer*
 **Step 2.4** Check the Hyperledger Composer version that you just installed::
 
  bcuser@ubuntu16044:~$ composer --version
- v0.19.0
+ v0.19.5
 
 **Step 2.5:** Go to your home directory::
 
@@ -60,44 +63,16 @@ Notice that now the location within your environment's PATH where the *composer*
  Resolving deltas: 100% (769/769), done.
  Checking connectivity... done.
 
+**Step 2.7:** You need to go to a specific commit level that is one commit behind the most current version::
+
+ bcuser@ubuntu16044:~$ cd composer-sample-applications
+
 **Step 2.7:** Change to the *composer-sample-applications/packages/digitialproperty-app* directory::
 
  bcuser@ubuntu16044:~$ cd composer-sample-applications/packages/digitalproperty-app
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app $ 
- 
-**Step 2.8:** Within the directory you just navigated to, there is a sample application called the *Digital Property
-Network* that you will be working with throughout the lab.  This is just one of many sample applications provided by
-the Hyperledger Composer project.  
 
-Ideally right now you could set this application up for use without further ado; however, at this point in time you will make a slight change to a file named *package.json*. The reason is that within this lab you will be using specific versions of Hyperledger Composer and Hyperledger Fabric- you will be using Hyperledger Composer v0.19.0 and Hyperledger Fabric v1.1.0.
-
-Within the *package.json* file for the *Digital Property Network* sample application, requests are being made to install some Hyperledger Composer components at any level of 0.19.*.  While not likely, it's possible that a future upgrade, say 0.19.1 or 0.19.2 might accidentally break this lab.  So in order to eliminate that possibility, you will make a change to ensure that 0.19.0, and only 0.19.0, will be installed.  The next several steps will guide you through that process.
-
-First, issue this *grep* command to find the occurrences of the string *0.19.0* within *package.json*::
-
- bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ grep 0\.19\.0 package.json
-     "composer-cli": "^0.19.0",
-     "composer-client": "^0.19.0",
-    
-It is the caret ('^') character that directs *npm* to install newer levels of 0.19.* when they become available.  In order to ensure that only 0.19.0 is installed, you will remove that caret in the next step.
-
-**Note:** The backslashes in the previous command tell *grep* to look for the period character *('.')*.  Without the backslash the *grep* command would interpret the period character to mean "any single character", so, e.g., if you specified ``0.19.0`` instead of ``0\.19\.0`` *grep* would match that against *0.19.3* but also against things like *0a19b0* which is not what we want here.  In this particular file, you probably would not find any unwanted matches even if you did leave the backslashes out, but you may not be so fortunate in future searches.  
-
-**Step 2.9:** This *sed* command will replace the occurrences of *^0.19.0* with *0.19.0* for the two npm packages listed in the output from the previous *grep* command.::
-
- bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ sed -i "s/\^0\.19\.0/0.19.0/" package.json
- 
-Note that, in accordance with the note from the prior step, you are specifying the backslashes in the first part of the *-i* argument to the *sed* command - *\^0\.19\.0*- where you specify what to look for, but not for the second part- *0.19.0* where you are specifying what you wish to replace the string in the first part with.  That is, the command you issued follows this general pattern:  *sed -i "s/<string_to_search_for>/<string_to_replace_it_with>/" file_to_change*.  Note that this particular form of the command changed the file in place-  fair enough for this lab, but in a more critical environment I'd recommend you make a backup of your file first.
-
-**Step 2.10** Enter this *grep* command now to verify that the changes you intended to make in the prior step were made successfully::
-
- bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ grep 0\.19\.0 package.json 
-     "composer-cli": "0.19.0",
-     "composer-client": "0.19.0",
-
-**Important:** If you do not see the output as shown above, now would be a really good time to ask an instructor for help, because if you don't get this step right, things will get, shall we say, "challenging" for you later.
-
-**Step 2.11:** Open the *package.json* file in read-only mode by adding the *-R* argument to the *vi* command::
+**Step 2.8:** Open the *package.json* file in read-only mode by adding the *-R* argument to the *vi* command::
 
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ vi -R package.json 
 
@@ -120,16 +95,16 @@ When *npm install* is run, it first runs the commands listed in the *“preinsta
 the *“dependencies”* section (not shown in this output snippet) that are not already installed.  After that it will run the command listed in 
 the *“postinstall”* name/value pair.
 
-**Step 2.12:** You can exit this file now by typing in ``:q!`` - if hitting the colon key does not take your cursor to the command line 
+**Step 2.9:** You can exit this file now by typing in ``:q!`` - if hitting the colon key does not take your cursor to the command line 
 at the bottom of your screen try hitting the **Escape key** and retrying ``:q!``.
 
-**Step 2.13:** Now that you've changed *package.json* to ask for 0.19.0 packages instead of ^0.19.0 packages for Hyperledger Composer, and peeked a bit at the inside of that file, go ahead and run the *npm install* command::
+**Step 2.10:** Go ahead and run the *npm install* command::
 
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ npm install
  
 It will take a couple of minutes and produce a lot of output.
 
-**Step 2.14:** The *digitalproperty-app* sample application is capable of running in a Hyperledger Fabric network- this could be running on your own server, it could be running in the cloud, e.g. on the IBM Cloud, it could even be running on your own laptop.  For this lab, it will run here, on the same Linux on IBM Z guest that you are currently logged in to.  But, you haven't started a Hyperledger Fabric network yet.  
+**Step 2.11:** The *digitalproperty-app* sample application is capable of running in a Hyperledger Fabric network- this could be running on your own server, it could be running in the cloud, e.g. on the IBM Cloud, it could even be running on your own laptop.  For this lab, it will run here, on the same Linux on IBM Z guest that you are currently logged in to.  But, you haven't started a Hyperledger Fabric network yet.  
 
 The good news is that the Hyperledger Composer team has provided some tooling that makes it easy for you to stand up a small, simple, uncomplicated Hyperledger Fabric network that is suitable for development purposes.  You could stand up your own Hyperledger Fabric network that is as large and complex as you wish, and run Hyperledger Composer on it, but that overly complicates things if your main task is to learn how to use Hyperleger Composer.
 
@@ -138,7 +113,7 @@ Take advantage of the convenience that the Hyperledger Composer team has provide
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ cd $HOME
  bcuser@ubuntu16044:~$ 
 
-**Step 2.15:** Use *git* to get the GitHub repository that contains these convenient scripts::
+**Step 2.12:** Use *git* to get the GitHub repository that contains these convenient scripts::
 
  bcuser@ubuntu16044:~$ git clone https://github.com/hyperledger/composer-tools
  Cloning into 'composer-tools'...
