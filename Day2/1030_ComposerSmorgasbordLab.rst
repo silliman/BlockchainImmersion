@@ -1,6 +1,3 @@
-Under Construction- Please do not use yet
-=========================================
-
 Section 1:  Lab Overview
 ========================
 
@@ -63,16 +60,20 @@ Notice that now the location within your environment's PATH where the *composer*
  Resolving deltas: 100% (769/769), done.
  Checking connectivity... done.
 
-**Step 2.7:** You need to go to a specific commit level that is one commit behind the most current version::
+**Step 2.7:** Change to the *composer-sample-applications* directory::
 
  bcuser@ubuntu16044:~$ cd composer-sample-applications
 
-**Step 2.7:** Change to the *composer-sample-applications/packages/digitialproperty-app* directory::
+**Step 2.8:** You need to go to a specific commit level that is one commit behind the most current version::
 
- bcuser@ubuntu16044:~$ cd composer-sample-applications/packages/digitalproperty-app
+ bcuser@ubuntu16044:~/composer-sample-applications$ git checkout d7e347
+
+**Step 2.9:** Change to the *packages/digitialproperty-app* directory::
+
+ bcuser@ubuntu16044:~$ cd packages/digitalproperty-app
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app $ 
 
-**Step 2.8:** Open the *package.json* file in read-only mode by adding the *-R* argument to the *vi* command::
+**Step 2.10:** Open the *package.json* file in read-only mode by adding the *-R* argument to the *vi* command::
 
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ vi -R package.json 
 
@@ -95,16 +96,16 @@ When *npm install* is run, it first runs the commands listed in the *“preinsta
 the *“dependencies”* section (not shown in this output snippet) that are not already installed.  After that it will run the command listed in 
 the *“postinstall”* name/value pair.
 
-**Step 2.9:** You can exit this file now by typing in ``:q!`` - if hitting the colon key does not take your cursor to the command line 
+**Step 2.11:** You can exit this file now by typing in ``:q!`` - if hitting the colon key does not take your cursor to the command line 
 at the bottom of your screen try hitting the **Escape key** and retrying ``:q!``.
 
-**Step 2.10:** Go ahead and run the *npm install* command::
+**Step 2.12:** Go ahead and run the *npm install* command::
 
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ npm install
  
 It will take a couple of minutes and produce a lot of output.
 
-**Step 2.11:** The *digitalproperty-app* sample application is capable of running in a Hyperledger Fabric network- this could be running on your own server, it could be running in the cloud, e.g. on the IBM Cloud, it could even be running on your own laptop.  For this lab, it will run here, on the same Linux on IBM Z guest that you are currently logged in to.  But, you haven't started a Hyperledger Fabric network yet.  
+**Step 2.13:** The *digitalproperty-app* sample application is capable of running in a Hyperledger Fabric network- this could be running on your own server, it could be running in the cloud, e.g. on the IBM Cloud, it could even be running on your own laptop.  For this lab, it will run here, on the same Linux on IBM Z guest that you are currently logged in to.  But, you haven't started a Hyperledger Fabric network yet.  
 
 The good news is that the Hyperledger Composer team has provided some tooling that makes it easy for you to stand up a small, simple, uncomplicated Hyperledger Fabric network that is suitable for development purposes.  You could stand up your own Hyperledger Fabric network that is as large and complex as you wish, and run Hyperledger Composer on it, but that overly complicates things if your main task is to learn how to use Hyperleger Composer.
 
@@ -113,7 +114,7 @@ Take advantage of the convenience that the Hyperledger Composer team has provide
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ cd $HOME
  bcuser@ubuntu16044:~$ 
 
-**Step 2.12:** Use *git* to get the GitHub repository that contains these convenient scripts::
+**Step 2.14:** Use *git* to get the GitHub repository that contains these convenient scripts::
 
  bcuser@ubuntu16044:~$ git clone https://github.com/hyperledger/composer-tools
  Cloning into 'composer-tools'...
@@ -124,27 +125,27 @@ Take advantage of the convenience that the Hyperledger Composer team has provide
  Resolving deltas: 100% (644/644), done.
  Checking connectivity... done.
 
-**Step 2.16:** Change to the *composer-tools/packages/fabric-dev-servers* directory::
+**Step 2.15:** Change to the *composer-tools/packages/fabric-dev-servers* directory::
 
  bcuser@ubuntu16044:~$ cd composer-tools/packages/fabric-dev-servers
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ 
 
-**Step 2.17:** Run *npm install*::
+**Step 2.16:** Run *npm install*::
 
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ npm install
  
-**Step 2.18:** Enter the *docker images* command to see that you currently have no Docker images on your system::
+**Step 2.17:** Enter the *docker images* command to see that you currently have no Docker images on your system::
 
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ docker images
  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
 You just see column headings.  You do not yet have any Docker images on your system.  You will soon and then you will issue this command again and see those images.
 
-**Step 2.19:** Run the *downloadFabric.sh* script in order to pull the necessary Hyperledger Fabric v1.1.0 images from the Hyperledger project's public Docker Hub repositories::
+**Step 2.18:** Run the *downloadFabric.sh* script in order to pull the necessary Hyperledger Fabric v1.1.0 images from the Hyperledger project's public Docker Hub repositories::
 
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ ./downloadFabric.sh
  
-**Step 2.20:** Enter the *docker images* command again and this time you should see that several Hyperledger Fabric v1.1.0 Docker images are available on your system::
+**Step 2.19:** Enter the *docker images* command again and this time you should see that several Hyperledger Fabric v1.1.0 Docker images are available on your system::
 
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ docker images
  REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
@@ -156,13 +157,13 @@ You just see column headings.  You do not yet have any Docker images on your sys
 
 **Note:** I mentioned that this is a simple Hyperledger Fabric network.  There are several other Hyperledger Fabric Docker images that are necessary in a more complicated network.
 
-**Step 2.21:** You are about to start your Hyperledger Fabric network.  But before you do that, enter this command to show that you do not currently have any Docker containers running::
+**Step 2.20:** You are about to start your Hyperledger Fabric network.  But before you do that, enter this command to show that you do not currently have any Docker containers running::
 
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ docker ps -a
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$
 
-**Step 2.22:** Run the script to start the Hyperledger Fabric network::
+**Step 2.21:** Run the script to start the Hyperledger Fabric network::
 
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ ./startFabric.sh
  Development only script for Hyperledger Fabric control
@@ -218,7 +219,7 @@ You just see column headings.  You do not yet have any Docker images on your sys
  2018-03-22 17:58:05.076 UTC [channelCmd] executeJoin -> INFO 006 Successfully submitted proposal to join channel
  2018-03-22 17:58:05.076 UTC [main] main -> INFO 007 Exiting.....
 
-**Step 2.23:** Now enter *docker ps -a* to see if your Docker containers are running.  They should all be in the *Up* status::
+**Step 2.22:** Now enter *docker ps -a* to see if your Docker containers are running.  They should all be in the *Up* status::
 
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ docker ps -a
  CONTAINER ID        IMAGE                                    COMMAND                  CREATED             STATUS              PORTS                                            NAMES
@@ -229,7 +230,7 @@ You just see column headings.  You do not yet have any Docker images on your sys
 
 **Important:** All four containers listed should be in the *Up* status.  If any of them say *Exited*, ask an instructor for help.
 
-**Step 2.24:** Now you must create a Hyperledger Composer Peer Admin business network card. A business network card is the “glue” that lets Hyperledger Composer know how a particular user is going to connect to a Hyperledger Fabric network.  The *Peer Admin* is a special user that has administrative authority on the Hyperledger Fabric peer node and thus has the ability to install Hyperledger Composer business networks on the Hyperledger Fabric peer. 
+**Step 2.23:** Now you must create a Hyperledger Composer Peer Admin business network card. A business network card is the “glue” that lets Hyperledger Composer know how a particular user is going to connect to a Hyperledger Fabric network.  The *Peer Admin* is a special user that has administrative authority on the Hyperledger Fabric peer node and thus has the ability to install Hyperledger Composer business networks on the Hyperledger Fabric peer. 
 
 A script has been provided to do this. Run the *createPeerAdminCard* script::
 
@@ -239,7 +240,7 @@ A script has been provided to do this. Run the *createPeerAdminCard* script::
  FABRIC_VERSION is unset, assuming hlfv11
  FABRIC_START_TIMEOUT is unset, assuming 15 (seconds)
 
- Using composer-cli at v0.19.0
+ Using composer-cli at v0.19.5
 
  Successfully created business network card file to 
  	Output file: /tmp/PeerAdmin@hlfv1.card
@@ -271,12 +272,12 @@ A script has been provided to do this. Run the *createPeerAdminCard* script::
  
 **Note:** Notice from the above output that the "Card Name" *PeerAdmin@hlfv1*, associated with the "UserId" *PeerAdmin* does not have any information listed under the "Business Network".  The *PeerAdmin* user has authority to install Hyperledger Composer business networks, but it does not have authority to connect to and use them.  When a Hyperledger Composer business network is installed under PeerAdmin's authority, a separate business network administrator is created for that specific business network that does have authority to connect and use just that one business network.  
 
-**Step 2.25:** Go back to the sample application that you downloaded by changing back to this directory::
+**Step 2.24:** Go back to the sample application that you downloaded by changing back to this directory::
 
  bcuser@ubuntu16044:~/composer-tools/packages/fabric-dev-servers$ cd ~/composer-sample-applications/packages/digitalproperty-app/
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$
 
-**Step 2.26:** Run the *npm* command to deploy the *digitalproperty-network* Hyperledger Composer business network onto the Hyperledger 
+**Step 2.25:** Run the *npm* command to deploy the *digitalproperty-network* Hyperledger Composer business network onto the Hyperledger 
 Fabric network that you just created::
 
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ npm run deployNetwork
@@ -354,14 +355,14 @@ Fabric network that you just created::
 
 **Note:** You can see from the end of this output that this sample network has two Asset types, *LandTitle* and *SalesAgreement*, and one Participant type, *Person*.
 
-**Step 2.27:** Run this Docker command and you will see that a new Docker image was created for 
+**Step 2.26:** Run this Docker command and you will see that a new Docker image was created for 
 the Hyperledger Composer business network that you just deployed::
 
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ docker images dev-*
  REPOSITORY                                                                                                                   TAG                 IMAGE ID            CREATED              SIZE
  dev-peer0.org1.example.com-digitalproperty-network-0.2.2-8eb8214bbd3977ac522750fde0f2ed8d133fe4782f7f82a37a8793fd9ca6659e   latest              cc4c174c984e        5 minutes ago       1.45GB
  
-**Step 2.28:** Run the Docker command to show your Docker containers and you will see that a Docker container based on your new Docker image has been created (it should be the first container listed in the output)::
+**Step 2.27:** Run the Docker command to show your Docker containers and you will see that a Docker container based on your new Docker image has been created (it should be the first container listed in the output)::
 
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ docker ps
  CONTAINER ID        IMAGE                                                                                                                        COMMAND                  CREATED             STATUS              PORTS                                            NAMES
@@ -371,7 +372,7 @@ the Hyperledger Composer business network that you just deployed::
  e9476fcec230        hyperledger/fabric-couchdb:s390x-0.4.6                                                                                       "tini -- /docker-e..."   44 minutes ago      Up 44 minutes       4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
  104b8a355a46        hyperledger/fabric-ca:s390x-1.1.0                                                                                            "sh -c 'fabric-ca-..."   44 minutes ago      Up 44 minutes       0.0.0.0:7054->7054/tcp                           ca.org1.example.com
 
-**Step 2.29:** A few steps ago I mentioned in the notes that when the *PeerAdmin* deploys a Hyperledger Composer business network, it creates a business network administrator for that network.  Run this command to see that this new business network administrator, named *admin@digitalproperty-network*, has been created::
+**Step 2.28:** A few steps ago I mentioned in the notes that when the *PeerAdmin* deploys a Hyperledger Composer business network, it creates a business network administrator for that network.  Run this command to see that this new business network administrator, named *admin@digitalproperty-network*, has been created::
 
  bcuser@ubuntu16044:~/composer-sample-applications/packages/digitalproperty-app$ composer card list 
  The following Business Network Cards are available:
@@ -390,7 +391,7 @@ the Hyperledger Composer business network that you just deployed::
 
  Command succeeded
 
-**Step 2.30:** At this point you have deployed a Hyperledger Composer Business Network on a Hyperledger Fabric v1.1.0 network, but you 
+**Step 2.29:** At this point you have deployed a Hyperledger Composer Business Network on a Hyperledger Fabric v1.1.0 network, but you 
 have not actually created any participants or assets on the network.  Run this command and you will see that you will not have 
 any “Land Titles” listed (if there had been any they would have been under the column headings surrounded by boxes at the bottom of 
 this output)::
@@ -401,7 +402,7 @@ this output)::
  > node cli.js landregistry list
 
  info: [DigitalProperty-App] Hyperledger Composer: Digital Property console application
- info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.2
+ info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.3
  info: [DigitalProperty-App] listTitles Getting the asset registry
  info: [DigitalProperty-App] listTitles Getting all assest from the registry.
  info: [DigitalProperty-App] listTitles Current Land Titles
@@ -412,7 +413,7 @@ this output)::
  └─────────┴─────────┴────────────┴─────────┴─────────────┴─────────┘
  info: [DigitalProperty-App] Command completed successfully.
 
-**Step 2.31:** Run the following *npm test* command which will define two assets owned by Fred Bloggs, list them, set one for sale, and 
+**Step 2.30:** Run the following *npm test* command which will define two assets owned by Fred Bloggs, list them, set one for sale, and 
 list them again.  Everything below the *npm test* command that you will enter is output.  Look carefully at the tables and you will see 
 that Fred Bloggs’ nice house in the country was initially listed as not for sale but then was made available for sale as the result of 
 a Business Network transaction::
@@ -428,7 +429,7 @@ a Business Network transaction::
 
   info: [DigitalProperty-App] Hyperledger Composer: Digital Property console application
   info: [DigitalProperty-App] Adding default land titles to the asset registry
-  info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.2
+  info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.3
   info: [DigitalProperty-App] LandRegistry:_bootstrapTitles getting asset registry for "net.biz.digitalPropertyNetwork.LandTitle"
   info: [DigitalProperty-App] about to get asset registry
   info: [DigitalProperty-App] LandRegistry:_bootstrapTitles got asset registry
@@ -444,7 +445,7 @@ a Business Network transaction::
   > node cli.js landregistry list
 
   info: [DigitalProperty-App] Hyperledger Composer: Digital Property console application
-  info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.2
+  info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.3
   info: [DigitalProperty-App] listTitles Getting the asset registry
   info: [DigitalProperty-App] listTitles Getting all assest from the registry.
   info: [DigitalProperty-App] listTitles Current Land Titles
@@ -463,13 +464,13 @@ a Business Network transaction::
   > node cli.js landregistry submit && node cli.js landregistry list
 
   info: [DigitalProperty-App] Hyperledger Composer: Digital Property console application
-  info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.2
+  info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.3
   info: [DigitalProperty-App] updateForSale Getting assest from the registry.
   info: [DigitalProperty-App] updateForSale Submitting transaction
   info: [DigitalProperty-App] Transaction Submitted
   info: [DigitalProperty-App] Command completed successfully.
   info: [DigitalProperty-App] Hyperledger Composer: Digital Property console application
-  info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.2
+  info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.3
   info: [DigitalProperty-App] listTitles Getting the asset registry
   info: [DigitalProperty-App] listTitles Getting all assest from the registry.
   info: [DigitalProperty-App] listTitles Current Land Titles
@@ -514,7 +515,7 @@ I think I may have confused you enough for now.  Let's get started.
 
 **Step 3.3:** Install it with *npm*::
 
- bcuser@ubuntu16044:~$ npm install -g composer-playground@0.19.0
+ bcuser@ubuntu16044:~$ npm install -g composer-playground@0.19.5
 
 **Step 3.4:** Start composer-playground by simply entering *composer-playground* without any arguments.  Notice that Composer Playground is listening on port 8080::
 
@@ -796,13 +797,13 @@ In this step, the command is performed on your laptop or workstation. The above 
  > node cli.js landregistry submit && node cli.js landregistry list
 
  info: [DigitalProperty-App] Hyperledger Composer: Digital Property console application
- info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.2
+ info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.3
  info: [DigitalProperty-App] updateForSale Getting assest from the registry.
  info: [DigitalProperty-App] updateForSale Submitting transaction
  info: [DigitalProperty-App] Transaction Submitted
  info: [DigitalProperty-App] Command completed successfully.
  info: [DigitalProperty-App] Hyperledger Composer: Digital Property console application
- info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.2
+ info: [DigitalProperty-App] LandRegistry:<init> businessNetworkDefinition obtained digitalproperty-network@0.2.3
  info: [DigitalProperty-App] listTitles Getting the asset registry
  info: [DigitalProperty-App] listTitles Getting all assest from the registry.
  info: [DigitalProperty-App] listTitles Current Land Titles
@@ -952,7 +953,7 @@ The Hyperledger Composer REST Server reads a Business Network definition and exp
 
 **Step 5.3:** Use *npm* to install the Hyperledger Composer REST server (output not shown)::
 
- bcuser@ubuntu16044:~$ npm install -g composer-rest-server@0.19.0
+ bcuser@ubuntu16044:~$ npm install -g composer-rest-server@0.19.5
 
 **Step 5.4:** Upon completion, verify that it is installed::
 
@@ -1093,7 +1094,7 @@ In this section, you will install tools that will allow you to generate a simple
 
 **Step 6.3:** Hyperledger Composer provides a package to work with Yeoman.  Install it using this command::
 
- bcuser@ubuntu16044:~$ npm install -g generator-hyperledger-composer@0.19.0
+ bcuser@ubuntu16044:~$ npm install -g generator-hyperledger-composer@0.19.5
 
 **Step 6.4:** Enter the following command to begin the generation of an AngularJS application based on your Hyperledger Composer Business Network::
 
