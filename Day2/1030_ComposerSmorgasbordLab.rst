@@ -515,7 +515,7 @@ I think I may have confused you enough for now.  Let's get started.
 
 **Step 3.3:** Install it with *npm*::
 
- bcuser@ubuntu16044:~$ npm install -g composer-playground@0.19.5
+ bcuser@ubuntu16044:~$ npm install -g composer-playground
 
 **Step 3.4:** Start composer-playground by simply entering *composer-playground* without any arguments.  Notice that Composer Playground is listening on port 8080::
 
@@ -953,7 +953,7 @@ The Hyperledger Composer REST Server reads a Business Network definition and exp
 
 **Step 5.3:** Use *npm* to install the Hyperledger Composer REST server (output not shown)::
 
- bcuser@ubuntu16044:~$ npm install -g composer-rest-server@0.19.5
+ bcuser@ubuntu16044:~$ npm install -g composer-rest-server
 
 **Step 5.4:** Upon completion, verify that it is installed::
 
@@ -1094,7 +1094,7 @@ In this section, you will install tools that will allow you to generate a simple
 
 **Step 6.3:** Hyperledger Composer provides a package to work with Yeoman.  Install it using this command::
 
- bcuser@ubuntu16044:~$ npm install -g generator-hyperledger-composer@0.19.5
+ bcuser@ubuntu16044:~$ npm install -g generator-hyperledger-composer
 
 **Step 6.4:** Enter the following command to begin the generation of an AngularJS application based on your Hyperledger Composer Business Network::
 
