@@ -52,6 +52,14 @@ rule txUAuthMembers {
       action: ALLOW
 }
 
+rule txMedUAuthMembers {
+      description: "Allow the guardian to authorize member organizations"
+      participant: "ibm.wsc.immunichain.MedProvider"
+      operation: ALL
+      resource: "ibm.wsc.immunichain.authMember"
+      action: ALLOW
+}
+
 rule DeauthMembers {
       description: "Allow the guardian to deauthorize member organizations"
       participant(g): "ibm.wsc.immunichain.Guardian"
@@ -198,6 +206,3 @@ rule GuardanUser {
       resource: "org.hyperledger.composer.system.*"
       action: ALLOW
 }
-
-
-
