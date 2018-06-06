@@ -345,7 +345,7 @@ What did you notice about the permissions here? From the Guardian perspective, y
 
 From the Guardian perspective, you are able to do a lot of different things. First, you can view the Children in the network that the Guardian has ownership of. Also, the guardian can create additional children with the way the permissions are set up. Do you think this is a viable option in a production environment? I would say no, but you can have the Medical Provider, who administered the birth of the Child, create the Child asset. In a production environment, this would be negotiated between all the participants in the business network. Also, as the Guardian you can also view all the Members and Medical Providers. Why do you think that is so? When you have a child as a guardian you want to be able to view all the options you have as possible Medical Providers and Members. In a real-world scenario, maybe the Guardian would only view and allow all the Medical Providers that are tied to their Health Insurance, but that would require an Insurer in this Immunichain business network. Maybe in the future :) 
 
-**19.** I think you're getting the sense from the Guardian perspective. Before we jump to another perspective, delete all Members. When I say delete all the members, I mean to delete the contents within the brackets - []. You previously did this from step 16 in this part. Once you have successfully done that, go ahead and switch to the Medical Provider perspective. Click on My Business Networks in the top right. Then click on Connect Now on the Medical Provider
+**19.** I think you're getting the sense from the Guardian perspective. Before we jump to another perspective, **delete all Members. When I say delete all the members, I mean to delete the contents within the brackets - [].** You previously did this from step 16 in this part. Once you have successfully done that, go ahead and switch to the Medical Provider perspective. Click on My Business Networks in the top right. Then click on Connect Now on the Medical Provider
 
 .. image:: images/composer/5.19.png
 
@@ -361,7 +361,7 @@ Members:
 
 Child: 
 
-.. image:: images/composer/5.22.png
+.. image:: images/composer/nomember.png
 
 **21.** Click on Submit Transaction. Start with assigning a Member
 
@@ -371,9 +371,7 @@ Child:
 
 .. image:: images/composer/5.24.png
 
-.. image:: images/composer/5.25.png
-
-If you noticed, I now have TWINS! My life suddenly got crazy for a 23-year-old. I guess I need to continue work in order to support them. Or just become a crypto-currency millionaire (I don't know if that's possible these days). 
+Now, you won't notice the kid show up from the medical perspective, but I now have TWINS! My life suddenly got crazy for a 23-year-old. I guess I need to continue work in order to support them. Or just become a crypto-currency millionaire (I don't know if that's possible these days). 
 
 On a slightly more serious note, maybe having the Medical Provider create additional children isn't the best idea. It really depends on who the Medical Provider is. Is it the hospital? Or more specifically, is the Medical Provider the doctor who works in the baby delivery department of the hospital? Should the Medical Provider be able to create the child, or should we leave it up to the Guardians to create the children? These types of conversations have to occur between the peers in the business network if this was to be a production environment. 
 
