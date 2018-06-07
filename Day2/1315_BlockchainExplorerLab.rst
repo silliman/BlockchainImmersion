@@ -11,6 +11,7 @@ Blockchain Explorer is a simple way to monitor, at a channel level, what is happ
 *	Mysql 5.7 or greater
 *	Docker 17.06.2-ce
 *	Docker Compose 1.14 or greater
+*	Marbles UI is up and running
 
 Part 1: MySQL Set Up
 ====================
@@ -44,7 +45,7 @@ When you get prompted, always say YES - Except when it asks if you want to chang
 	of the plugin.
 	Using existing password for root.
 
-	Estimated strength of the password: 25 
+	
 	Change the password for root ? ((Press y|Y for Yes, any other key for No) : N
 
 	 ... skipping.
@@ -105,22 +106,23 @@ When you get prompted, always say YES - Except when it asks if you want to chang
 
 	mysql>
 
-**6.** Your command prompt should begin with the words 'mysql' If that is the case, we are doing great so far. 
+**6.** Your command prompt should begin with the words 'mysql' If that is the case, we are doing great so far::
 
-**7.** With your mysql command line, enter CREATE USER 'blockchain@localhost' IDENTIFIED by 'password';
+	mysql>
+
+**7.** With your mysql command line, enter the command below
 
 This step will create a user named blockchain with the password of password. Again, security is our top priority here.::
 
 	mysql> CREATE USER 'blockchain'@'localhost' IDENTIFIED by 'password';
 
-**8.** With your new user created, enter GRANT ALL PRIVILEGES  ON '.' TO 'blockchain@localhost';
+**8.** With your new user created, enter the command below;
 
 This step grants our user, blockchain, to have all privileges to all databases.::
 
 	mysql> GRANT ALL PRIVILEGES  ON fabricexplorer.* to 'blockchain'@'localhost';
 
-**9.** Exit mysql as root and log in as blockchain by entering
-mysql -ublockchain -p. When prompted for the password, it is password if you followed step 7.::
+**9.** Exit mysql as root and log in as user, blockchain. When prompted for the password, it is password if you followed step 7.::
 
 	bcuser@ubuntu16043:~$ mysql -ublockchain -p
 	Enter password: 
@@ -142,28 +144,28 @@ mysql -ublockchain -p. When prompted for the password, it is password if you fol
 
 	bcuser@ubuntu16043:~$
 
-**What did you accomplish?**
-
-You installed a mysql-server package from our Ubuntu instance. You gave a password to our user named root. Then we used root to create another user named blockchain. You did all of this with security being our top concern by naming our password's password. Well done!
-
 Part 2: Set Up Explorer
 =======================
 
 This part is dependent on you accomplishing the Hyperledger Fabric installation & verification as well as the Marbles Smart Contract & UI labs.
 
-**1.** To confirm you have 1.1.0-alpha of Hyperledger Fabric running, enter docker images. Your screen should look very similar to what is below
+**1.** To confirm you have 1.1.0 of Hyperledger Fabric running, enter docker images. Your screen should look very similar to what is below::
+
+	docker images
 
 .. image:: images/explorer/2.1-p.png
 
-**2.** Also, we need to know if you have Marbles Chaincode installed. Enter docker ps -a. Your screen should look very similar to what is below
+**2.** Also, we need to know if you have Marbles Chaincode installed. Enter docker ps -a. Your screen should look very similar to what is below::
+
+	docker ps -a
 
 .. image:: images/explorer/2.2-p.png
 
 **3.** Now run this command to get the needed documentation for Blockchain Explorer::
 
- wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/blockchain-explorer.tar.gz
+	wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/blockchain-explorer.tar.gz
 
-**4.** Extract the file you just pulled down from GitHub, by entering tar -xvf blockchain-explorer.tar.gz::
+**4.** Extract the file you just pulled down from GitHub, by entering the command below::
 
 	bcuser@ubuntu16043:~$ tar -xvf blockchain-explorer.tar.gz
 
@@ -187,7 +189,9 @@ This part is dependent on you accomplishing the Hyperledger Fabric installation 
 	bcuser@ubuntu16043:~$ cd blockchain-explorer/
 	bcuser@ubuntu16043:~/blockchain-explorer$
 
-**6.** Once you are in the blockchain-explorer directory, enter cd db to enter the db directory
+**6.** Once you are in the blockchain-explorer directory, enter cd db to enter the db directory::
+
+	bcuser@ubuntu16043:~/blockchain-explorer$ cd db/
 
 **7.** Enter chmod u+x fabricexplorer.sql to make the fabricexplorer file executable. Enter ls -l again to see it show up in a different color. On my system it is green::
 
@@ -198,10 +202,12 @@ This part is dependent on you accomplishing the Hyperledger Fabric installation 
 	-rw-rw-r-- 1 bcuser bcuser 14925 Feb  9 12:17 mysqlservice.js
 	bcuser@ubuntu16043:~/blockchain-explorer/db$
 
-**8.** Enter cd .. to go back one directory to the blockchain-explorer directory
+**8.** Go back one directory to the blockchain-explorer directory::
+
+	bcuser@ubuntu16043:~/blockchain-explorer/db$ cd ..
 
 **9.** You are now going to set up your mysql databases by entering 
-mysql -ublockchain -p < db/fabricexplorer.sql. You will be prompt to enter the password for our mysql user blockchain. I hope you haven't forgotten about our super secure password <- hint hint::
+the command below. You will be prompt to enter the password for our mysql user blockchain. I hope you haven't forgotten about our super secure password <- hint hint::
 
 	bcuser@ubuntu16043:~/blockchain-explorer$ mysql -ublockchain -p < db/fabricexplorer.sql
 
