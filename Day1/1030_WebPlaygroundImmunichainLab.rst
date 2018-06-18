@@ -33,11 +33,9 @@ Part 1: Starting and Creating Your Hyperledger Composer Network
 
 **3.** You will see a sample business card. That is a great "Welcome to Composer, here is a sample application" meant for the very beginers. Since we are soon-to-be-experts, click on Deploy a New Business Network located to the right of the sample business card. The next screen will show you various samples and give you the availability deploy your own chaincode.
 
-**4.** You have to give a name for your Blockchain Network. Give it a description as well. Then finish off by dragging the immunichain.bna file to the upload box. You can find the immunichain.bna file on your desktop that was downloaded for you before you arrived today. 
+**4.** You have to give a name for your Blockchain Network. Give it a description as well. Then select **empty-business-network**. This will give us a bare bones business network.  
 
-.. image:: images/composer/1.2.png
-
-**5.** Then click on Deploy. This will deploy our chaincode/blockchain application onto a Hyperledger Fabric underneath that neither you nor I can see.  
+**5.** Then click on Deploy. This will deploy our chaincode/blockchain application onto a Hyperledger Fabric underneath that neither you nor I can see. Basically, it is being stored in your local cache.
 
 **6.** Afterwards, you can come back to the Composer Playground play with some of the other sample business network applications, like animal tracking or vehicle lifecycle. These are found just below the option to deploy empty or sample blockchain applications.
 
@@ -45,14 +43,188 @@ Part 1: Starting and Creating Your Hyperledger Composer Network
 
 .. image:: images/composer/1.3.png
 
-**8.** After you have done that, your screen should look like this. If it does, then we are in business (get it? In business, business network - great!)
+**8.** Next, you will see a few files on the left. You can think of these files as the contents that make up your chaincode. Below there are definitions as to what each file is meant for:
 
-.. image:: images/composer/1.4.png
+*   README.md is meant to give people an overview of the purpose of the business network.
+*   Model File contains all of participants, assets and transactions. It gets referred in the script.js file.
+*   Access Control is how to grant access to certain participants, basically can they invoke certain transactions or not
+*   We don't have a Script.js file in here yet, but the script.js houses all of the javascript that invokes the transactions
+
+**9.** Now, we are going to add some substance to our model file. Begin by clicking on the model file on the left and then delete all of the contents within that file. Then add the below contents. Copy and paste is your very best friend here::
+
+	/* Immunization definitions */
+
+	namespace ibm.wsc.immunichain
+
+	participant Guardian identified by gid {
+      	o String gid
+      	o String name
+	}
+
+	participant MedProvider identified by medid {
+     	o String medid
+      	o String name
+	}
+
+	abstract concept immunization {
+      	o String name
+      	o String provider
+      	o String imdate
+	}
+
+	concept immunirecord extends immunization {}
+
+	asset Childform identified by cid {
+      	o String cid
+      	o String name
+      	o String address
+      	--> Guardian guardian
+      	o String dob
+      	--> MedProvider [] medproviders optional
+      	o immunirecord [] immunizations
+	}
+
+	transaction assignMedProvider {
+      	--> Guardian guardian
+      	--> MedProvider medprovider
+      	--> Childform childform
+	}
+
+	transaction authMember {
+      	--> Guardian guardian
+      	--> Childform childform
+	}
+
+	transaction removeMemberAuth {
+      	--> Guardian guardian
+      	--> Childform childform
+	}
+
+	transaction addImmunizations {
+      	o immunirecord [] vaccines
+      	--> Childform childform
+	}
+
+	transaction updateChildForm {
+      	o String name optional
+      	o String address optional
+      	--> Childform childform
+	}
+
+	transaction reassignGuardian {
+      	--> Guardian oldguardian
+      	--> Guardian newguardian
+      	--> Childform childform
+	}
+
+
+**10.** Click on **Add a File** towards the bottom of the files section. Now, select **Script File (.js)** and then Add in the highlighted blue. Obviously, this will add a Script file to our network. 
+
+**11.** Just like step 9, delete all of the contents and fill in our file with the information below::
+
+	'use strict';
+
+	/**
+      	* Add medical provider to child record
+	* @param {ibm.wsc.immunichain.assignMedProvider} assignMedProvider - the assignMedProvider transaction
+      	* @transaction
+      	*/
+	function assignMedProvider(assignMedProvider) {
+      	var guardian = assignMedProvider.guardian;
+      	var child = assignMedProvider.childform;
+      	var medprovider = assignMedProvider.medprovider;
+      	child.medproviders.push(medprovider);
+
+      	return getAssetRegistry('ibm.wsc.immunichain.Childform')
+      	.then(function(result) {
+      	return result.update(child);
+      	});
+	}
+
+	/**
+      	* Add immunization(s) to child record
+	* @param {ibm.wsc.immunichain.addImmunizations} addImmunizations - the addImmunizations transaction
+      	* @transaction
+      	*/
+	function addImmunizations(addImmunizations){
+      	var vaccines = addImmunizations.vaccines;
+      	var child = addImmunizations.childform;
+      	var immunizations = child.immunizations;
+	/*    if (immunizations[0].name == 'default'){
+      	immunizations.splice(0,1)
+      	} */
+      	immunizations.push.apply(immunizations,vaccines);
+
+      	return getAssetRegistry('ibm.wsc.immunichain.Childform')
+              .then(function(ChildRegistry){
+                      //save the childform
+                      return ChildRegistry.update(child);
+              });
+	}
+
+	/**
+      	* Update information on child record, can only be done by guardian
+	* @param {ibm.wsc.immunichain.updateChildForm} updateChildForm - the updateChildForm transaction
+      	* @transaction
+      	*/
+	function updateChildForm(updateChildForm){
+      	var newaddress = null;
+      	var newname = null;
+      	var child = updateChildForm.childform;
+      	newaddress = updateChildForm.address;
+      	newname = updateChildForm.name;
+
+      	if (newaddress != null && newname != null){
+      	child.name = newname;
+      	child.address = newaddress;
+      	}
+      	else if (newaddress != null){
+      	child.address = newaddress;
+      	}
+      	else if (newname != null){
+      	child.name = newname;
+      	}
+      	return getAssetRegistry('ibm.wsc.immunichain.Childform')
+              .then(function(ChildRegistry){
+                      //save the childform
+                      return ChildRegistry.update(child);
+              });
+	}
+
+	/**
+      	* Assign child to his/herself when he/she is of legal age
+	* @param {ibm.wsc.immunichain.reassignGuardian} reassignGuardian - the reassignGuardian transaction
+	* @transaction
+      	*/
+	function reassignGuardian(reassignGuardian) {
+      	var oldguardian = reassignGuardian.oldguardian;
+      	var newguardian = reassignGuardian.newguardian;
+      	var child = reassignGuardian.childform;
+      	child.guardian = newguardian;
+
+      	return getAssetRegistry('ibm.wsc.immunichain.Childform')
+      	.then(function(result) {
+      	return result.update(child);
+      	});
+	}
+
+	/**
+      	* Get the immunizations for a child
+      	* @query
+      	* @param {String} cid - the unique id assigned to the childform
+      	* @returns {immunirecord[]} - the immunizations that the child has gotten
+	*/
+	function listImmunizations(cid) {
+      	return query('select x.immunizations from Childform where x.cid ==: cid');
+	}
+	
+**12.** Luckily, we don't have to make changes to our Access Control file right now. Now click on **Deploy Changes.** This will update our network with the specific modifications you just made. Basically, you just add participants, assets, and a script file, which houses all of our transactions in javascript. I highly suggest going through the code we pasted into the files to get a sense as to what is happening. 
+
 
 Part 2: Creating Assets and Participants
 ========================================
 
-**1.** Now that you have an Immunichain Business Network, jump over to the Test section of the Composer Playground. The test area allows you to create assets, participants and submit transactions against your assets and participants. Your screen should look like this: 
+**1.** Now that you have an Immunichain Business Network from scratch, jump over to the Test section of the Composer Playground. The test area allows you to create assets, participants and submit transactions against your assets and participants. Your screen should look like this: 
 
 .. image:: images/composer/2.1.png
 
