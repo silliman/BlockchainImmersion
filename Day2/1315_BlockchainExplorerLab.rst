@@ -33,19 +33,21 @@ Part 1: MySQL Set Up
 
 **4.** Enter this command: mysql_secure_installation
 
-When you get prompted, always say YES - Except when it asks if you want to change the root's password, say NO:: 
+When you get prompted, say **NO** to the first two questions and then **YES** to the rest of the prompts:: 
 
-	bcuser@ubuntu16043:~$ mysql_secure_installation
+	bcuser@ubuntu16044:~$ mysql_secure_installation
 
 	Securing the MySQL server deployment.
 
 	Enter password for user root: 
-	The 'validate_password' plugin is installed on the server.
-	The subsequent steps will run with the existing configuration
-	of the plugin.
-	Using existing password for root.
 
-	
+	VALIDATE PASSWORD PLUGIN can be used to test passwords
+	and improve security. It checks the strength of password
+	and allows the users to set only those passwords which are
+	secure enough. Would you like to setup VALIDATE PASSWORD plugin?
+
+	Press y|Y for Yes, any other key for No: No
+	Using existing password for root.
 	Change the password for root ? ((Press y|Y for Yes, any other key for No) : N
 
 	 ... skipping.
@@ -86,7 +88,8 @@ When you get prompted, always say YES - Except when it asks if you want to chang
 	Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Y
 	Success.
 
-	All done!
+	All done! 
+
 
 **5.** Once you get your command line prompt back, enter mysql -uroot -p. When prompted, enter root's password::
 
@@ -122,7 +125,10 @@ This step grants our user, blockchain, to have all privileges to all databases.:
 
 	mysql> GRANT ALL PRIVILEGES  ON fabricexplorer.* to 'blockchain'@'localhost';
 
-**9.** Exit mysql as root and log in as user, blockchain. When prompted for the password, it is password if you followed step 7.::
+**9.** Exit mysql as root by entering **exit** and log in as user, blockchain. When prompted for the password, it is password if you followed step 7.::
+
+	mysql> exit
+	Bye
 
 	bcuser@ubuntu16043:~$ mysql -ublockchain -p
 	Enter password: 
@@ -217,7 +223,7 @@ the command below. You will be prompt to enter the password for our mysql user b
 
 **11.** If your file looks the same as the picture, enter npm install from the blockchain-explorer directory. This will create a node_modules directory and a log.log file to give out information on Explorer::
 
-	bcuser@ubuntu16043:~$ npm install
+	bcuser@ubuntu16043:~/blockchain-explorer$ npm install
 
 **12.** Now you are ready to start Explorer by entering ./start.sh - You will be given your command prompt right away meaning that it is running in the background::
 
