@@ -462,8 +462,8 @@ If you were to go to the permissions.acl file in the Define section, you would n
 **9.** You will notice a few rules there already. These rules are required for the Admin identity to access the entire network. It is important that you leave those rules there. Now, you are going to add a few rules to our network. Copy these rules below::
 
 	rule UpdatePersonal {
-      	description: "Allow the guardian update the child's personal info"
-        participant(g): "ibm.wsc.immunichain.Guardian"
+    	description: "Allow the guardian update the child's personal info"
+    	participant(g): "ibm.wsc.immunichain.Guardian"
       	operation: ALL
       	resource(c): "ibm.wsc.immunichain.Childform"
       	transaction(tx): "ibm.wsc.immunichain.updateChildForm"
@@ -515,6 +515,14 @@ If you were to go to the permissions.acl file in the Define section, you would n
       	action: ALLOW
 	}
 
+	rule txMedUAuthMembers {
+      	description: "Allow the guardian to authorize member organizations"
+      	participant: "ibm.wsc.immunichain.MedProvider"
+      	operation: ALL
+      	resource: "ibm.wsc.immunichain.authMember"
+      	action: ALLOW
+	}
+
 	rule DeauthMembers {
       	description: "Allow the guardian to deauthorize member organizations"
       	participant(g): "ibm.wsc.immunichain.Guardian"
@@ -535,7 +543,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 
 	rule Reassign {
       	description: "Allow the guardian to reassign their children (if of age)"
-      	participant(g): "ibm.wsc.immunichain.Guardian"
+        participant(g): "ibm.wsc.immunichain.Guardian"
       	operation: UPDATE
       	resource(c): "ibm.wsc.immunichain.Childform"
       	transaction(tx): "ibm.wsc.immunichain.reassignGuardian"
@@ -561,7 +569,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 	}
 
 	rule readMembers {
-      	description: "Allow guardians to view their own child's health record"
+      	description: "Allow Guardian to view the Member"
       	participant: "ibm.wsc.immunichain.Guardian"
       	operation: READ
       	resource: "ibm.wsc.immunichain.Member"
@@ -569,7 +577,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 	}
 
 	rule readMedicalProviders {
-    	description: "Allow the guardian to create medical providers in the network"
+    	description: "Allow the Guardian to read the Medical Providers in the network"
       	participant: "ibm.wsc.immunichain.Guardian"
       	operation: READ
       	resource: "ibm.wsc.immunichain.MedProvider"
@@ -593,7 +601,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 	}
 
 	rule MedicalProviderRead {
-    	description: "Allow members to view children that have them as a member"
+    	description: "Allow Medical Providers to view children that have them as a medical provider"
       	participant(g): "ibm.wsc.immunichain.MedProvider"
       	operation: UPDATE, READ
       	resource(c): "ibm.wsc.immunichain.Childform"
@@ -619,24 +627,35 @@ If you were to go to the permissions.acl file in the Define section, you would n
       	action: ALLOW
 	}
 
-	rule MemRead {
-      	description: "Allow the Members to view all the Children in the network"
-      	participant: "ibm.wsc.immunichain.Member"
-      	operation: READ
-      	resource: "ibm.wsc.immunichain.Childform"
+	rule memberRead {
+    	description: "Allow the guardian to reassign their children (if of age)"
+    	participant: "ibm.wsc.immunichain.Member"
+    	operation: READ
+    	resource: "ibm.wsc.immunichain.Childform"
+    	action: ALLOW
+	}
+
+	rule MemberRead {
+      	description: "Allow members to view children that have them as a member"
+        participant(g): "ibm.wsc.immunichain.Member"
+      	operation: UPDATE, READ
+      	resource(c): "ibm.wsc.immunichain.Childform"
+        condition: (c.members.some(function (member) {
+      	return member.getIdentifier() == g.getIdentifier();
+      	}))
       	action: ALLOW
 	}
 
 	rule medUser {
-    	description: "Allow the Medical provider to view all the guardian's in the network"
+    	description: "Allow the Medical provider to access the network"
       	participant: "ibm.wsc.immunichain.MedProvider"
       	operation: READ
       	resource: "org.hyperledger.composer.system.*"
       	action: ALLOW
 	}
 
-	rule memberUser {
-    	description: "Allow the Medical provider to view all the guardian's in the network"
+  	rule memberUser {
+    	description: "Allow the Member to access the network"
       	participant: "ibm.wsc.immunichain.Member"
       	operation: READ
       	resource: "org.hyperledger.composer.system.*"
@@ -644,7 +663,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 	}
 
 	rule GuardanUser {
-    	description: "Allow the Medical provider to view all the guardian's in the network"
+    	description: "Allow the Guardian to access the network"
       	participant: "ibm.wsc.immunichain.Guardian"
       	operation: READ
       	resource: "org.hyperledger.composer.system.*"
