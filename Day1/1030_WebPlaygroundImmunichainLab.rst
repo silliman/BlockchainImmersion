@@ -459,11 +459,199 @@ If you were to go to the permissions.acl file in the Define section, you would n
 
 .. image:: images/composer/5.6.png
 
-**9.** Open up the permissions.acl file that you can find on your desktop. Select all and copy the contents in that file. 
+**9.** You will notice a few rules there already. These rules are required for the Admin identity to access the entire network. It is important that you leave those rules there. Now, you are going to add a few rules to our network. Copy these rules below::
 
-.. image:: images/composer/5.7.png
+	rule UpdatePersonal {
+      	description: "Allow the guardian update the child's personal info"
+        participant(g): "ibm.wsc.immunichain.Guardian"
+      	operation: ALL
+      	resource(c): "ibm.wsc.immunichain.Childform"
+      	transaction(tx): "ibm.wsc.immunichain.updateChildForm"
+      	condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      	action: ALLOW
+	}
 
-**10.** **Then paste that content above the other rules** in the Access Control file. Here is what I my screen looks like now. The order of the ACL rules is important. The first rule determines if the participants can proceed to the next rule:
+	rule txUpdatePersonal {
+      	description: "Allow the guardian to update the child assets"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: ALL
+      	resource: "ibm.wsc.immunichain.updateChildForm"
+      	action: ALLOW
+	}
+
+	rule AssignProvider {
+      	description: "Allow the guardian to assign and update medical providers"
+      	participant(g): "ibm.wsc.immunichain.Guardian"
+      	operation: UPDATE
+      	resource(c): "ibm.wsc.immunichain.Childform"
+      	transaction(tx): "ibm.wsc.immunichain.assignMedProvider"
+      	condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      	action: ALLOW
+	}
+
+	rule txAssignProvider {
+      	description: "Allow the guardian to assign and update medical providers"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: ALL
+      	resource: "ibm.wsc.immunichain.assignMedProvider"
+      	action: ALLOW
+	}
+
+	rule AuthMembers {
+      	description: "Allow the guardian to authorize member organizations"
+      	participant(g): "ibm.wsc.immunichain.Guardian"
+      	operation: UPDATE
+      	resource(c): "ibm.wsc.immunichain.Childform"
+      	transaction(tx): "ibm.wsc.immunichain.authMember"
+      	condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      	action: ALLOW
+	}
+
+	rule txUAuthMembers {
+      	description: "Allow the guardian to authorize member organizations"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: ALL
+      	resource: "ibm.wsc.immunichain.authMember"
+      	action: ALLOW
+	}
+
+	rule DeauthMembers {
+      	description: "Allow the guardian to deauthorize member organizations"
+      	participant(g): "ibm.wsc.immunichain.Guardian"
+      	operation: UPDATE
+      	resource(c): "ibm.wsc.immunichain.Childform"
+      	transaction(tx): "ibm.wsc.immunichain.removeMemberAuth"
+      	condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      	action: ALLOW
+	}
+
+	rule txDeauthMembers {
+      	description: "Allow the guardian to deauthorize member organizations"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: ALL
+      	resource: "ibm.wsc.immunichain.removeMemberAuth"
+      	action: ALLOW
+	}
+
+	rule Reassign {
+      	description: "Allow the guardian to reassign their children (if of age)"
+      	participant(g): "ibm.wsc.immunichain.Guardian"
+      	operation: UPDATE
+      	resource(c): "ibm.wsc.immunichain.Childform"
+      	transaction(tx): "ibm.wsc.immunichain.reassignGuardian"
+      	condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      	action: ALLOW
+	}
+
+	rule txReassign {
+      	description: "Allow the guardian to reassign their children (if of age)"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: ALL
+      	resource: "ibm.wsc.immunichain.reassignGuardian"
+      	action: ALLOW
+	}
+
+	rule GuardianRead {
+      	description: "Allow guardians to view their own child's health record"
+      	participant(g): "ibm.wsc.immunichain.Guardian"
+      	operation: UPDATE, READ
+      	resource(c): "ibm.wsc.immunichain.Childform"
+      	condition: (c.guardian.getIdentifier() == g.getIdentifier())
+      	action: ALLOW
+	}
+
+	rule readMembers {
+      	description: "Allow guardians to view their own child's health record"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: READ
+      	resource: "ibm.wsc.immunichain.Member"
+      	action: ALLOW
+	}
+
+	rule readMedicalProviders {
+    	description: "Allow the guardian to create medical providers in the network"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: READ
+      	resource: "ibm.wsc.immunichain.MedProvider"
+      	action: ALLOW
+	}
+
+	rule addChild {
+      	description: "Allow the Medical Provider to add a child in the network"
+      	participant: "ibm.wsc.immunichain.MedProvider"
+      	operation: CREATE
+      	resource: "ibm.wsc.immunichain.Childform"
+      	action: ALLOW
+	}
+
+	rule CreateChild {
+      	description: "Allow the Guardian to add a child in the network"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: CREATE
+      	resource: "ibm.wsc.immunichain.Childform"
+      	action: ALLOW
+	}
+
+	rule MedicalProviderRead {
+    	description: "Allow members to view children that have them as a member"
+      	participant(g): "ibm.wsc.immunichain.MedProvider"
+      	operation: UPDATE, READ
+      	resource(c): "ibm.wsc.immunichain.Childform"
+      	condition: (c.medproviders.some(function(MedProvider) {
+      	return MedProvider.getIdentifier() == g.getIdentifier();
+      	}))
+      	action: ALLOW
+	}
+
+	rule medRead1 {
+    	description: "Allow the Medical Providers to read all the members available in the network"
+      	participant: "ibm.wsc.immunichain.MedProvider"
+      	operation: READ
+      	resource: "ibm.wsc.immunichain.Member"
+      	action: ALLOW
+	}
+
+	rule medRead2 {
+    	description: "Allow the Medical provider to view all the guardian's in the network"
+      	participant: "ibm.wsc.immunichain.MedProvider"
+      	operation: READ
+      	resource: "ibm.wsc.immunichain.Guardian"
+      	action: ALLOW
+	}
+
+	rule MemRead {
+      	description: "Allow the Members to view all the Children in the network"
+      	participant: "ibm.wsc.immunichain.Member"
+      	operation: READ
+      	resource: "ibm.wsc.immunichain.Childform"
+      	action: ALLOW
+	}
+
+	rule medUser {
+    	description: "Allow the Medical provider to view all the guardian's in the network"
+      	participant: "ibm.wsc.immunichain.MedProvider"
+      	operation: READ
+      	resource: "org.hyperledger.composer.system.*"
+      	action: ALLOW
+	}
+
+	rule memberUser {
+    	description: "Allow the Medical provider to view all the guardian's in the network"
+      	participant: "ibm.wsc.immunichain.Member"
+      	operation: READ
+      	resource: "org.hyperledger.composer.system.*"
+      	action: ALLOW
+	}
+
+	rule GuardanUser {
+    	description: "Allow the Medical provider to view all the guardian's in the network"
+      	participant: "ibm.wsc.immunichain.Guardian"
+      	operation: READ
+      	resource: "org.hyperledger.composer.system.*"
+      	action: ALLOW
+	}
+
+**10.** **Then paste these rules above the other rules** in the Access Control file. Here is what I my screen looks like now. The order of the ACL rules is important. The first rule determines if the participants can proceed to the next rule:
 
 .. image:: images/composer/5.8.png
 
