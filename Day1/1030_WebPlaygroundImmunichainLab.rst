@@ -238,7 +238,7 @@ Before we create assets and participants, we need to know what each asset and pa
 
 .. image:: images/composer/2.2.png
 
-.. image:: images/composer/2.3.png
+.. image:: images/composer/2.3.1.png
 
 **3.** Once you have created a Guardian, your screen should look like this: 
 
@@ -265,13 +265,13 @@ So far, everything has been a bit easy. Now, we are going to add a participant a
 
 **1.** Head into your model file by going to the Define section and clicking on the Model File, found on the left hand side. The model file defines all the participants, assets and transactions. It gives participants attributes like name, email address, id numbers, etc. 
 
-.. image:: images/composer/3.1.png
+.. image:: images/composer/3.1.1.png
 
 **2.** On line 15, add in this participant::
 
 	participant Member identified by memid {
-		o String memid
-		o String name
+	o String memid
+	o String name
 	}
 
 .. image:: images/composer/3.2.png
@@ -280,23 +280,23 @@ So far, everything has been a bit easy. Now, we are going to add a participant a
 
 	--> Member [] members optional
 
-.. image:: images/composer/3.3.png
+.. image:: images/composer/3.3.1.png
 
 **4.** On line 47, add in this line in the transaction authMember::
 
 	--> Member member
 
-.. image:: images/composer/3.4.png
+.. image:: images/composer/3.4.1.png
 
 **5.** On line 54, add in this line in the transaction removeMemberAuth::
 
 	--> Member member
 
-.. image:: images/composer/3.5.png
+.. image:: images/composer/3.5.1.png
 
 **6.** Then click on Deploy Changes (the 0.19.0 release of Composer changes this button from Update to Deploy Changes. Both do the same thing, but the wording is different), if successful you will get a success message in the top right. You have now deployed a new version of the chaincode. If we were running this locally, you would see a new version of the chaincode represented with Docker Images and Containers.
 
-.. image:: images/composer/3.6.png
+.. image:: images/composer/3.6.1.png
 
 What other participants or assets could you see being added the Immunichain Blockchain network? Collaborate with a few people around you to gather ideas. Later you can add these participants and assets to your network. 
 
@@ -304,7 +304,7 @@ Now, let's add some transactions.
 
 **7.** Switch to the Script File in the Define Section
 
-.. image:: images/composer/3.7.png
+.. image:: images/composer/3.7.1.png
 
 **8.** On line 20, add in this transaction. This is javascript, which is looking at participants, assets and transactions located in the model file::
 
@@ -324,7 +324,7 @@ Now, let's add some transactions.
 	  });
 	}
 
-.. image:: images/composer/3.8.png
+.. image:: images/composer/3.8.1.png
 
 **9.** On line 36, add in this transaction as well::
 
@@ -353,7 +353,7 @@ Now, let's add some transactions.
 
 See picture below to get a sense of what to do.
 
-.. image:: images/composer/3.9.png
+.. image:: images/composer/3.9.1.png
 
 **10.** Again, click on Deploy Changes to update your Script File.
 
@@ -457,13 +457,13 @@ If you were to go to the permissions.acl file in the Define section, you would n
 
 **8.** Since we are in the admin identity (make sure you see admin in the top right), lets change our permissions file. Click on Define and then Access Control in the bottom left.
 
-.. image:: images/composer/5.6.png
+.. image:: images/composer/5.6.1.png
 
 **9.** You will notice a few rules there already. These rules are required for the Admin identity to access the entire network. It is important that you leave those rules there. Now, you are going to add a few rules to our network. Copy these rules below::
 
 	rule UpdatePersonal {
-    	description: "Allow the guardian update the child's personal info"
-    	participant(g): "ibm.wsc.immunichain.Guardian"
+      	description: "Allow the guardian update the child's personal info"
+        participant(g): "ibm.wsc.immunichain.Guardian"
       	operation: ALL
       	resource(c): "ibm.wsc.immunichain.Childform"
       	transaction(tx): "ibm.wsc.immunichain.updateChildForm"
@@ -507,7 +507,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
       	action: ALLOW
 	}
 
-	rule txUAuthMembers {
+	rule txGuardianAuthMembers {
       	description: "Allow the guardian to authorize member organizations"
       	participant: "ibm.wsc.immunichain.Guardian"
       	operation: ALL
@@ -515,11 +515,12 @@ If you were to go to the permissions.acl file in the Define section, you would n
       	action: ALLOW
 	}
 
-	rule txMedUAuthMembers {
+	rule txMedProviderAuthMembers {
       	description: "Allow the guardian to authorize member organizations"
       	participant: "ibm.wsc.immunichain.MedProvider"
       	operation: ALL
       	resource: "ibm.wsc.immunichain.authMember"
+  	transaction: "ibm.wsc.immunichain.authMember"
       	action: ALLOW
 	}
 
@@ -543,7 +544,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 
 	rule Reassign {
       	description: "Allow the guardian to reassign their children (if of age)"
-        participant(g): "ibm.wsc.immunichain.Guardian"
+      	participant(g): "ibm.wsc.immunichain.Guardian"
       	operation: UPDATE
       	resource(c): "ibm.wsc.immunichain.Childform"
       	transaction(tx): "ibm.wsc.immunichain.reassignGuardian"
@@ -562,14 +563,14 @@ If you were to go to the permissions.acl file in the Define section, you would n
 	rule GuardianRead {
       	description: "Allow guardians to view their own child's health record"
       	participant(g): "ibm.wsc.immunichain.Guardian"
-      	operation: UPDATE, READ
+      	operation: READ, UPDATE
       	resource(c): "ibm.wsc.immunichain.Childform"
       	condition: (c.guardian.getIdentifier() == g.getIdentifier())
       	action: ALLOW
 	}
 
 	rule readMembers {
-      	description: "Allow Guardian to view the Member"
+      	description: "Allow guardians to view their own child's health record"
       	participant: "ibm.wsc.immunichain.Guardian"
       	operation: READ
       	resource: "ibm.wsc.immunichain.Member"
@@ -577,7 +578,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 	}
 
 	rule readMedicalProviders {
-    	description: "Allow the Guardian to read the Medical Providers in the network"
+    	description: "Allow the guardian to create medical providers in the network"
       	participant: "ibm.wsc.immunichain.Guardian"
       	operation: READ
       	resource: "ibm.wsc.immunichain.MedProvider"
@@ -601,7 +602,7 @@ If you were to go to the permissions.acl file in the Define section, you would n
 	}
 
 	rule MedicalProviderRead {
-    	description: "Allow Medical Providers to view children that have them as a medical provider"
+    	description: "Allow members to view children that have them as a member"
       	participant(g): "ibm.wsc.immunichain.MedProvider"
       	operation: UPDATE, READ
       	resource(c): "ibm.wsc.immunichain.Childform"
@@ -627,35 +628,24 @@ If you were to go to the permissions.acl file in the Define section, you would n
       	action: ALLOW
 	}
 
-	rule memberRead {
-    	description: "Allow the guardian to reassign their children (if of age)"
-    	participant: "ibm.wsc.immunichain.Member"
-    	operation: READ
-    	resource: "ibm.wsc.immunichain.Childform"
-    	action: ALLOW
-	}
-
-	rule MemberRead {
-      	description: "Allow members to view children that have them as a member"
-        participant(g): "ibm.wsc.immunichain.Member"
-      	operation: UPDATE, READ
-      	resource(c): "ibm.wsc.immunichain.Childform"
-        condition: (c.members.some(function (member) {
-      	return member.getIdentifier() == g.getIdentifier();
-      	}))
+	rule MemRead {
+      	description: "Allow the Members to view all the Children in the network"
+      	participant: "ibm.wsc.immunichain.Member"
+      	operation: READ
+      	resource: "ibm.wsc.immunichain.Childform"
       	action: ALLOW
 	}
 
 	rule medUser {
-    	description: "Allow the Medical provider to access the network"
+    	description: "Allow the Medical provider to view all the guardian's in the network"
       	participant: "ibm.wsc.immunichain.MedProvider"
-      	operation: READ
+      	operation: READ, CREATE
       	resource: "org.hyperledger.composer.system.*"
       	action: ALLOW
 	}
 
-  	rule memberUser {
-    	description: "Allow the Member to access the network"
+	rule memberUser {
+    	description: "Allow the Medical provider to view all the guardian's in the network"
       	participant: "ibm.wsc.immunichain.Member"
       	operation: READ
       	resource: "org.hyperledger.composer.system.*"
@@ -663,20 +653,21 @@ If you were to go to the permissions.acl file in the Define section, you would n
 	}
 
 	rule GuardanUser {
-    	description: "Allow the Guardian to access the network"
+    	description: "Allow the Medical provider to view all the guardian's in the network"
       	participant: "ibm.wsc.immunichain.Guardian"
-      	operation: READ
+      	operation: READ, CREATE
       	resource: "org.hyperledger.composer.system.*"
       	action: ALLOW
 	}
 
+
 **10.** **Then paste these rules above the other rules** in the Access Control file. Here is what I my screen looks like now. The order of the ACL rules is important. The first rule determines if the participants can proceed to the next rule:
 
-.. image:: images/composer/5.8.png
+.. image:: images/composer/5.8.1.png
 
 **11.** Once you are good to go, click on Deploy Changes in the bottom left and that will make changes across the entire business network. Read through some of the rules that we just implemented. What do you think will change as we go through the various identities?
 
-.. image:: images/composer/5.9.png
+.. image:: images/composer/5.9.1.png
 
 **12.** Click on admin in the top right again. This time, click on My Business Networks. This will take us to the Composer Playground homepage
 
