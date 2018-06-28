@@ -12,14 +12,12 @@ The Hyperledger Composer Playground is way to produce Blockchain applications qu
 **Pre-Requisites for Mac**
 
 *   Web Browser (Chrome preferably)
-*   Command line
 *   Internet connectively
 
 **Pre-Requisites for Microsoft**
 
 *   Web Browser (Chrome preferably)
 *   Internet connectively
-*   Command line
 
 
 Part 1: Starting and Creating Your Hyperledger Composer Network
@@ -34,6 +32,8 @@ Part 1: Starting and Creating Your Hyperledger Composer Network
 **3.** You will see a sample business card. That is a great "Welcome to Composer, here is a sample application" meant for the very beginers. Since we are soon-to-be-experts, click on Deploy a New Business Network located to the right of the sample business card. The next screen will show you various samples and give you the availability deploy your own chaincode.
 
 **4.** You have to give a name for your Blockchain Network. Give it a description as well. Then select **empty-business-network**. This will give us a bare bones business network.  
+
+.. image:: images/composer/1.2.1.png
 
 **5.** Then click on Deploy. This will deploy our chaincode/blockchain application onto a Hyperledger Fabric underneath that neither you nor I can see. Basically, it is being stored in your local cache.
 
