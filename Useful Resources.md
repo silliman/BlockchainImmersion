@@ -13,7 +13,7 @@ https://immunichain.zcloud.marist.edu/login/?next=/
 Weekly (or bi-weekly) Blockchain Innovators Call (with replays to past calls):
 http://ibm.biz/blockchain-innovators
 
-Badging:
+**Badging:**
 
 Blockchain Essentials: https://developer.ibm.com/courses/all/blockchain-essentials
 
