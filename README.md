@@ -1,4 +1,11 @@
 # Blockchain Immersion Workshop (BKCHN1)
+
+This master branch of the repository has been reset in preparation for our next class.
+The lecture and lab materials will be populated onto the repository during the class.
+
+If you came here looking for a complete set of materials from a prior class instance, please click the button that says *Branch: master* and select the tag that corresponds to the class instance of interest. 
+
+
  
 ## Lab Notes:
 
