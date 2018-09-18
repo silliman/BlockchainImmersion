@@ -1,5 +1,5 @@
 Course evaluation link:
-TBA (To Be Announced)
+https://tec-feedback.mybluemix.net/event/PCOY-B43KAY  
 
 Getting Started with Enterprise Blockchain:
 https://www.ibm.com/blogs/blockchain/2018/03/getting-started-on-the-ibm-blockchain-platform-starter-plan/
