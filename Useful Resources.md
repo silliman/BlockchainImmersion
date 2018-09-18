@@ -4,6 +4,12 @@ https://tec-feedback.mybluemix.net/event/PCOY-B43KAY
 Getting Started with Enterprise Blockchain:
 https://www.ibm.com/blogs/blockchain/2018/03/getting-started-on-the-ibm-blockchain-platform-starter-plan/
 
+Hyperledger Fabric documentation:
+http://ibm.biz/hl_fabricdocs
+
+Twitch video going over "Write your first application tutorial":
+https://www.twitch.tv/videos/309949877, at the 49 min mark
+
 Hyperledger Composer (tutorials, documentation):
 https://hyperledger.github.io/composer/
 
