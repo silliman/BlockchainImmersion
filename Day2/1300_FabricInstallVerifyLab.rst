@@ -1,6 +1,6 @@
 Section 1:  Lab Overview
 ========================
-In this lab, you will start with a basic Ubuntu 16.04.4 server instance running on an IBM z13 Server that resides in the IBM Washington Systems Center in Herndon, Virginia.  Ubuntu updates were applied such that at this time the level of Ubuntu is *16.04.4 LTS* and the Linux kernel is at level *4.4.0-127*.  In addtion, several software prerequisites have already been installed on this instance for you, including:
+In this lab, you will start with a basic Ubuntu 16.04.5 server instance running on an IBM z13 Server that resides in the IBM Washington Systems Center in Herndon, Virginia.  Ubuntu updates were applied such that at this time the level of Ubuntu is *16.04.5 LTS* and the Linux kernel is at level *4.4.0-131*.  In addtion, several software prerequisites have already been installed on this instance for you, including:
 
 *	Docker and Docker Compose
 *	Node.js and npm
@@ -36,11 +36,11 @@ In this section, you will:
 
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger$ git clone -b v1.1.1 https://gerrit.hyperledger.org/r/fabric
  Cloning into 'fabric'...
- remote: Counting objects: 5640, done
- remote: Finding sources: 100% (45/45)
- remote: Total 71382 (delta 2), reused 71362 (delta 2)
- Receiving objects: 100% (71382/71382), 88.27 MiB | 30.15 MiB/s, done.
- Resolving deltas: 100% (32176/32176), done.
+ remote: Counting objects: 5083, done
+ remote: Finding sources: 100% (40/40)
+ remote: Total 74955 (delta 6), reused 74937 (delta 6)
+ Receiving objects: 100% (74955/74955), 92.17 MiB | 26.57 MiB/s, done.
+ Resolving deltas: 100% (33497/33497), done.
  Checking connectivity... done.
  Note: checking out 'df84b5b3c3014c3f6cf469df21766dcd645ecb7e'.
 
@@ -77,29 +77,29 @@ Docker images stored on it.  The only output you will see is the column headings
  sys	0m0.598s
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric$ 
 
-**Step 2.7:** Run *docker images* again and you will see several Docker images that were just created. You will notice that many of the Docker images at the top of the output were created in the last few minutes.  These were created by the *make docker* command.  The Docker images that are several months old were downloaded from the Hyperledger Fabric's public DockerHub repository.  Your output should look similar to that shown here, although the tags will be different if your instructor gave you a different level to checkout, and your *image ids* will be different either way, for those images that were created in the last few minutes::
+**Step 2.7:** Run *docker images* again and you will see several Docker images that were just created. You will notice that many of the Docker images at the top of the output were created in the last few minutes.  These were created by the *make docker* command.  The Docker images that are several months old were downloaded from Hyperledger Fabric's public DockerHub repository.  Your output should look similar to that shown here, although the tags will be different if your instructor gave you a different level to checkout, and your *image ids* will be different either way, for those images that were created in the last few minutes::
 
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric$ docker images
  REPOSITORY                     TAG                 IMAGE ID            CREATED              SIZE
- hyperledger/fabric-tools       latest              592d921603b8        34 seconds ago       1.37GB
- hyperledger/fabric-tools       s390x-1.1.1         592d921603b8        34 seconds ago       1.37GB
- hyperledger/fabric-orderer     latest              5491eacc2ca8        About a minute ago   203MB
- hyperledger/fabric-orderer     s390x-1.1.1         5491eacc2ca8        About a minute ago   203MB
- hyperledger/fabric-peer        latest              7a635dfa9f90        About a minute ago   210MB
- hyperledger/fabric-peer        s390x-1.1.1         7a635dfa9f90        About a minute ago   210MB
- hyperledger/fabric-javaenv     latest              9eb789f8a6fa        About a minute ago   1.38GB
- hyperledger/fabric-javaenv     s390x-1.1.1         9eb789f8a6fa        About a minute ago   1.38GB
- hyperledger/fabric-ccenv       latest              c794e7f5895f        About a minute ago   1.3GB
- hyperledger/fabric-ccenv       s390x-1.1.1         c794e7f5895f        About a minute ago   1.3GB
- hyperledger/fabric-baseimage   s390x-0.4.6         234d9beb079b        5 months ago         1.27GB
- hyperledger/fabric-baseos      s390x-0.4.6         0eaed2e8996f        5 months ago         173MB
+ hyperledger/fabric-tools       latest              60f94847e352        25 seconds ago       1.37GB
+ hyperledger/fabric-tools       s390x-1.1.1         60f94847e352        25 seconds ago       1.37GB
+ hyperledger/fabric-orderer     latest              a9e44282a9c4        57 seconds ago       203MB
+ hyperledger/fabric-orderer     s390x-1.1.1         a9e44282a9c4        57 seconds ago       203MB
+ hyperledger/fabric-peer        latest              5e420b96445b        About a minute ago   210MB
+ hyperledger/fabric-peer        s390x-1.1.1         5e420b96445b        About a minute ago   210MB
+ hyperledger/fabric-javaenv     latest              ef10412953d9        About a minute ago   1.38GB
+ hyperledger/fabric-javaenv     s390x-1.1.1         ef10412953d9        About a minute ago   1.38GB
+ hyperledger/fabric-ccenv       latest              cc66ffd94fe4        About a minute ago   1.3GB
+ hyperledger/fabric-ccenv       s390x-1.1.1         cc66ffd94fe4        About a minute ago   1.3GB
+ hyperledger/fabric-baseimage   s390x-0.4.6         234d9beb079b        7 months ago         1.27GB
+ hyperledger/fabric-baseos      s390x-0.4.6         0eaed2e8996f        7 months ago         173MB
 
 **Step 2.8:** Navigate to the directory one level above where the “end-to-end” test lives::
 
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric$ cd examples
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric/examples$
 
-**Step 2.9:** Recent updates to Docker Compose have changed how the default Docker network is named. Previously, it created a network named *directory*_default where *directory* is the current directory with special characters like underscores removed.  For instance, the test we want to run lives in the *e2e_cli* directory and Docker would create an internal network named *e2ecli_default*.  The end-to-end test supplied by Hyperledger Fabric is configured to expect a network of this name.  Now, however, Docker Compose will leave the underscore in, and create an internal network named *e2e_cli_default*, which breaks the test we want to run unless we take corrective measures, which we're about to do.  The more elegant solution would be to change the value of the *CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE* environment variable set in *examples/e2e_cli/base/peer-base.yaml* from *e2ecli_default* to *e2e_cli_default*.  But a sneakier way to get around this for the purposes of this lab is to simply rename the directory from *e2e_cli*.  Let's do that::
+**Step 2.9:** Recent updates to Docker Compose have changed how the default Docker network is named. Previously, it created a network named *directory_default* where *directory* is the current directory with special characters like underscores removed.  For instance, the test we want to run lives in the *e2e_cli* directory and Docker would create an internal network named *e2ecli_default*.  The end-to-end test supplied by Hyperledger Fabric is configured to expect a network of this name.  Now, however, Docker Compose will leave the underscore in, and create an internal network named *e2e_cli_default*, which breaks the test we want to run unless we take corrective measures, which we're about to do.  The more elegant solution would be to change the value of the *CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE* environment variable set in *examples/e2e_cli/base/peer-base.yaml* from *e2ecli_default* to *e2e_cli_default*.  But a sneakier way to get around this for the purposes of this lab is to simply rename the directory from *e2e_cli*.  Let's do that::
 
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric/examples$ mv -iv e2e_cli/ e2ecli
  'e2e_cli/' -> 'e2ecli'
@@ -109,7 +109,7 @@ Docker images stored on it.  The only output you will see is the column headings
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric/examples$ cd e2ecli 
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric/examples/e2ecli$ 
  
-**Step 2.11:** The end-to-end test that you are about to run will create several Docker containers.  A Docker container is what runs a process, and it is based on a Docker image.  Run this command, which shows all Docker containers, however right now there will be no output other than column headings, which indicates no Docker containers are currently running::
+**Step 2.11:** The end-to-end test that you are about to run will create several Docker containers.  A Docker container is what runs a process, and it is based on a Docker image.  Run this command, which shows all Docker containers. Right now there will be no output other than column headings, which indicates no Docker containers are currently running::
 
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric/examples/e2ecli$ docker ps -a
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -168,7 +168,6 @@ You have successfully run the CLI end-to-end test.  You will clean things up now
 **Recap:** In this section, you:
 
 *	Downloaded the main Hyperledger Fabric source code repository
-*	Installed prerequisite tools required to build the Hyperledger Fabric project
 *	Ran *make* to build the project’s Docker images
 *	Ran the Hyperledger Fabric command line interface (CLI) end-to-end test
 *	Cleaned up afterwards
@@ -178,7 +177,7 @@ Section 3: Install the Hyperledger Fabric Certificate Authority
 
 In the prior section, the end-to-end test that you ran supplied its own security-related material such as keys and certificates- everything it needed to perform its test.  Therefore it did not need the services of a Certificate Authority.
 
-Almost all "real world" Hyperledger Fabric networks will not be this static-  new users, peers and organizations will probably join the network.  They will need PKI x.509 certificates in order to participate.  The Hyperledger Fabric Certificate Authority (CA) is provided by the Hyperledger Fabric project in order to issue these certificates.
+Almost all "real world" Hyperledger Fabric networks will not be this static-  new users, peers and organizations will probably join the network.  They will need Public Key Infrastructure (PKI) x.509 certificates in order to participate.  The Hyperledger Fabric Certificate Authority (CA) is provided by the Hyperledger Fabric project in order to issue these certificates.
 
 The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s end-to-end test.  This test makes calls to the Hyperledger Fabric Certificate Authority (CA). Therefore, before we can run that test, you will get started by downloading and building the Hyperledger Fabric CA.
 
@@ -192,9 +191,9 @@ The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger$ git clone -b v1.2.0 https://gerrit.hyperledger.org/r/fabric-ca
  Cloning into 'fabric-ca'...
  remote: Counting objects: 17, done
- remote: Total 11356 (delta 0), reused 11356 (delta 0)
- Receiving objects: 100% (11356/11356), 26.27 MiB | 20.07 MiB/s, done.
- Resolving deltas: 100% (4001/4001), done.
+ remote: Total 11670 (delta 0), reused 11670 (delta 0)
+ Receiving objects: 100% (11670/11670), 26.62 MiB | 19.49 MiB/s, done.
+ Resolving deltas: 100% (4098/4098), done.
  Checking connectivity... done.
  Note: checking out '3bcdbb2bb9f46c7eb705c9de8b9bb002c5c15fe3'.
 
@@ -212,7 +211,7 @@ The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger$ cd fabric-ca
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric-ca$
 
-**Step 3.4:** Enter the following command, which will build the Hyperledger Fabric CA images.  Just like you did with the *fabric* repo, ‘wrap’ the *make* command, which is what will do all the work, in a *time* command, which will give you a measure of the time, including ‘wall clock’ time, required to build the images::
+**Step 3.4:** Enter the following command, which will build the Hyperledger Fabric CA images.  Just like you did with the *fabric* repo, ‘wrap’ the *make* command, which is what will do all the work, in a *time* command, which will give you a measure of the time, including ‘wall clock’ time, required to build the images. You may see a couple of warnings near the top of the output about cache being disabled. You may ignore these warnings.::
 
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric-ca $ time FABRIC_CA_DYNAMIC_LINK=true make docker
    .
@@ -255,17 +254,17 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric-ca$ cd ~/git/src/github.com/hyperledger/
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger$
 
-**Step 4.2:** Now you will download the version 1.1.1 release of the Hyperledger Fabric Node SDK source code from its official repository::
+**Step 4.2:** Now you will download the version 1.1.2 release of the Hyperledger Fabric Node SDK source code from its official repository::
 
- bcuser@ubuntu16044: ~/git/src/github.com/hyperledger $ git clone -b v1.1.1 https://gerrit.hyperledger.org/r/fabric-sdk-node
+ bcuser@ubuntu16044: ~/git/src/github.com/hyperledger $ git clone -b v1.1.2 https://gerrit.hyperledger.org/r/fabric-sdk-node
  Cloning into 'fabric-sdk-node'...
- remote: Counting objects: 438, done
- remote: Finding sources: 100% (12/12)
- remote: Total 9237 (delta 0), reused 9227 (delta 0)
- Receiving objects: 100% (9237/9237), 6.33 MiB | 10.68 MiB/s, done.
- Resolving deltas: 100% (4558/4558), done.
+ remote: Counting objects: 871, done
+ remote: Finding sources: 100% (156/156)
+ remote: Total 10282 (delta 33), reused 10237 (delta 33)
+ Receiving objects: 100% (10282/10282), 7.28 MiB | 11.43 MiB/s, done.
+ Resolving deltas: 100% (5019/5019), done.
  Checking connectivity... done.
- Note: checking out '96c18d5b990983b377b0d4139f3ee112f9576f13'.
+ Note: checking out '8ae4d5b2f97e75e6dd28041dee002523e4c5ee06'.
 
  You are in 'detached HEAD' state. You can look around, make experimental
  changes and commit them, and you can discard any commits you make in this
@@ -285,7 +284,7 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
 run *npm list* to see that you are starting with a blank slate::
 
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
- fabric-sdk-node@1.1.0 /home/bcuser/git/src/github.com/hyperledger/fabric-sdk-node
+ fabric-sdk-node@1.1.2 /home/bcuser/git/src/github.com/hyperledger/fabric-sdk-node
  `-- (empty)
 
  bcuser@ubuntu16044: ~/git/src/github.com/hyperledger/fabric-sdk-node$
@@ -314,7 +313,6 @@ You may ignore the *WARN* messages throughout the output, and there may even be 
 
 **Recap:** In this section, you:
 
-*	Installed Node.js and npm
 *	Downloaded the Hyperledger Fabric Node.js SDK
 *	Installed the *npm* packages required by the Hyperledger Fabric Node.js SDK
  
@@ -392,13 +390,13 @@ The first test is a quick test that takes a little over twenty seconds, and does
  -------------------------------|----------|----------|----------|----------|----------------|
 
 
- =============================== Coverage summary ===============================
+ =============================== Coverage summary ===============================  
  Statements   : 67.67% ( 4057/5995 )
  Branches     : 61.19% ( 1701/2780 )
  Functions    : 67.43% ( 470/697 )
  Lines        : 67.82% ( 4036/5951 )
  ================================================================================
- [16:20:41] Finished 'test-headless' after 23 s
+ [13:12:53] Finished 'test-headless' after 23 s
 
 
 
@@ -480,7 +478,7 @@ You may have seen some messages scroll by that looked like errors or exceptions,
  Functions    : 81.92% ( 571/697 )
  Lines        : 84.64% ( 5037/5951 )
  ================================================================================
- [16:32:03] Finished 'test' after 8.1 min
+ [13:24:07] Finished 'test' after 8.23 min
  bcuser@ubuntu16044:~/git/src/github.com/hyperledger/fabric-sdk-node$
 
 **Step 5.3:** Enter this command to see what Docker containers were created as part of the test::
