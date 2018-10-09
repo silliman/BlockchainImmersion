@@ -25,6 +25,8 @@ Part 1: Starting and Creating Your Hyperledger Composer Network
 
 **1.** From your web browser, go to https://composer-playground.mybluemix.net/ -- This is the web version of Hyperledger Composer running in a Kubernetes environment. For more information on Kubernetes, go to https://kubernetes.io/
 
+**UPDATE** As of 10/09/2018, Hyperledger Composer as been throwing fits with getting the above URL to work. If the https://composer-playground.mybluemix.net/ does not work, try going to http://blockchaindevelop.mybluemix.net/login - which is supported on both Chrome and Firefox.
+
 **2.** You will get a "Welcome" pop-up box with a graphic and a few words. Click on "Let's Blockchain." This will take us to the homepage of Hyperledger Composer. Once you proceed, you will be in the Composer Playground.
 
 .. image:: images/composer/1.1.png
