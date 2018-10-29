@@ -160,7 +160,7 @@ In order to get the Hyperledger Explorer UI connected and working, we need to in
 	bcuser@ubuntu16045:~$ cd $HOME/blockchain-explorer/app/platform/fabric
 	bcuser@ubuntu16045:~/blockchain-explorer/app/platform/fabric$
 	
-n**2.** When you pulled down the tar file, we already configured the config.json file for you to match the Marbles UI and Chaincode. The config.json file is vital to getting everything to work. You have to map the file path to the keys, the correct channel and ports. I will include some of the important parts of the config.json file::
+**2.** When you pulled down the tar file, we already configured the config.json file for you to match the Marbles UI and Chaincode. The config.json file is vital to getting everything to work. You have to map the file path to the keys, the correct channel and ports. I will include some of the important parts of the config.json file::
 
 	bcuser@ubuntu16045:~/blockchain-explorer/app/platform/fabric$ cat config.json
 	
@@ -237,7 +237,7 @@ You won't get a bunch of output from that command, but you can view the logs by 
 Part 4: Hyperledger Explorer Walk Through
 ==========================================
 
-**1.** If you go to your IP address with the port 8080, you will be graced by the Hyperledger Explorer Homepage
+**1.** If you go to your IP address with the port 8080, you will be graced by the Hyperledger Explorer homepage::
 
 	IP Address: 192.168.22.1xx:8080
 	
