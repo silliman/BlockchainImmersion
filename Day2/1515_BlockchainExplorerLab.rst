@@ -298,7 +298,7 @@ Part 5: Marbles UI & Hyperledger Explorer
 
 .. image:: images/explorer/5.2.png
 
-**3.** Now, let's try to make a bunch of transactions and see how they get observed in the Explorer UI.
+**3.** Now, let's try to make a bunch of transactions. You can do that by trading marbles very quickly in the UI. Once you do, observe the Explorer UI represent your transactions.
 
 .. image:: images/explorer/5.3.png
 
