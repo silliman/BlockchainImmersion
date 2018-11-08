@@ -900,23 +900,23 @@ The Hyperledger Composer REST Server reads a Business Network definition and exp
 
 **Step 5.1:** Navigate to your home directory.  Strictly speaking, this is not required, but it will shorten the command prompt which will be less of a distraction in the output snippets in this section that show commands and their output::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ cd ~
- bcuser@ubuntu16045:~$
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ cd ~
+ ubuntu@wsc00-14:~$
 
 **Step 5.2:** Verify that the Hyperledger Composer REST server is available to you::
 
- bcuser@ubuntu16045:~$ which composer-rest-server
- /home/bcuser/bin/composer-rest-server
- bcuser@ubuntu16045:~$
+ ubuntu@wsc00-14:~$ which composer-rest-server
+ /home/ubuntu/bin/composer-rest-server
+ ubuntu@wsc00-14:~$
 
 **Step 5.3:** See which version of the Hyperledger Composer REST server is installed::
 
- bcuser@ubuntu16045:~$ composer-rest-server --version
+ ubuntu@wsc00-14:~$ composer-rest-server --version
  v0.20.2
 
 **Step 5.4:** Start the Hyperledger Composer REST Server and it will prompt you to enter some information.  Enter the information as shown here::
 
- bcuser@ubuntu16045:~$ composer-rest-server
+ ubuntu@wsc00-14:~$ composer-rest-server
  ? Enter the name of the business network card to use: admin@digitalproperty-network
  ? Specify if you want namespaces in the generated REST API: always use namespaces
  ? Specify if you want to use an API key to secure the REST API: No
@@ -1005,12 +1005,12 @@ The line you clicked on to expand and show the APIs for *LandTitle* acts like a 
 
 **Step 5.20:** Now, find a free PuTTY or SSH session (or start a new one) and navigate to */home/bcuser/composer-sample-applications/packages/digitalproperty-app*::
 
- bcuser@ubuntu16045:~$ cd ~/composer-sample-applications/packages/digitalproperty-app/
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ 
+ ubuntu@wsc00-14:~$ cd ~/composer-sample-applications/packages/digitalproperty-app/
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ 
  
 **Step 5.21:** Run the *npm* command that lists the assets.  You should see that you have relieved Fred Bloggs from the burden of ownership of his small flat in the city::
  
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ npm run listAssets
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ npm run listAssets
 
  > digitalproperty-app@0.0.11 listAssets /home/bcuser/composer-sample-applications/packages/digitalproperty-app
  > node cli.js landregistry list
