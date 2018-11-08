@@ -789,7 +789,7 @@ For the remainder of this lab, I will refer to the session where you are in the 
 **Step 9.2:**	You are going to confirm that you do not have any chaincode Docker images created, nor any Docker chaincode containers running currently. 
 From PuTTY Session 2, enter this command and observe that all of your images begin with *hyperledger*::
 
- bcuser@ubuntu16045:~$ docker images
+ ubuntu@wsc00-14:~$ docker images
  REPOSITORY                      TAG                 IMAGE ID            CREATED             SIZE
  hyperledger/fabric-ca          latest                         7a3fa3cd6f4c        4 hours ago         317MB
  hyperledger/fabric-ca          s390x-1.4.0-snapshot-bd7f997   7a3fa3cd6f4c        4 hours ago         317MB
@@ -826,7 +826,7 @@ This will show only those images that begin with *dev-\**, of which there should
 **Step 9.3:** Now do essentially the same thing with *docker ps* and you should see all of the Docker containers for the 
 Hyperledger Fabric processes and CouchDB, but no chaincode-related Docker containers::  
 
- bcuser@ubuntu16045:~$ docker ps --all
+ ubuntu@wsc00-14:~$ docker ps --all
  CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                                                       NAMES
  91819c57c22c        hyperledger/fabric-tools                  "bash"                   30 minutes ago      Up 30 minutes                                                                                   cli
  b62ea5779b10        hyperledger/fabric-peer                   "peer node start"        30 minutes ago      Up 30 minutes       0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp      peer1.unitedmarbles.com
@@ -844,7 +844,7 @@ Hyperledger Fabric processes and CouchDB, but no chaincode-related Docker contai
 **Step 9.4:** Entering this will make this fact stand out more as you should only see column headers in your output. 
 (The *--invert-match* argument for *grep* says “do not show me anything that contains the string “hyperledger”)::
 
- bcuser@ubuntu16045:~$ docker ps --all | grep --invert-match hyperledger
+ ubuntu@wsc00-14:~$ docker ps --all | grep --invert-match hyperledger
  CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                                                       NAMES
 
 Now that you have established that you have no chaincode-related Docker images or containers present, try to instantiate the chaincode.
@@ -879,13 +879,13 @@ Some people do not like being treated as objects, but evidently chaincode does n
 The reason for this is that as part of the instantiate, a Docker image for the chaincode is created and then a Docker container is started from the image.  
 To prove this to yourself, on PuTTY Session 2, enter this to see the new Docker image::
 
- bcuser@ubuntu16045:~$ docker images dev-*
+ ubuntu@wsc00-14:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED              SIZE
  dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        5 minutes ago       137MB
 
 **Step 9.8:** And enter this to see the Docker chaincode container created from the new Docker image::
 
- bcuser@ubuntu16045:~$ docker ps | grep --invert-match hyperledger 
+ ubuntu@wsc00-14:~$ docker ps | grep --invert-match hyperledger 
  CONTAINER ID        IMAGE                                                                                                      COMMAND                  CREATED             STATUS              PORTS                                                                       NAMES
  0929db7e5a83        dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.add…"   5 minutes ago       Up 5 minutes                                                                                    dev-peer0.unitedmarbles.com-marbles-1.0
  bcuser@ubuntu16045:~$ 
