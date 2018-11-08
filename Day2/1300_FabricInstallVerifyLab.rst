@@ -260,12 +260,12 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
 
 **Step 4.1:** Back up one directory level to the *~/git/src/github.com/hyperledger* directory::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$ cd ~/git/src/github.com/hyperledger/
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca$ cd ~/git/src/github.com/hyperledger/
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ 
 
 **Step 4.2:** Now you will download the Hyperledger Fabric Node SDK source code from its official repository::
 
- bcuser@ubuntu16045: ~/git/src/github.com/hyperledger $ git clone https://gerrit.hyperledger.org/r/fabric-sdk-node
+ ubuntu@wsc00-14: ~/git/src/github.com/hyperledger $ git clone https://gerrit.hyperledger.org/r/fabric-sdk-node
  Cloning into 'fabric-sdk-node'...
  remote: Counting objects: 643, done
  remote: Finding sources: 100% (6/6)
@@ -276,32 +276,23 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
 
 **Step 4.3:** Change to the *fabric-sdk-node* directory which was just created::
 
- bcuser@ubuntu16045: ~/git/src/github.com/hyperledger $ cd fabric-sdk-node
- bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$
+ ubuntu@wsc00-14: ~/git/src/github.com/hyperledger $ cd fabric-sdk-node
+ ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$
 
 **Step 4.4:** You are about to install the packages that the Hyperledger Fabric Node SDK would like to use. Before you start, 
 run *npm list* to see that you are starting with a blank slate::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
  fabric-sdk-node@1.3.0-snapshot /home/bcuser/git/src/github.com/hyperledger/fabric-sdk-node
  `-- (empty)
 
-
-
-   ╭─────────────────────────────────────╮
-   │                                     │
-   │   Update available 5.6.0 → 6.4.1    │
-   │     Run npm i -g npm to update      │
-   │                                     │
-   ╰─────────────────────────────────────╯
-
- bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$
+ ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$
 
 You may ignore the message concerning the available update to npm here and throughout the remainder of these labs.
 
 **Step 4.5:** Run *npm install* to install the required packages.  This will take a few minutes and will produce a lot of output::
 
- bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$ npm install
+ ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$ npm install
    .
    . (output not shown here)
    .
@@ -316,11 +307,11 @@ You may ignore the *WARN* messages throughout the output, and there may even be 
 
 **Step 4.6:** Repeat the *npm list* command.  The output, although not shown here, will be anything but empty.  This just proves what everyone suspected-  programmers would much rather use other peoples’ code than write their own.  Not that there’s anything wrong with that. You can even steal this lab if you want to.
 ::
- bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
+ ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
    .
    . (output not shown here, but surely you will agree it is not empty)
    .
- bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$
+ ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$
 
 **Recap:** In this section, you:
 
