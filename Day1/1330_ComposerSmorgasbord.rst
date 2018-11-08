@@ -18,28 +18,53 @@ In this section, you will work with the Hyperledger Composer Command Line Interf
 
 **Step 2.1:** Check the location of the Hyperledger Composer CLI binary::
 
- bcuser@ubuntu16045:~$ which composer
- /home/bcuser/bin/composer
+ ubuntu@wsc00-14:~$ which composer
+ /home/ubuntu/bin/composer
 
 The location within your environment's PATH where the *composer* program was found is listed.
 
 **Step 2.2** Check to see what version of Hyperledger Composer is installed::
 
- bcuser@ubuntu16045:~$ composer --version
+ ubuntu@wsc00-14:~$ composer --version
  v0.20.2
 
 **Step 2.3:** Go to your home directory::
 
- bcuser@ubuntu16045:~$ cd $HOME   # you may already be in your home directory but this command won't hurt
- bcuser@ubuntu16045:~$
+ ubuntu@wsc00-14:~$ cd $HOME   # you may already be in your home directory but this command won't hurt
+ ubuntu@wsc00-14:~$ 
 
 **Step 2.4:** Change to the directory for the "Digital Property Network" sample application::
 
- bcuser@ubuntu16045:~$ cd composer-sample-applications/packages/digitalproperty-app
+ ubuntu@wsc00-14:~$ cd composer-sample-applications/packages/digitalproperty-app
 
+**Step 2.4.1:** Run this command to find the occurrences of the string *composer* within the file *package.json*::
+
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ grep composer package.json
+    "postinstall": "composer --version",
+    "url": "git@github.com:hyperledger/composer-sample-applications"
+    "composer-cli": "^0.19.0",
+    "composer-client": "^0.19.0",
+
+**Step 2.4.2:** We need to change the version of *composer-cli* and *composer-client* to *0.20.2*.  First run this command to ensure that these are the only places where the string *0.19.0* occurs::
+
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ grep 0\.19\.0 package.json
+    "composer-cli": "^0.19.0",
+    "composer-client": "^0.19.0",
+
+**Step 2.4.3:** Change these values to *0.20.2* with this command::
+
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ sed -i "s/\^0\.19\.0/0.20.2/g" package.json
+
+**Step 2.4.4:** Verify that the changes worked::
+
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ grep composer- package.json
+    "url": "git@github.com:hyperledger/composer-sample-applications"
+    "composer-cli": "0.20.2",
+    "composer-client": "0.20.2",
+ 
 **Step 2.5:** Open the *package.json* file in read-only mode by adding the *-R* argument to the *vi* command::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ vi -R package.json 
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ vi -R package.json 
 
 *package.json* contains information used by the *npm* command.  
 You should see, near the top of the *package.json* file, a section named *scripts*::
@@ -73,46 +98,46 @@ You could stand up your own Hyperledger Fabric network that is as large and comp
 
 Take advantage of the convenience that the Hyperledger Composer team has provided for you.  Get started by switching to your $HOME directory::
  
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ cd $HOME
- bcuser@ubuntu16045:~$ 
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ cd $HOME
+ ubuntu@wsc00-14:~$ 
 
 **Step 2.8:** Change to the *composer-tools/packages/fabric-dev-servers* directory::
 
- bcuser@ubuntu16045:~$ cd composer-tools/packages/fabric-dev-servers
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ 
+ ubuntu@wsc00-14:~$ cd composer-tools/packages/fabric-dev-servers
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$  
  
 **Step 2.9:** Enter the *docker images* command to see that you currently have no Docker images on your system::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ docker images
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ docker images
  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
 You just see column headings.  You do not yet have any Docker images on your system.  You will soon and then you will issue this command again and see those images.
 
 **Step 2.10:** Run the *downloadFabric.sh* script in order to pull the necessary Hyperledger Fabric v1.2.1 images from the Hyperledger project's public Docker Hub repositories::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ ./downloadFabric.sh
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ ./downloadFabric.sh
  
 **Step 2.11:** Enter the *docker images* command again and this time you should see that several Hyperledger Fabric v1.2.1 Docker images are available on your system::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ docker images
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ docker images
  REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
- hyperledger/fabric-ccenv     1.2.1               02f1c0afdcd3        3 weeks ago         1.44GB
- hyperledger/fabric-orderer   1.2.1               ceee6d466d47        3 weeks ago         141MB
- hyperledger/fabric-peer      1.2.1               75093b68fdf2        3 weeks ago         147MB
- hyperledger/fabric-ca        1.2.1               83761c9a2c08        3 weeks ago         215MB
- hyperledger/fabric-couchdb   0.4.10              76a35badf382        3 months ago        1.76GB
+ hyperledger/fabric-ccenv     1.2.1               02f1c0afdcd3        5 weeks ago         1.44GB
+ hyperledger/fabric-orderer   1.2.1               ceee6d466d47        5 weeks ago         141MB
+ hyperledger/fabric-peer      1.2.1               75093b68fdf2        5 weeks ago         147MB
+ hyperledger/fabric-ca        1.2.1               83761c9a2c08        5 weeks ago         215MB
+ hyperledger/fabric-couchdb   0.4.10              76a35badf382        4 months ago        1.76GB
 
 **Note:** I mentioned that this is a simple Hyperledger Fabric network.  There are several other Hyperledger Fabric Docker images that are necessary in a more complicated network.
 
 **Step 2.12:** You are about to start your Hyperledger Fabric network.  But before you do that, enter this command to show that you do not currently have any Docker containers running::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ docker ps --all
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ docker ps --all
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$
 
 **Step 2.13:** Run the script to start the Hyperledger Fabric network::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ ./startFabric.sh
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ ./startFabric.sh
  Development only script for Hyperledger Fabric control
  Running 'startFabric.sh'
  FABRIC_VERSION is unset, assuming hlfv12
@@ -134,12 +159,12 @@ You just see column headings.  You do not yet have any Docker images on your sys
 
 **Step 2.14:** Now enter *docker ps --all* to see if your Docker containers are running.  They should all be in the *Up* status::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ docker ps --all
- CONTAINER ID        IMAGE                                    COMMAND                  CREATED             STATUS              PORTS                                            NAMES
- c687beb976cb        hyperledger/fabric-peer:1.2.1       "peer node start"        About a minute ago   Up About a minute   0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
- 8f564df5d9be        hyperledger/fabric-ca:1.2.1         "sh -c 'fabric-ca-se…"   About a minute ago   Up About a minute   0.0.0.0:7054->7054/tcp                           ca.org1.example.com
- e72ea03777d0        hyperledger/fabric-orderer:1.2.1    "orderer"                About a minute ago   Up About a minute   0.0.0.0:7050->7050/tcp                           orderer.example.com
- cceb65864429        hyperledger/fabric-couchdb:0.4.10   "tini -- /docker-ent…"   About a minute ago   Up About a minute   4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ docker ps --all
+ CONTAINER ID        IMAGE                               COMMAND                  CREATED             STATUS              PORTS                                            NAMES
+ 6bb299b415bf        hyperledger/fabric-peer:1.2.1       "peer node start"        40 seconds ago      Up 38 seconds       0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
+ 27dbd96e0283        hyperledger/fabric-orderer:1.2.1    "orderer"                42 seconds ago      Up 39 seconds       0.0.0.0:7050->7050/tcp                           orderer.example.com
+ 0d23291216fd        hyperledger/fabric-ca:1.2.1         "sh -c 'fabric-ca-se…"   42 seconds ago      Up 39 seconds       0.0.0.0:7054->7054/tcp                           ca.org1.example.com
+ aed647f6bd47        hyperledger/fabric-couchdb:0.4.10   "tini -- /docker-ent…"   42 seconds ago      Up 40 seconds       4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
 
 **Important:** All four containers listed should be in the *Up* status.  If any of them say *Exited*, ask an instructor for help.
 
@@ -147,7 +172,7 @@ You just see column headings.  You do not yet have any Docker images on your sys
 
 A script has been provided to do this. Run the *createPeerAdminCard* script::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ ./createPeerAdminCard.sh
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ ./createPeerAdminCard.sh
  Development only script for Hyperledger Fabric control
  Running 'createPeerAdminCard.sh'
  FABRIC_VERSION is unset, assuming hlfv12
@@ -182,18 +207,31 @@ A script has been provided to do this. Run the *createPeerAdminCard* script::
  Command succeeded
 
  Hyperledger Composer PeerAdmin card has been imported, host of fabric specified as 'localhost'
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$
  
 **Note:** Notice from the above output that the "Card Name" *PeerAdmin@hlfv1*, associated with the "UserId" *PeerAdmin* does not have any information listed under the "Business Network".  The *PeerAdmin* user has authority to install Hyperledger Composer business networks, but it does not have authority to connect to and use them.  When a Hyperledger Composer business network is installed under PeerAdmin's authority, a separate business network administrator is created for that specific business network that does have authority to connect and use just that one business network.  
 
 **Step 2.16:** Go back to the sample application that you downloaded by changing back to this directory::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ cd ~/composer-sample-applications/packages/digitalproperty-app/
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ cd ~/composer-sample-applications/packages/digitalproperty-app/
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$
+
+**Step 2.16.1:** Run the *npm install* command to install project dependencies::
+
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ npm install
+  .
+  . (most output not shown)
+  .
+ v0.20.2
+ npm notice created a lockfile as package-lock.json. You should commit this file.
+ npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.4 (node_modules/fsevents):
+ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"}  (current: {"os":"linux","arch":"s390x"})
+
+ added 783 packages in 66.767s
 
 **Step 2.17:** Run the *npm* command to deploy the *digitalproperty-network* Hyperledger Composer business network onto the Hyperledger Fabric network that you just created::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ npm run deployNetwork
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ npm run deployNetwork
 
  > digitalproperty-app@0.0.11 deployNetwork /home/bcuser/composer-sample-applications/packages/digitalproperty-app
  > ./deployNetwork.sh
@@ -271,23 +309,23 @@ A script has been provided to do this. Run the *createPeerAdminCard* script::
 
 **Step 2.18:** Run this Docker command and you will see that a new Docker image was created for the Hyperledger Composer business network that you just deployed::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ docker images dev-*
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ docker images dev-*
  REPOSITORY                                                                                                                   TAG                 IMAGE ID            CREATED              SIZE
  dev-peer0.org1.example.com-digitalproperty-network-0.2.5-d8060b1a22e5bca07604169f2547a96dedad6f2f092216599fe40995cbc32dea   latest              edba4c89514f        24 seconds ago      1.56GB
  
 **Step 2.19:** Run the Docker command to show your Docker containers and you will see that a Docker container based on your new Docker image has been created (it should be the first container listed in the output)::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ docker ps
- CONTAINER ID        IMAGE                                                                                                                        COMMAND                  CREATED             STATUS              PORTS                                            NAMES
- 5b8c45023854        dev-peer0.org1.example.com-digitalproperty-network-0.2.5-d8060b1a22e5bca07604169f2547a96dedad6f2f092216599fe40995cbc32dea   "/bin/sh -c 'cd /usr…"   55 seconds ago      Up 54 seconds                                                        dev-peer0.org1.example.com-digitalproperty-network-0.2.5
- c687beb976cb        hyperledger/fabric-peer:1.2.1                                                                                               "peer node start"        6 minutes ago       Up 6 minutes        0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
- 8f564df5d9be        hyperledger/fabric-ca:1.2.1                                                                                                 "sh -c 'fabric-ca-se…"   6 minutes ago       Up 6 minutes        0.0.0.0:7054->7054/tcp                           ca.org1.example.com
- e72ea03777d0        hyperledger/fabric-orderer:1.2.1                                                                                            "orderer"                6 minutes ago       Up 6 minutes        0.0.0.0:7050->7050/tcp                           orderer.example.com
- cceb65864429        hyperledger/fabric-couchdb:0.4.10                                                                                           "tini -- /docker-ent…"   6 minutes ago       Up 6 minutes        4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ docker ps
+ CONTAINER ID        IMAGE                                                                                                                       COMMAND                  CREATED             STATUS              PORTS                                            NAMES
+ f4784708ae18        dev-peer0.org1.example.com-digitalproperty-network-0.2.5-d8060b1a22e5bca07604169f2547a96dedad6f2f092216599fe40995cbc32dea   "/bin/sh -c 'cd /usr…"   22 seconds ago      Up 21 seconds                                                        dev-peer0.org1.example.com-digitalproperty-network-0.2.5
+ 6bb299b415bf        hyperledger/fabric-peer:1.2.1                                                                                               "peer node start"        10 minutes ago      Up 10 minutes       0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
+ 27dbd96e0283        hyperledger/fabric-orderer:1.2.1                                                                                            "orderer"                10 minutes ago      Up 10 minutes       0.0.0.0:7050->7050/tcp                           orderer.example.com
+ 0d23291216fd        hyperledger/fabric-ca:1.2.1                                                                                                 "sh -c 'fabric-ca-se…"   10 minutes ago      Up 10 minutes       0.0.0.0:7054->7054/tcp                           ca.org1.example.com
+ aed647f6bd47        hyperledger/fabric-couchdb:0.4.10                                                                                           "tini -- /docker-ent…"   10 minutes ago      Up 10 minutes       4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
 
 **Step 2.20:** A few steps ago I mentioned in the notes that when the *PeerAdmin* deploys a Hyperledger Composer business network, it creates a business network administrator for that network.  Run this command to see that this new business network administrator, named *admin@digitalproperty-network*, has been created::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ composer card list 
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ composer card list 
  The following Business Network Cards are available:
 
  Connection Profile: hlfv1
@@ -306,7 +344,7 @@ A script has been provided to do this. Run the *createPeerAdminCard* script::
 
 **Step 2.21:** At this point you have deployed a Hyperledger Composer Business Network on a Hyperledger Fabric v1.2.1 network, but you have not actually created any participants or assets on the network.  Run this command and you will see that you will not have any “Land Titles” listed (if there had been any they would have been under the column headings surrounded by boxes at the bottom of this output)::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ npm run listAssets
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ npm run listAssets
 
  > digitalproperty-app@0.0.11 listAssets /home/bcuser/composer-sample-applications/packages/digitalproperty-app
  > node cli.js landregistry list
@@ -325,7 +363,7 @@ A script has been provided to do this. Run the *createPeerAdminCard* script::
 
 **Step 2.22:** Run the following *npm test* command which will define two assets owned by Fred Bloggs, list them, set one for sale, and list them again.  Everything below the *npm test* command that you will enter is output.  Look carefully at the tables and you will see that Fred Bloggs’ nice house in the country was initially listed as not for sale but then was made available for sale as the result of a Business Network transaction::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ npm test
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ npm test
 
  > digitalproperty-app@0.0.11 pretest /home/bcuser/composer-sample-applications/packages/digitalproperty-app
  > npm run licchk
