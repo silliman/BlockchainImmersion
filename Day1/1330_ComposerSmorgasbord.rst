@@ -462,22 +462,22 @@ I think I may have confused you enough for now.  Let's get started.
 
 **Step 3.1:** Go to your home directory::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ cd ~
- bcuser@ubuntu16045:~$ 
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ cd ~
+ ubuntu@wsc00-14:~$ 
  
 **Step 3.2:** Verify that Hyperledger Composer Playground is available to you::
 
- bcuser@ubuntu16045:~$ which composer-playground
- /home/bcuser/bin/composer-playground
+ ubuntu@wsc00-14:~$ which composer-playground
+ /home/ubuntu/bin/composer-playground
 
 **Step 3.3:** Check to see which version of Hyperledger Composer Playground is installed::
 
- bcuser@ubuntu16045:~$ composer-playground --version
+ ubuntu@wsc00-14:~$ composer-playground --version
  0.20.2
 
 **Step 3.4:** Start composer-playground by simply entering *composer-playground* without any arguments.  Notice that Composer Playground is listening on port 8080::
 
- bcuser@ubuntu16045:~$ composer-playground
+ ubuntu@wsc00-14:~$ composer-playground
  info: [Hyperledger-Composer] :LoadModule               :loadModule()              Loading composer-wallet-filesystem from /home/bcuser/lib/node_modules/composer-playground/node_modules/composer-wallet-filesystem
  info: [Hyperledger-Composer] :PlaygroundAPI            :createServer()            Playground API started on port 8080
 
