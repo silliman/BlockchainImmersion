@@ -346,9 +346,9 @@ The first test is a quick test that takes about a minute and does not bring up a
    .
    . (initial output not shown)
    .
- 1..640
- # tests 640
- # pass  640
+ 1..890
+ # tests 890
+ # pass  890
 
  # ok
 
@@ -454,7 +454,7 @@ You may have seen some messages scroll by that looked like errors or exceptions,
 
 **Step 5.2:** Run the end-to-end tests with the *gulp test* command.  While this command is running, a little bit of the output may look like errors, but some of the tests expect errors, so the real indicator is, again, like the first test, whether or not all tests passed::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ gulp test
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ gulp test
    .
    . (lots of output not shown here)
    . 
@@ -562,24 +562,26 @@ You may have seen some messages scroll by that looked like errors or exceptions,
  Lines        : 91.79% ( 6449/7026 )
  ================================================================================
  [11:31:37] Finished 'test' after 18 min
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$
+
+**NOTE:** This test may fail on our "emergency" LinuxONE instances (at least it did for me) and due to time constraints I was not able to debug and resolve the failures.  Although less than ideal, this should not affect the remaining labs so let's move on.
 
 **Step 5.3:** Enter this command to see what Docker containers were created as part of the test::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
 
 **Step 5.4:** Enter this command to see that quite a few Docker images for chaincode have been created as part of the test.  
 These are the images that start with *dev-*::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
  
 **Step 5.5:** You will now clean up. You will do this by running only the parts "hidden" within the *gulp test* command execution that do the initial cleanup::
  
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ gulp clean-up pre-test docker-clean
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ gulp clean-up pre-test docker-clean
  
 **Step 5.6:** Now observe that all Docker containers have been stopped and most have been removed by entering this command::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
  CONTAINER ID        IMAGE                                                                                                    COMMAND                  CREATED             STATUS                          PORTS               NAMES
  1401b5aeeceb        dev-peer0.org2.example.com-second-v10-5714f9445c9ccd0fd2642a3a170d60848b55d4c0efff20d5b2edb9dedfd6f4d7   "/bin/sh -c 'cd /usr…"   18 minutes ago      Exited (0) 9 minutes ago                            dev-peer0.org2.example.com-second-v10
  45480b06c3fe        dev-peer0.org1.example.com-second-v10-7ac564a300ba156f1849b973e08e3fb8661959e16651ae0b3ca349c870799248   "/bin/sh -c 'cd /usr…"   18 minutes ago      Exited (0) About a minute ago                       dev-peer0.org1.example.com-second-v10
@@ -590,7 +592,7 @@ These are the images that start with *dev-*::
 
 **Step 5.7:** And enter this comand and see that only a few chaincode images remain- those starting with *dev-* remain- again, related to the note at the end of the previous step, I suspect that a future fix will ensure that these images are deleted::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
  REPOSITORY                                                                                               TAG                 IMAGE ID            CREATED             SIZE
  dev-peer0.org2.example.com-second-v10-5714f9445c9ccd0fd2642a3a170d60848b55d4c0efff20d5b2edb9dedfd6f4d7   latest              fbce3d7767e1        23 minutes ago      1.52GB
  dev-peer0.org1.example.com-second-v10-7ac564a300ba156f1849b973e08e3fb8661959e16651ae0b3ca349c870799248   latest              214cd785c0b8        23 minutes ago      1.52GB
@@ -599,7 +601,7 @@ These are the images that start with *dev-*::
  
 **Step 5.8:** Let's clean up the Docker containers and images that were left behind:: 
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker rm $(docker ps --all --quiet)
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker rm $(docker ps --all --quiet)
  1401b5aeeceb
  45480b06c3fe
  16c07e6b8661
@@ -607,12 +609,12 @@ These are the images that start with *dev-*::
 
 **Step 5.9:** Now verify that those containers are gone::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
 **Step 5.10:** Now remove the Docker chaincode images::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker rmi $(docker images --quiet dev-*)
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker rmi $(docker images --quiet dev-*)
  Untagged: dev-peer0.org2.example.com-second-v10-5714f9445c9ccd0fd2642a3a170d60848b55d4c0efff20d5b2edb9dedfd6f4d7:latest
  Deleted: sha256:fbce3d7767e1930da50b338d49775991aa15be18afa2e88eac18f726033f5a2f
  Deleted: sha256:777e3a6c96b5781545de94cff7848c9c30d0ce96c3cf64df58d4f9b26aa7ffff
@@ -636,7 +638,7 @@ These are the images that start with *dev-*::
  
 **Step 5.11:** Verify that the Docker chaincode images are gone::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
 **Recap:** In this section,you ran the Hyperledger Fabric Node.js SDK end-to-end tests and then you cleaned up its leftover artifacts afterward. This completes this lab.  You have downloaded and built a Hyperledger Fabric network and verified that the setup is correct by successfully running two end-to-end tests-  the CLI end-to-end test and the Node.js SDK end-to-end test- and the shorter Node.js SDK test.
