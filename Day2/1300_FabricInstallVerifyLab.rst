@@ -24,17 +24,17 @@ In this section, you will:
 
 **Step 2.1:** Create the following directory path with this command.  Make sure you are in your home directory when you enter it. If you are following these steps exactly, you already are.  If you strayed away from your home directory, I'm assuming you're smart enough to get back there or at least smart enough to ask for help::
 
- bcuser@ubuntu16045:~$ mkdir -p git/src/github.com/hyperledger
- bcuser@ubuntu16045:~$
+ ubuntu@wsc00-14:~$ mkdir -p git/src/github.com/hyperledger
+ ubuntu@wsc00-14:~$ 
  
 **Step 2.2:** Navigate to the directory you just created::
 
- bcuser@ubuntu16045:~$ cd git/src/github.com/hyperledger/
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$
+ ubuntu@wsc00-14:~$ cd git/src/github.com/hyperledger/
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger$
  
 **Step 2.3:** Use the software tool *git* to download the source code of the Hyperledger Fabric core package from the official place where it lives::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric
  Cloning into 'fabric'...
  remote: Counting objects: 79472, done
  remote: Finding sources: 100% (79472/79472)
@@ -47,29 +47,45 @@ In this section, you will:
 
 **Step 2.4:** Switch to the *fabric* directory, which is the top-level directory of where the *git* command put the code it just downloaded::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ cd fabric
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ cd fabric
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ 
+ 
+**Step 2.4.1:** Use this *git* command to go to a specific commit level which is necessary for the (hopefully) smooth functioning of this lab::
+
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ git checkout f208ba2
+ Note: checking out 'f208ba2'.
+
+ You are in 'detached HEAD' state. You can look around, make experimental
+ changes and commit them, and you can discard any commits you make in this
+ state without impacting any branches by performing another checkout.
+
+ If you want to create a new branch to retain commits you create, you may
+ do so (now or later) by using -b with the checkout command again. Example:
+
+   git checkout -b <new-branch-name>
+
+ HEAD is now at f208ba2... [FAB-11918] Add etcd/wal dependencies.
 
 **Step 2.5:** You will use a program called *make*, which is used to build software projects, in order to build Docker images for Hyperledger Fabric.  But first, run this command to show that your system does not currently have any 
 Docker images stored on it.  The only output you will see is the column headings::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ docker images
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ docker images
  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
 **Step 2.6:** That will change in a few minutes.  Enter the following command, which will build the Hyperledger Fabric images.  You can ‘wrap’ the *make* command, which is what will do all the work, in a *time* command, which will give you a measure of the time, including ‘wall clock’ time, required to build the images::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ time make docker
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ time make docker
    .
    .  (output not shown here)
    .
  real	4m10.454s
  user	0m15.755s
  sys	0m1.330s
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ 
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ 
 
 **Step 2.7:** Run *docker images* again and you will see several Docker images that were just created. You will notice that many of the Docker images at the top of the output were created in the last few minutes.  These were created by the *make docker* command.  The Docker images that are several months old were downloaded from Hyperledger Fabric's public DockerHub repository.  Your output should look similar to that shown here, although the tags will be different if your instructor gave you a different level to checkout, and your *image ids* will be different either way, for those images that were created in the last few minutes::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ docker images
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ docker images
  REPOSITORY                     TAG                 IMAGE ID            CREATED              SIZE
  hyperledger/fabric-tools       latest                         eb61a4372d2d        49 seconds ago      1.52GB
  hyperledger/fabric-tools       s390x-1.4.0-snapshot-5caab9b   eb61a4372d2d        49 seconds ago      1.52GB
@@ -95,17 +111,17 @@ Docker images stored on it.  The only output you will see is the column headings
 
 **Step 2.8:** Navigate to the directory where the “end-to-end” test lives::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ cd examples/e2e_cli
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ cd examples/e2e_cli
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$
 
 **Step 2.9:** The end-to-end test that you are about to run will create several Docker containers.  A Docker container is what runs a process, and it is based on a Docker image.  Run this command, which shows all Docker containers. Right now there will be no output other than column headings, which indicates no Docker containers are currently running::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
 **Step 2.10:** Run the end-to-end test with this command::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ ./network_setup.sh up mychannel 10 couchdb
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ ./network_setup.sh up mychannel 10 couchdb
    .
    . (output not shown here)
    .
@@ -118,7 +134,7 @@ Docker images stored on it.  The only output you will see is the column headings
 
 **Step 2.11:** Run the *docker ps* command to see the Docker containers that the test created::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
  CONTAINER ID        IMAGE                                                                                                  COMMAND                  CREATED              STATUS                     PORTS                                                                       NAMES
  09b4a2c28e87        dev-peer1.org2.example.com-mycc-1.0-26c2ef32838554aac4f7ad6f100aca865e87959c9a126e86d764c8d01f8346ab   "chaincode -peer.add…"   About a minute ago   Up About a minute                                                                                       dev-peer1.org2.example.com-mycc-1.0
  6a8f1936acf3        dev-peer0.org1.example.com-mycc-1.0-384f11f484b9302df90b453200cfb25174305fce8f53f4e94d45ee3b6cab0ce9   "chaincode -peer.add…"   About a minute ago   Up About a minute                                                                                       dev-peer0.org1.example.com-mycc-1.0
@@ -147,11 +163,11 @@ You have successfully run the CLI end-to-end test.  You will clean things up now
 
 **Step 2.12:** Run the *network_setup.sh* script with different arguments to bring the Docker containers down::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ ./network_setup.sh down
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ ./network_setup.sh down
 
 **Step 2.15:** Try the *docker ps* command again and you should see that there are no longer any Docker containers running::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
 **Recap:** In this section, you:
