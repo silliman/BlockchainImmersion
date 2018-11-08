@@ -188,12 +188,12 @@ The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s
 
 **Step 3.1:** Use *cd* to navigate three directory levels up, to the *hyperledger* directory::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ cd ~/git/src/github.com/hyperledger
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ cd ~/git/src/github.com/hyperledger
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ 
 
 **Step 3.2:** Get the source code for the Fabric CA using *git*::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric-ca
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric-ca
  Cloning into 'fabric-ca'...
  remote: Counting objects: 1697, done
  remote: Finding sources: 100% (61/61)
@@ -204,23 +204,23 @@ The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s
 
 **Step 3.3:** Navigate to the *fabric-ca* directory, which is the top directory of where the *git* command put the code it just downloaded::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ cd fabric-ca
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ cd fabric-ca
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca$
 
 **Step 3.4:** Enter the following command, which will build the Hyperledger Fabric CA images.  Just like you did with the *fabric* repo, ‘wrap’ the *make* command, which is what will do all the work, in a *time* command, which will give you a measure of the time, including ‘wall clock’ time, required to build the images. You may see a couple of warnings near the top of the output about cache being disabled. You may ignore these warnings.::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca $ time FABRIC_CA_DYNAMIC_LINK=true make docker
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca $ time FABRIC_CA_DYNAMIC_LINK=true make docker
    .
    .  (output not shown here)
    .
  real	1m29.510s
  user	0m0.313s
  sys	0m0.160s
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca$
 
 **Step 3.5:** Enter the *docker images* command and you will see at the top of the output the Docker image that was just created for the Fabric Certificate Authority::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$ docker images
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca$ docker images
  REPOSITORY                      TAG                 IMAGE ID            CREATED              SIZE
  hyperledger/fabric-ca          latest                         7a3fa3cd6f4c        2 minutes ago       317MB
  hyperledger/fabric-ca          s390x-1.4.0-snapshot-bd7f997   7a3fa3cd6f4c        2 minutes ago       317MB
