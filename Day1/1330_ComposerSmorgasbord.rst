@@ -688,7 +688,7 @@ so that your screen looks like this:
 **Step 4.31:** You need to transfer the file you just saved on your laptop or workstation up to your Linux on IBM Z instance. Here is an example where I used *scp* within a Cygwin xTerm session to get the desired file from my laptop to my Linux on z Systems instance::
 
  silliman@ADMINIB-BL1HU3C ~/scratchpad
- $ scp modified-digitalproperty-network.bna bcuser@192.168.22.225:~/
+ $ scp modified-digitalproperty-network.bna bcuser@148.100.86.xx:~/
  modified-digitalproperty-network.bna                                                          100% 9899   179.4KB/s   00:00    
 
 In this step, the command is performed on your laptop or workstation. The above command example sent this file to my home directory.  Remember where you send this file. You will come back to it in a moment but first you will rerun your *npm* transactions to verify that your Business Network is still working *without* your updates.
@@ -697,12 +697,12 @@ In this step, the command is performed on your laptop or workstation. The above 
 
 **Step 4.32:** Change to the directory from where you were previously working before you started working with Hyperledger Composer Playground (you may need to start a new PuTTY session if Hyperledger Composer Playground is tying up your only other session)::
 
- bcuser@ubuntu16045:~$ cd ~/composer-sample-applications/packages/digitalproperty-app/
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$
+ ubuntu@wsc00-14:~$ cd ~/composer-sample-applications/packages/digitalproperty-app/
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ 
 
 **Step 4.33:** Run the *composer network list* command to list your network’s assets.  Your new *goldNuggets* asset will *not* show up since you have not updated your business network on the Hyperledger Fabric yet::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ composer network list --card admin@digitalproperty-network
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ composer network list --card admin@digitalproperty-network
  
   ✔ List business network from card admin@digitalproperty-network
   models: 
@@ -748,7 +748,7 @@ In this step, the command is performed on your laptop or workstation. The above 
 
 **Step 4.34:** Now run the *npm* command which will submit a transaction.  The output will *not* have your updates to the transaction where you added the phrase *“He really needs the money!”* to the *information*::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ npm run submitTransaction
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ npm run submitTransaction
  
  > digitalproperty-app@0.0.11 submitTransaction /home/bcuser/composer-sample-applications/packages/digitalproperty-app
  > node cli.js landregistry submit && node cli.js landregistry list
@@ -777,7 +777,7 @@ In this step, the command is performed on your laptop or workstation. The above 
 
 **Step 4.35:** In order to get the changes you made in the last section, which are in the Business Network Archive (BNA) that you exported, two steps are required- a *composer network install* which reads the exported BNA and installs its definitions onto the Fabric peer, and then a *composer network upgrade* which will create a new chaincode image containing these updates, and then start a container based on this image.  Perform the first step::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ composer network install --archiveFile ~/modified-digitalproperty-network.bna --card PeerAdmin@hlfv1
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ composer network install --archiveFile ~/modified-digitalproperty-network.bna --card PeerAdmin@hlfv1
  ✔ Installing business network. This may take a minute...
  Successfully installed business network digitalproperty-network, version 0.2.6-deploy.2
 
@@ -787,7 +787,7 @@ In this step, the command is performed on your laptop or workstation. The above 
 
 **Step 4.36:** Now run the *composer network upgrade* command.  If your version differs from *0.2.6-deploy.2* use the value shown on your system in place of *0.2.6-deploy.2* in the command::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ composer network upgrade --networkName digitalproperty-network --networkVersion 0.2.6-deploy.2 --card PeerAdmin@hlfv1
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ composer network upgrade --networkName digitalproperty-network --networkVersion 0.2.6-deploy.2 --card PeerAdmin@hlfv1
  Upgrading business network digitalproperty-network to version 0.2.6-deploy.2
 
  ✔ Upgrading business network definition. This may take a minute...
@@ -796,25 +796,25 @@ In this step, the command is performed on your laptop or workstation. The above 
 
 **Step 4.37:** You can see that a new Docker image was created for the updated business network-  observe the first image listed in the output and see that its version name, *0.2.6-deploy.2* is part of the image name::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ docker images dev-*
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ docker images dev-*
  REPOSITORY                                                                                                                           TAG                 IMAGE ID            CREATED             SIZE
- dev-peer0.org1.example.com-digitalproperty-network-0.2.6-deploy.2-3acdcbff3f4e90cad8a30b395f0d5b8da1db04b68e0b903b75acf52f1148de08   latest              9480ea2acb48        12 seconds ago      1.56GB
- dev-peer0.org1.example.com-digitalproperty-network-0.2.5-d8060b1a22e5bca07604169f2547a96dedad6f2f092216599fe40995cbc32dea            latest              edba4c89514f        17 minutes ago      1.56GB
+ dev-peer0.org1.example.com-digitalproperty-network-0.2.6-deploy.2-3acdcbff3f4e90cad8a30b395f0d5b8da1db04b68e0b903b75acf52f1148de08   latest              db4017daf20e        24 seconds ago      1.56GB
+ dev-peer0.org1.example.com-digitalproperty-network-0.2.5-d8060b1a22e5bca07604169f2547a96dedad6f2f092216599fe40995cbc32dea            latest              fc04f6e0e1bb        35 minutes ago      1.56GB
 
 **Step 4.38:** Similary, you can see that a new Docker container has been created for the updated business network::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ docker ps --all
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ docker ps --all
  CONTAINER ID        IMAGE                                                                                                                                COMMAND                  CREATED             STATUS              PORTS                                            NAMES
- 927a95085761        dev-peer0.org1.example.com-digitalproperty-network-0.2.6-deploy.2-3acdcbff3f4e90cad8a30b395f0d5b8da1db04b68e0b903b75acf52f1148de08   "/bin/sh -c 'cd /usr…"   45 seconds ago      Up 44 seconds                                                        dev-peer0.org1.example.com-digitalproperty-network-0.2.6-deploy.2
- 5b8c45023854        dev-peer0.org1.example.com-digitalproperty-network-0.2.5-d8060b1a22e5bca07604169f2547a96dedad6f2f092216599fe40995cbc32dea            "/bin/sh -c 'cd /usr…"   18 minutes ago      Up 18 minutes                                                        dev-peer0.org1.example.com-digitalproperty-network-0.2.5
- c687beb976cb        hyperledger/fabric-peer:1.2.1                                                                                                        "peer node start"        23 minutes ago      Up 23 minutes       0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
- 8f564df5d9be        hyperledger/fabric-ca:1.2.1                                                                                                          "sh -c 'fabric-ca-se…"   23 minutes ago      Up 23 minutes       0.0.0.0:7054->7054/tcp                           ca.org1.example.com
- e72ea03777d0        hyperledger/fabric-orderer:1.2.1                                                                                                     "orderer"                23 minutes ago      Up 23 minutes       0.0.0.0:7050->7050/tcp                           orderer.example.com
- cceb65864429        hyperledger/fabric-couchdb:0.4.10                                                                                                    "tini -- /docker-ent…"   23 minutes ago      Up 23 minutes       4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
+ 0424f822e7a3        dev-peer0.org1.example.com-digitalproperty-network-0.2.6-deploy.2-3acdcbff3f4e90cad8a30b395f0d5b8da1db04b68e0b903b75acf52f1148de08   "/bin/sh -c 'cd /usr…"   47 seconds ago      Up 46 seconds                                                        dev-peer0.org1.example.com-digitalproperty-network-0.2.6-deploy.2
+ f4784708ae18        dev-peer0.org1.example.com-digitalproperty-network-0.2.5-d8060b1a22e5bca07604169f2547a96dedad6f2f092216599fe40995cbc32dea            "/bin/sh -c 'cd /usr…"   35 minutes ago      Up 35 minutes                                                        dev-peer0.org1.example.com-digitalproperty-network-0.2.5
+ 6bb299b415bf        hyperledger/fabric-peer:1.2.1                                                                                                        "peer node start"        About an hour ago   Up About an hour    0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
+ 27dbd96e0283        hyperledger/fabric-orderer:1.2.1                                                                                                     "orderer"                About an hour ago   Up About an hour    0.0.0.0:7050->7050/tcp                           orderer.example.com
+ 0d23291216fd        hyperledger/fabric-ca:1.2.1                                                                                                          "sh -c 'fabric-ca-se…"   About an hour ago   Up About an hour    0.0.0.0:7054->7054/tcp                           ca.org1.example.com
+ aed647f6bd47        hyperledger/fabric-couchdb:0.4.10                                                                                                    "tini -- /docker-ent…"   About an hour ago   Up About an hour    4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
 
 **Step 4.39:** Run the same *composer network list* command that you ran in *Step 4.33* and you will see that the asset type of *GoldNuggets* that you defined in the Playground is now present::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ composer network list --card admin@digitalproperty-network
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ composer network list --card admin@digitalproperty-network
 
  ✔ List business network from card admin@digitalproperty-network
  models: 
@@ -862,7 +862,7 @@ In this step, the command is performed on your laptop or workstation. The above 
 
 **Step 4.40:** Now rerun the *npm* command from *Step 4.34* and you will see that your modified transaction processor function was used.  The *LandTitle* information has been modified with your changes::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ npm run submitTransaction
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ npm run submitTransaction
 
  > digitalproperty-app@0.0.11 submitTransaction /home/bcuser/composer-sample-applications/packages/digitalproperty-app
  > node cli.js landregistry submit && node cli.js landregistry list
