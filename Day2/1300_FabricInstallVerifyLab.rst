@@ -279,12 +279,28 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
  ubuntu@wsc00-14: ~/git/src/github.com/hyperledger $ cd fabric-sdk-node
  ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$
 
+**Step 4.3.1:** Run this *git* command to check out the *v1.3.0* version of the Fabric Node SDK to ensure (hopefully) smooth operation of this lab::
+
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ git checkout v1.3.0
+ Note: checking out 'v1.3.0'.
+
+ You are in 'detached HEAD' state. You can look around, make experimental
+ changes and commit them, and you can discard any commits you make in this
+ state without impacting any branches by performing another checkout.
+
+ If you want to create a new branch to retain commits you create, you may
+ do so (now or later) by using -b with the checkout command again. Example:
+
+   git checkout -b <new-branch-name>
+
+ HEAD is now at 95b02d9... FABN-966 NodeSDK prepare for v1.3.0
+
 **Step 4.4:** You are about to install the packages that the Hyperledger Fabric Node SDK would like to use. Before you start, 
 run *npm list* to see that you are starting with a blank slate::
 
  ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
- fabric-sdk-node@1.3.0-snapshot /home/bcuser/git/src/github.com/hyperledger/fabric-sdk-node
- `-- (empty)
+ fabric-sdk-node@1.3.0 /home/ubuntu/git/src/github.com/hyperledger/fabric-sdk-node
+ └── (empty)
 
  ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$
 
@@ -326,7 +342,7 @@ The first test is a quick test that takes about a minute and does not bring up a
 
 **Step 5.1:** The first test is very simple and can be run simply by running *npm test*::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm test
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm test
    .
    . (initial output not shown)
    .
@@ -572,7 +588,7 @@ These are the images that start with *dev-*::
 
 **Note:** The output of this command shows a few containers in the *Exited* state, but none in the *Up* state.  Over the course of the Hyperledger project, the cleanup command from *Step 5.5* tended to remove all containers, so that none were left behind even in the *Exited* state.  I suspect that this is just something that slipped through the cracks in a recent update and will probably be corrected in the future.
 
-**Step 5.7:** And enter this comand and see that only a few chaincode images remain- those starting with *dev-* remain- again, related to the note at the end of the previous step, I suspect that a future fix will ensure that these images are deleted.
+**Step 5.7:** And enter this comand and see that only a few chaincode images remain- those starting with *dev-* remain- again, related to the note at the end of the previous step, I suspect that a future fix will ensure that these images are deleted::
 
  bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
  REPOSITORY                                                                                               TAG                 IMAGE ID            CREATED             SIZE
