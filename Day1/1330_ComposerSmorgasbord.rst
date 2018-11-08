@@ -1042,24 +1042,23 @@ In this section, you will use tools that will allow you to generate a simple fro
 
 **Step 6.1:** Change to your home directory::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ cd $HOME
- bcuser@ubuntu16045:~$
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ cd $HOME
+ ubuntu@wsc00-14:~$ 
 
 **Step 6.2:** You will use a tool called Yeoman that helps generate applications. See which version of Yeoman is installed::
 
- bcuser@ubuntu16045:~$ yo --version
+ ubuntu@wsc00-14:~$ yo --version
  2.0.5
 
 **Step 6.3:** Hyperledger Composer provides a package to work with Yeoman.  It has been installed for you. Use this command to see what version of it has been installed::
 
- bcuser@ubuntu16045:~$ npm ls -g generator-hyperledger-composer
- /home/bcuser/lib
- `-- generator-hyperledger-composer@0.20.2
+ ubuntu@wsc00-14:~$ npm ls -g generator-hyperledger-composer
+ /home/ubuntu/lib
+ └── generator-hyperledger-composer@0.20.2 
 
- 
 **Step 6.4:** Enter the following command to begin the generation of an AngularJS application based on your Hyperledger Composer Business Network::
 
- bcuser@ubuntu16045:~$ yo hyperledger-composer:angular
+ ubuntu@wsc00-14:~$ yo hyperledger-composer:angular
  
 **Step 6.5:** You will be given several prompts.  Enter the values as shown (many of them are defaults and are given to you already, in which case you can just hit enter). Substitute the last octet of your IP address for the *xx* shown in this example::
 
@@ -1077,19 +1076,19 @@ In this section, you will use tools that will allow you to generate a simple fro
  ? License: Apache-2.0
  ? Name of the Business Network card: admin@digitalproperty-network
  ? Do you want to generate a new REST API or connect to an existing REST API?  Connect to an existing REST API
- ? REST server address: http://192.168.22.xx
+ ? REST server address: http://148.100.86.xx
  ? REST server port: 3000
  ? Should namespaces be used in the generated REST API? Namespaces are used
 
 
 **Step 6.6:** This may take a few minutes to complete.  When you get your command prompt back, switch to the *angular-app* directory which was created by the prior command.  (The directory name will be the value you gave it for the question *“What is the name of the application you wish to generate?”*.  I accepted the default value of *angular-app*)::
 
- bcuser@ubuntu16045:~$ cd angular-app/
- bcuser@ubuntu16045:~/angular-app$
+ ubuntu@wsc00-14:~$ cd angular-app/
+ ubuntu@wsc00-14:~/angular-app$
 
 **Step 6.7:** Some of the parameters generated for you are configured for running the application and the REST server on a local workstation.  
-Since you are running these on your Linux on IBM Z instance, there are two files you will have to change to point to the external IP address of your instance.  
-The following instructions use *192.168.22.xx* – substitute the last octet of your external IP address for *xx* when following these instructions.
+Since you are running these on your LinuxONE instance, there are two files you will have to change to point to the external IP address of your instance.  
+The following instructions use *148.100.86.xx* – substitute the last octet of your external IP address for *xx* when following these instructions.
 
 The next several steps will guide you through the commands necessary to change the host IP address for the *ng* server which serves your generated Angular application.  
 You will make a change in two files- *package.json* and *protractor.conf.js*. 
@@ -1097,47 +1096,49 @@ For each change, three commands are shown- a "before" and "after" *grep* command
 
 Get started by running this *grep* command to find the line in *package.json* that you will change::
 
- bcuser@ubuntu16045:~/angular-app$ grep '0\.0\.0\.0' package.json 
+ ubuntu@wsc00-14:~/angular-app$ grep '0\.0\.0\.0' package.json 
      "start": "ng serve --proxy-config proxy.conf.js --host 0.0.0.0",
  
 **Step 6.8:** Use *sed* to change the *0.0.0.0* IP address to specify your external IP address.  Dont forget to change *xx* to match the last octect ofyour IP address before entering the command::
 
- bcuser@ubuntu16045:~/angular-app$ sed -i "s/0\.0\.0\.0/192.168.22.xx/g" package.json
+ ubuntu@wsc00-14:~/angular-app$ sed -i "s/0\.0\.0\.0/148.100.86.xx/g" package.json
 
 **Step 6.9:** Run *grep* again and you should see that your change took effect::
 
- bcuser@ubuntu16045:~/angular-app$ grep 'ng serve' package.json 
-     "start": "ng serve --host 192.168.22.xx",
+ ubuntu@wsc00-14:~/angular-app$ grep 'ng serve' package.json 
+     "start": "ng serve --host 148.100.86.xx",
  
 **Step 6.10:** Run *grep* to find the line in *protractor.conf.js* that you will change::
 
- bcuser@ubuntu16045:~/angular-app$ grep localhost protractor.conf.js 
+ ubuntu@wsc00-14:~/angular-app$ grep localhost protractor.conf.js 
    baseUrl: 'http://localhost:4200/',
    
 **Step 6.11:** Use *sed* to change *localhost* to your IP address.  Don't forget to change *xx* to match your IP address::
 
- bcuser@ubuntu16045:~/angular-app$ sed -i s/localhost/192.168.22.xx/g protractor.conf.js 
+ ubuntu@wsc00-14:~/angular-app$ sed -i s/localhost/148.100.86.xx/g protractor.conf.js 
  
 **Step 6.12:** Run *grep* to see that your change took effect::
  
- bcuser@ubuntu16045:~/angular-app$ grep baseUrl protractor.conf.js 
+ ubuntu@wsc00-14:~/angular-app$ grep baseUrl protractor.conf.js 
    baseUrl: 'http://192.168.22.xx:4200/',
 
 **Step 6.13:** Enter *npm* start to start the server that will host the generated Angular application. Your output should look like what is shown here::
 
- bcuser@ubuntu16045:~/angular-app$ npm start
+ ubuntu@wsc00-14:~/angular-app$ npm start
 
- > angular-app@0.0.1 start /home/bcuser/angular-app
- > ng serve --host 192.168.22.xx
+ > angular-app@0.0.1 start /home/ubuntu/angular-app
+ > ng serve --proxy-config proxy.conf.js --host 148.100.86.xx
 
- ** NG Live Development Server is running on http://192.168.22.xx:4200 **
- Hash: 5dd73a9b61f47dd1ef9e                                                               
- Time: 10018ms
- chunk    {0} polyfills.bundle.js, polyfills.bundle.js.map (polyfills) 267 kB {5} [initial] [rendered]
- chunk    {1} main.bundle.js, main.bundle.js.map (main) 90 kB {4} [initial] [rendered]
+ ** NG Live Development Server is running on http://148.100.86.xx:4200 **
+  10% building modules 4/4 modules 0 active[HPM] Proxy created: [ '/auth', '/api' ]  ->  http://148.100.86.xx:3000
+ [HPM] Proxy created: /  ->  http://148.100.86.xx:3000
+ Hash: d738b560d6077511e232                                                               
+ Time: 11259ms
+ chunk    {0} polyfills.bundle.js, polyfills.bundle.js.map (polyfills) 270 kB {5} [initial] [rendered]
+ chunk    {1} main.bundle.js, main.bundle.js.map (main) 151 kB {4} [initial] [rendered]
  chunk    {2} styles.bundle.js, styles.bundle.js.map (styles) 184 kB {5} [initial] [rendered]
  chunk    {3} scripts.bundle.js, scripts.bundle.js.map (scripts) 439 kB {5} [initial] [rendered]
- chunk    {4} vendor.bundle.js, vendor.bundle.js.map (vendor) 4.11 MB [initial] [rendered]
+ chunk    {4} vendor.bundle.js, vendor.bundle.js.map (vendor) 4.12 MB [initial] [rendered]
  chunk    {5} inline.bundle.js, inline.bundle.js.map (inline) 0 bytes [entry] [rendered]
  webpack: Compiled successfully.
 
