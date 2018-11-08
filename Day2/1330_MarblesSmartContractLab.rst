@@ -42,14 +42,14 @@ Section 3 -	Extract the artifacts necessary to run the lab
 **Step 3.1:**	Navigate to the home directory by entering *cd ~* (the “tilde” character, i.e., ‘*~*’, represents the user’s home directory in Linux).  
 This directory is also usually set in the $HOME environment variable, so *cd $HOME* will also usually get you to your home directory::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ cd ~
- bcuser@ubuntu16045:~$ 
+ ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ cd ~
+ ubuntu@wsc00-14:~$ 
  
 *Note:* You may already be in your home directory prior to entering *cd ~*, in which case you'll just stay there- not a problem.
 
 **Step 3.2:** Retrieve the zmarbles compressed tarball prepared for this lab with the following command::
 
- bcuser@ubuntu16045:~$ wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/zmarbles.tar.gz
+ ubuntu@wsc00-14:~$ wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/zmarbles.tar.gz
  --2018-10-22 14:02:04--  https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/zmarbles.tar.gz
  Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.32.133
  Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.32.133|:443... connected.
@@ -63,7 +63,7 @@ This directory is also usually set in the $HOME environment variable, so *cd $HO
 
 **Step 3.3:**	List the *zmarbles* directory with this *ls* command::
 
- bcuser@ubuntu16045:~$ ls zmarbles     
+ ubuntu@wsc00-14:~$ ls zmarbles     
  ls: cannot access 'zmarbles': No such file or directory
  
 Don’t panic!  It wasn’t supposed to be there.  It will be after the next step.
@@ -73,11 +73,11 @@ If you are not giddy yet, try tucking the “*v*” switch into the options in t
 So, enter the command below as shown, or feel free to substitute *-xzvf* for *-xzf* in the tar command (the “*v*” is for “*verbose*”)
 ::
 
- bcuser@ubuntu16045:~$ tar -xzf zmarbles.tar.gz 
+ ubuntu@wsc00-14:~$ tar -xzf zmarbles.tar.gz 
  
 **Step 3.5:** List the *zmarbles* directory with this command::
 
- bcuser@ubuntu16045:~$ ls -l zmarbles
+ ubuntu@wsc00-14:~$ ls -l zmarbles
  total 64
  drwxr-xr-x  2 bcuser bcuser  4096 Oct 22 13:31 base
  drwxrwxr-x  2 bcuser bcuser  4096 Sep 24 15:01 bin
