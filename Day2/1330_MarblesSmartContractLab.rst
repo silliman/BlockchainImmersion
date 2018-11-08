@@ -954,14 +954,14 @@ But it all starts with function calls inside the chaincode functions that ask fo
 
 **Step 10.4:**	Go to PuTTY session 2, and enter this Docker command and you will observe that you still only have a Docker image and a Docker container for peer0 of Org0MSP::
 
- bcuser@ubuntu16045:~$ docker images dev-*
+ ubuntu@wsc00-14:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
  dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        10 minutes ago      137MB
 
 **Step 10.5:** Enter this command to see information about the chaincode container.  
 I introduce here the *--no-trunc* option, which stands for *no truncation*, so you can see more information about the container::
 
- bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-
+ ubuntu@wsc00-14:~$ docker ps --no-trunc | grep dev-
  0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                10 minutes ago      Up 10 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
 
 The takeaway is that the chaincode execution has only run on peer0 of Org0MSP so far, and this is also the peer on which you instantiated the chaincode, so the Docker image for the chaincode, and the corresponding Docker container based on the image, have been created for only this peer.  
@@ -996,14 +996,14 @@ I put 12 leading zeros in front of the number 1 in case you wanted to stay late 
 
 **Step 10.8:**	In PuTTY session 2, issue the command to see that you have two Docker chaincode images::
 
- bcuser@ubuntu16045:~$ docker images dev-*
+ ubuntu@wsc00-14:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
  dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      latest              a6e05533ebcb        About a minute ago   137MB
  dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        13 minutes ago       137MB
  
 **Step 10.9:**	In PuTTY session 2, issue the command to see that you have two Docker chaincode containers::
 
- bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-*
+ ubuntu@wsc00-14:~$ docker ps --no-trunc | grep dev-*
  24bbb59d91135de98030780eba1422eb9bd7b020535647709b5eae7e141c5521   dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      "chaincode -peer.address=peer0.marblesinc.com:7052"                                                                                                                                                                                                                   About a minute ago   Up About a minute                                                                               dev-peer0.marblesinc.com-marbles-1.0
  0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                14 minutes ago       Up 14 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
  bcuser@ubuntu16045:~$ 
@@ -1058,7 +1058,7 @@ It should work this time::
  
 **Step 10.14:**	Go back to PuTTY session 2 and enter the Docker command that will show you that you now have your third chaincode-related Docker image, the one just built for peer1 of Org0::
 
- bcuser@ubuntu16045:~$ docker images dev-*
+ ubuntu@wsc00-14:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
  dev-peer1.unitedmarbles.com-marbles-1.0-dea1aa08dc7c6f282a31dd498670173c21d3e75ef0ef1d170b95e1212fbacb77   latest              c5eb7c1a465e        41 seconds ago      137MB
  dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      latest              a6e05533ebcb        16 minutes ago      137MB
@@ -1066,7 +1066,7 @@ It should work this time::
 
 **Step 10.15:**	Enter the Docker command that will show you that you now have your third chaincode-related Docker container, the one just built for peer1 of Org0::
 
- bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-
+ ubuntu@wsc00-14:~$ docker ps --no-trunc | grep dev-
  7de0c5552680a9a19ac0720041ada2904ba721b8e884e7c08fa968fb7e0cb1a4   dev-peer1.unitedmarbles.com-marbles-1.0-dea1aa08dc7c6f282a31dd498670173c21d3e75ef0ef1d170b95e1212fbacb77   "chaincode -peer.address=peer1.unitedmarbles.com:7052"                                                                                                                                                                                                                About a minute ago   Up About a minute                                                                               dev-peer1.unitedmarbles.com-marbles-1.0
  24bbb59d91135de98030780eba1422eb9bd7b020535647709b5eae7e141c5521   dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      "chaincode -peer.address=peer0.marblesinc.com:7052"                                                                                                                                                                                                                   17 minutes ago       Up 17 minutes                                                                                   dev-peer0.marblesinc.com-marbles-1.0
  0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                29 minutes ago       Up 29 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
@@ -1117,7 +1117,7 @@ Your command prompt should change to reflect that you are now back at your Linux
 
  root@acd1f96d8807:/opt/gopath/src/github.com/hyperledger/fabric/peer# exit
  exit
- bcuser@ubuntu16045:~/zmarbles$ 
+ ubuntu@wsc00-14:~/zmarbles$ 
 
 
 **Step 10.18:**	Congratulations!! 
