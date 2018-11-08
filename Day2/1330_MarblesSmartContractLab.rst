@@ -123,8 +123,8 @@ Section 4	- Bring up the twelve Docker containers that comprise the Hyperledger 
 
 **Step 4.1:**	Change to the *zmarbles* directory with the *cd* command::
 
- bcuser@ubuntu16045:~$ cd zmarbles/ 
- bcuser@ubuntu16045:~/zmarbles$
+ ubuntu@wsc00-14:~$ cd zmarbles/ 
+ ubuntu@wsc00-14:~/zmarbles$ 
  
 **Step 4.2:**	You are going to run a script named *generateArtifacts.sh* that will create some configuration information that is necessary to get your Hyperledger Fabric network set up.  
 There is one optional parameter you may pass to the script, and that is the name of the channel you will be creating.  
@@ -136,7 +136,7 @@ E.g., if you wished to name your channel *tim*, then you would enter *./generate
 
 So, enter the command below, optionally specifying a custom channel name (not shown here) as the lone argument to the *generateArtifacts.sh* script::
 
- bcuser@ubuntu16045:~/zmarbles$ source ./generateArtifacts.sh    # specify a custom channel name or accept the default value of 'mychannel' 
+ ubuntu@wsc00-14:~/zmarbles$ source ./generateArtifacts.sh    # specify a custom channel name or accept the default value of 'mychannel' 
  
  Using cryptogen -> /home/bcuser/zmarbles/bin/cryptogen
 
@@ -206,7 +206,7 @@ and *configtxgen* (Configuration Transaction Generator), which is called four ti
 
 **Step 4.3:**	Issue the following command which will show you all files that were created by the *configtxgen* utility when it was called from inside *generateArtifacts.sh*::
 
- bcuser@ubuntu16045:~/zmarbles$ ls -ltr channel-artifacts
+ ubuntu@wsc00-14:~/zmarbles$ ls -ltr channel-artifacts
  total 28
  -rw-r--r-- 1 bcuser bcuser 12787 Oct 22 14:08 genesis.block
  -rw-r--r-- 1 bcuser bcuser   346 Oct 22 14:08 channel.tx
@@ -225,7 +225,7 @@ You will use these inputs in *Section 7*.
 
 **Step 4.4:** Issue the following command which will show you all files that were created by the *cryptogen* utility when it was called from inside *generateArtifacts.sh*.  This command will show one screen at a time and pause-  press the *Enter* key to scroll to the end, that is, until you get your command prompt back::
 
- bcuser@ubuntu16045:~/zmarbles$ ls -ltrR crypto-config | more
+ ubuntu@wsc00-14:~/zmarbles$ ls -ltrR crypto-config | more
    .
    .  (output not shown here)
    .
@@ -237,7 +237,7 @@ You can see that there is a dizzying set of directories and files, containing th
 
 **Step 4.5:**	You are going to look inside the Docker Compose configuration file a little bit.   Enter the following command::
 
- bcuser@ubuntu16045:~/zmarbles$ vi -R docker-compose.yaml
+ ubuntu@wsc00-14:~/zmarbles$ vi -R docker-compose.yaml
 
 You can enter ``Ctrl-f`` to scroll forward in the file and ``Ctrl-b`` to scroll back in the file.  
 The *-R* flag opens the file in read-only mode, so if you accidentally change something in the file, it’s okay.  
@@ -354,7 +354,7 @@ If you would like to see what is in the *base/docker-compose-base.yaml* and *bas
 
 **Step 4.6:**	Start the Hyperledger Fabric network by entering the command shown below::
 
- bcuser@ubuntu16045:~/zmarbles$ docker-compose up --detach
+ ubuntu@wsc00-14:~/zmarbles$ docker-compose up --detach
  Creating network "zmarbles_default" with the default driver
  Creating couchdb0 ... 
  Creating couchdb1 ... 
@@ -386,7 +386,7 @@ The *Exited* status means something went wrong, and you should check with an ins
 
 If, however, all twelve of your Docker containers are in *Up* status, as in the output below, you are ready to proceed to the next section::
 
- bcuser@ubuntu16045:~/zmarbles$ docker ps --all
+ ubuntu@wsc00-14:~/zmarbles$ docker ps --all
  CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                              NAMES
  91819c57c22c        hyperledger/fabric-tools                  "bash"                   59 seconds ago       Up 58 seconds                                                                                   cli
  b62ea5779b10        hyperledger/fabric-peer                   "peer node start"        About a minute ago   Up 59 seconds       0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp      peer1.unitedmarbles.com
