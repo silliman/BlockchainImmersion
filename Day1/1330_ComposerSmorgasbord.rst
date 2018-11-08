@@ -1195,7 +1195,7 @@ At this point in time, what you see will depend on what sorts of changes, if any
 
 **Step 7.8:** I would like you to go back to an available PuTTY session (open a new one if necessary) and use the Hyperledger Composer CLI again to list your network.  This is to get a baseline before you make a change in Hyperledger Composer Playground in the next step.  So, run this command::
 
- bcuser@ubuntu16045:~$ composer network list --card admin@digitalproperty-network
+ ubuntu@wsc00-14:~$ composer network list --card admin@digitalproperty-network
  
 I'm not showing the output here because your output will vary depending on the changes you made while experimenting in *Step 6.16*
 
@@ -1203,16 +1203,16 @@ I'm not showing the output here because your output will vary depending on the c
 
 **Step 7.10:** Repeat the *composer network list* command from *Step 7.8:* and verify that the change you made in *Step 7.9* shows up in the command output::
 
- bcuser@ubuntu16045:~$ composer network list --card admin@digitalproperty-network
+ ubuntu@wsc00-14:~$ composer network list --card admin@digitalproperty-network
 
 **Step 7.11:** These next few steps clean up the system when you are done.  Before proceeding further, scroll down a bit and look at the **Bonus Material** section and decide if you want to try any of the things suggested there.  Come back here when you are done and switch to the following directory::
 
- bcuser@ubuntu16045:~/composer-sample-applications/packages/digitalproperty-app$ cd ~/composer-tools/packages/fabric-dev-servers/
+ ubuntu@wsc00-14:~/composer-sample-applications/packages/digitalproperty-app$ cd ~/composer-tools/packages/fabric-dev-servers/
  bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ 
 
 **Step 7.12:** Run this script which will stop your Hyperledger Fabric Network::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ ./stopFabric.sh 
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ ./stopFabric.sh 
  Development only script for Hyperledger Fabric control
  Running 'stopFabric.sh'
  FABRIC_VERSION is unset, assuming hlfv12
@@ -1224,8 +1224,30 @@ I'm not showing the output here because your output will vary depending on the c
 
 **Step 7.13:** Ensure that you do not have any running Docker containers::
 
- bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ docker ps
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ docker ps
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+**Step 7.13.1:** Run this command to delete the stopped containers::
+
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ docker rm $(docker ps --all --quiet)
+ 0424f822e7a3
+ f4784708ae18
+ 6bb299b415bf
+ 27dbd96e0283
+ 0d23291216fd
+ aed647f6bd47
+
+**Step 7.13.2:** Run this command to remove all Docker images on your system.  You're not running this lab on a production system on you? ;-) ::
+ 
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ docker rmi $(docker images --quiet)
+   .
+   .  (output not shown)
+   .
+
+**Step 7.14.3:** Verify that you have no more images::
+
+ ubuntu@wsc00-14:~/composer-tools/packages/fabric-dev-servers$ docker images
+ REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
 **Step 7.14:** If you still have PuTTY or SSH sessions where your Composer Playground, Composer REST Server, and Composer Angular App processes are running, enter **Ctrl-C** to exist those processes and type `exit` to logout of those sessions.
 
