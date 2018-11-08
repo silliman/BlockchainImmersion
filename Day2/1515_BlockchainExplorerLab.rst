@@ -43,7 +43,7 @@ Part 1: Set Up
 
 **5.** We will pull down the files we need to execute everything we need. We created a tar file that is configured to our Marbles UI and Chaincode. We will walk you through it later on. Execute the following command to get our tar file::
 
-	bcuser@ubuntu16043:~$ wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/blockchain-	explorer.tar.gz
+	bcuser@ubuntu16043:~$ wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/blockchain-explorer.tar.gz
 	
 **6.** Then unpack our tar file::
 
@@ -213,7 +213,7 @@ You should see a lot check marks meaning that the test passed. If you do see a m
 	
 **5.** Change directories and then run on final npm install and a couple of test commands::
 
-	bcuser@ubuntu16045:~$ n
+	bcuser@ubuntu16045:~$ cd $HOME/blockchain-explorer/client
 	bcuser@ubuntu16045:~/blockchain-explorer/client$ npm install
 	
 	bcuser@ubuntu16045:~/blockchain-explorer/client$ npm test -- -u --coverage
