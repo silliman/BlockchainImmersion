@@ -292,12 +292,12 @@ The chosen topology is use-case dependent and beyond the scope of this lab.
 **Step 3.1:** You are now ready to start the server for UnitedMarbles.  
 Back up to the *~/zmarbles/marblesUI* directory::
 
- bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ cd ..
- bcuser@ubuntu16045:~/zmarbles/marblesUI$
+ ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ cd ..
+ ubuntu@wsc00-14:~/zmarbles/marblesUI$
 
 **Step 3.2:** You will now use *gulp* to start up the server, with this command::
 
- bcuser@ubuntu16045:~/zmarbles/marblesUI$ gulp marbles1
+ ubuntu@wsc00-14:~/zmarbles/marblesUI$ gulp marbles1
  [13:06:55] Using gulpfile ~/zmarbles/marblesUI/gulpfile.js
  [13:06:55] Starting 'start_marbles1'...
  
@@ -369,7 +369,7 @@ You should see a screen that looks like this:
 Notice that you are greeted at the top as a “United Marbles admin”.  
 Smart money says that this line in *marble1.json* has something to do with it (you may need to open a new PuTTY session and switch to the directory shown in the command below if you want to run this)::
 
- bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ grep company marbles1.json 
+ ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ grep company marbles1.json 
      "company": "United Marbles",
 
 I have drawn an arrow to the *Login* button.
@@ -425,8 +425,8 @@ Remember, the “blockchain” is shared among all participants of the channel, 
 But the user names specified in *config/marbles2.json* are not created until you start the server for *marbles2* and log in the first time.  
 List the contents of *marbles2.json* file (switch to a free PuTTY session or start a new one), e.g.::
 
- bcuser@ubuntu16045:~$ cd ~/zmarbles/marblesUI
- bcuser@ubuntu16045:~/zmarbles/marblesUI$ cat config/marbles2.json 
+ ubuntu@wsc00-14:~$ cd ~/zmarbles/marblesUI
+ ubuntu@wsc00-14:~/zmarbles/marblesUI$ cat config/marbles2.json 
  {
      "cred_filename": "blockchain_creds2.json",
      "use_events": false,
@@ -443,7 +443,7 @@ List the contents of *marbles2.json* file (switch to a free PuTTY session or sta
 
 **Step 3.7:** Start the second server, the one for Marbles Inc::
 
- bcuser@ubuntu16045:~/zmarbles/marblesUI$ gulp marbles2
+ ubuntu@wsc00-14:~/zmarbles/marblesUI$ gulp marbles2
  [16:22:07] Using gulpfile ~/zmarbles/marblesUI/gulpfile.js
  [16:22:07] Starting 'start_marbles2'...  
 
