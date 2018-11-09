@@ -18,7 +18,7 @@ Section 2: Marbles user interface setup
  ubuntu@wsc00-14:~$ cd ~/zmarbles/marblesUI
  ubuntu@wsc00-14:~/zmarbles/marblesUI$
 
-**Step 2.2:** **NIC CAN SKIP THIS STEP!!!** You will need to do an *npm install* to install the packages needed by the Marbles user interface.  
+**Step 2.2:** **NICK CAN SKIP THIS STEP!!!** You will need to do an *npm install* to install the packages needed by the Marbles user interface.  
 First you will verify that the *node_modules* directory does not exist.  
 This directory will be created when you run an npm *install* in the next step, so right now it shouldn't exist::
 
@@ -39,7 +39,7 @@ This directory will be created when you run an npm *install* in the next step, s
    .  (output not shown here)
    .
 
-**Step 2.5:** **Skip this one too Nic** How much ‘there’ is there?  Run this command if you are curious.  I hope you are a speed reader::
+**Step 2.5:** **Skip this one too Nick** How much ‘there’ is there?  Run this command if you are curious.  I hope you are a speed reader::
  
  ubuntu@wsc00-14:~/zmarbles/marblesUI$ ls -ltrR node_modules/
    .
