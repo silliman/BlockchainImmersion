@@ -42,14 +42,14 @@ Section 3 -	Extract the artifacts necessary to run the lab
 **Step 3.1:**	Navigate to the home directory by entering *cd ~* (the “tilde” character, i.e., ‘*~*’, represents the user’s home directory in Linux).  
 This directory is also usually set in the $HOME environment variable, so *cd $HOME* will also usually get you to your home directory::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ cd ~
- ubuntu@wsc00-14:~$ 
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ cd ~
+ bcuser@ubuntu16045:~$ 
  
 *Note:* You may already be in your home directory prior to entering *cd ~*, in which case you'll just stay there- not a problem.
 
 **Step 3.2:** Retrieve the zmarbles compressed tarball prepared for this lab with the following command::
 
- ubuntu@wsc00-14:~$ wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/zmarbles.tar.gz
+ bcuser@ubuntu16045:~$ wget https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/zmarbles.tar.gz
  --2018-10-22 14:02:04--  https://raw.githubusercontent.com/silliman/BlockchainImmersion/master/zmarbles.tar.gz
  Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.32.133
  Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.32.133|:443... connected.
@@ -63,7 +63,7 @@ This directory is also usually set in the $HOME environment variable, so *cd $HO
 
 **Step 3.3:**	List the *zmarbles* directory with this *ls* command::
 
- ubuntu@wsc00-14:~$ ls zmarbles     
+ bcuser@ubuntu16045:~$ ls zmarbles     
  ls: cannot access 'zmarbles': No such file or directory
  
 Don’t panic!  It wasn’t supposed to be there.  It will be after the next step.
@@ -73,11 +73,11 @@ If you are not giddy yet, try tucking the “*v*” switch into the options in t
 So, enter the command below as shown, or feel free to substitute *-xzvf* for *-xzf* in the tar command (the “*v*” is for “*verbose*”)
 ::
 
- ubuntu@wsc00-14:~$ tar -xzf zmarbles.tar.gz 
+ bcuser@ubuntu16045:~$ tar -xzf zmarbles.tar.gz 
  
 **Step 3.5:** List the *zmarbles* directory with this command::
 
- ubuntu@wsc00-14:~$ ls -l zmarbles
+ bcuser@ubuntu16045:~$ ls -l zmarbles
  total 64
  drwxr-xr-x  2 bcuser bcuser  4096 Oct 22 13:31 base
  drwxrwxr-x  2 bcuser bcuser  4096 Sep 24 15:01 bin
@@ -123,8 +123,8 @@ Section 4	- Bring up the twelve Docker containers that comprise the Hyperledger 
 
 **Step 4.1:**	Change to the *zmarbles* directory with the *cd* command::
 
- ubuntu@wsc00-14:~$ cd zmarbles/ 
- ubuntu@wsc00-14:~/zmarbles$ 
+ bcuser@ubuntu16045:~$ cd zmarbles/ 
+ bcuser@ubuntu16045:~/zmarbles$
  
 **Step 4.2:**	You are going to run a script named *generateArtifacts.sh* that will create some configuration information that is necessary to get your Hyperledger Fabric network set up.  
 There is one optional parameter you may pass to the script, and that is the name of the channel you will be creating.  
@@ -136,7 +136,7 @@ E.g., if you wished to name your channel *tim*, then you would enter *./generate
 
 So, enter the command below, optionally specifying a custom channel name (not shown here) as the lone argument to the *generateArtifacts.sh* script::
 
- ubuntu@wsc00-14:~/zmarbles$ source ./generateArtifacts.sh    # specify a custom channel name or accept the default value of 'mychannel' 
+ bcuser@ubuntu16045:~/zmarbles$ source ./generateArtifacts.sh    # specify a custom channel name or accept the default value of 'mychannel' 
  
  Using cryptogen -> /home/bcuser/zmarbles/bin/cryptogen
 
@@ -206,7 +206,7 @@ and *configtxgen* (Configuration Transaction Generator), which is called four ti
 
 **Step 4.3:**	Issue the following command which will show you all files that were created by the *configtxgen* utility when it was called from inside *generateArtifacts.sh*::
 
- ubuntu@wsc00-14:~/zmarbles$ ls -ltr channel-artifacts
+ bcuser@ubuntu16045:~/zmarbles$ ls -ltr channel-artifacts
  total 28
  -rw-r--r-- 1 bcuser bcuser 12787 Oct 22 14:08 genesis.block
  -rw-r--r-- 1 bcuser bcuser   346 Oct 22 14:08 channel.tx
@@ -225,7 +225,7 @@ You will use these inputs in *Section 7*.
 
 **Step 4.4:** Issue the following command which will show you all files that were created by the *cryptogen* utility when it was called from inside *generateArtifacts.sh*.  This command will show one screen at a time and pause-  press the *Enter* key to scroll to the end, that is, until you get your command prompt back::
 
- ubuntu@wsc00-14:~/zmarbles$ ls -ltrR crypto-config | more
+ bcuser@ubuntu16045:~/zmarbles$ ls -ltrR crypto-config | more
    .
    .  (output not shown here)
    .
@@ -237,7 +237,7 @@ You can see that there is a dizzying set of directories and files, containing th
 
 **Step 4.5:**	You are going to look inside the Docker Compose configuration file a little bit.   Enter the following command::
 
- ubuntu@wsc00-14:~/zmarbles$ vi -R docker-compose.yaml
+ bcuser@ubuntu16045:~/zmarbles$ vi -R docker-compose.yaml
 
 You can enter ``Ctrl-f`` to scroll forward in the file and ``Ctrl-b`` to scroll back in the file.  
 The *-R* flag opens the file in read-only mode, so if you accidentally change something in the file, it’s okay.  
@@ -354,7 +354,7 @@ If you would like to see what is in the *base/docker-compose-base.yaml* and *bas
 
 **Step 4.6:**	Start the Hyperledger Fabric network by entering the command shown below::
 
- ubuntu@wsc00-14:~/zmarbles$ docker-compose up --detach
+ bcuser@ubuntu16045:~/zmarbles$ docker-compose up --detach
  Creating network "zmarbles_default" with the default driver
  Creating couchdb0 ... 
  Creating couchdb1 ... 
@@ -386,7 +386,7 @@ The *Exited* status means something went wrong, and you should check with an ins
 
 If, however, all twelve of your Docker containers are in *Up* status, as in the output below, you are ready to proceed to the next section::
 
- ubuntu@wsc00-14:~/zmarbles$ docker ps --all
+ bcuser@ubuntu16045:~/zmarbles$ docker ps --all
  CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                              NAMES
  91819c57c22c        hyperledger/fabric-tools                  "bash"                   59 seconds ago       Up 58 seconds                                                                                   cli
  b62ea5779b10        hyperledger/fabric-peer                   "peer node start"        About a minute ago   Up 59 seconds       0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp      peer1.unitedmarbles.com
@@ -422,7 +422,7 @@ The decision on how many channels to create and what policies they have will usu
 
 **Step 5.1:**	Access the *cli* Docker container::
 
- ubuntu@wsc00-14:~/zmarbles$ docker exec --interactive --tty cli bash
+ bcuser@ubuntu16045:~/zmarbles$ docker exec --interactive --tty cli bash
  root@acd1f96d8807:/opt/gopath/src/github.com/hyperledger/fabric/peer#ic/peer#
 
 Observe that your command prompt changes when you enter the Docker container’s shell.
@@ -789,7 +789,7 @@ For the remainder of this lab, I will refer to the session where you are in the 
 **Step 9.2:**	You are going to confirm that you do not have any chaincode Docker images created, nor any Docker chaincode containers running currently. 
 From PuTTY Session 2, enter this command and observe that all of your images begin with *hyperledger*::
 
- ubuntu@wsc00-14:~$ docker images
+ bcuser@ubuntu16045:~$ docker images
  REPOSITORY                      TAG                 IMAGE ID            CREATED             SIZE
  hyperledger/fabric-ca          latest                         7a3fa3cd6f4c        4 hours ago         317MB
  hyperledger/fabric-ca          s390x-1.4.0-snapshot-bd7f997   7a3fa3cd6f4c        4 hours ago         317MB
@@ -826,7 +826,7 @@ This will show only those images that begin with *dev-\**, of which there should
 **Step 9.3:** Now do essentially the same thing with *docker ps* and you should see all of the Docker containers for the 
 Hyperledger Fabric processes and CouchDB, but no chaincode-related Docker containers::  
 
- ubuntu@wsc00-14:~$ docker ps --all
+ bcuser@ubuntu16045:~$ docker ps --all
  CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                                                       NAMES
  91819c57c22c        hyperledger/fabric-tools                  "bash"                   30 minutes ago      Up 30 minutes                                                                                   cli
  b62ea5779b10        hyperledger/fabric-peer                   "peer node start"        30 minutes ago      Up 30 minutes       0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp      peer1.unitedmarbles.com
@@ -844,7 +844,7 @@ Hyperledger Fabric processes and CouchDB, but no chaincode-related Docker contai
 **Step 9.4:** Entering this will make this fact stand out more as you should only see column headers in your output. 
 (The *--invert-match* argument for *grep* says “do not show me anything that contains the string “hyperledger”)::
 
- ubuntu@wsc00-14:~$ docker ps --all | grep --invert-match hyperledger
+ bcuser@ubuntu16045:~$ docker ps --all | grep --invert-match hyperledger
  CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                                                       NAMES
 
 Now that you have established that you have no chaincode-related Docker images or containers present, try to instantiate the chaincode.
@@ -879,13 +879,13 @@ Some people do not like being treated as objects, but evidently chaincode does n
 The reason for this is that as part of the instantiate, a Docker image for the chaincode is created and then a Docker container is started from the image.  
 To prove this to yourself, on PuTTY Session 2, enter this to see the new Docker image::
 
- ubuntu@wsc00-14:~$ docker images dev-*
+ bcuser@ubuntu16045:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED              SIZE
  dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        5 minutes ago       137MB
 
 **Step 9.8:** And enter this to see the Docker chaincode container created from the new Docker image::
 
- ubuntu@wsc00-14:~$ docker ps | grep --invert-match hyperledger 
+ bcuser@ubuntu16045:~$ docker ps | grep --invert-match hyperledger 
  CONTAINER ID        IMAGE                                                                                                      COMMAND                  CREATED             STATUS              PORTS                                                                       NAMES
  0929db7e5a83        dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.add…"   5 minutes ago       Up 5 minutes                                                                                    dev-peer0.unitedmarbles.com-marbles-1.0
  bcuser@ubuntu16045:~$ 
@@ -954,14 +954,14 @@ But it all starts with function calls inside the chaincode functions that ask fo
 
 **Step 10.4:**	Go to PuTTY session 2, and enter this Docker command and you will observe that you still only have a Docker image and a Docker container for peer0 of Org0MSP::
 
- ubuntu@wsc00-14:~$ docker images dev-*
+ bcuser@ubuntu16045:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
  dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        10 minutes ago      137MB
 
 **Step 10.5:** Enter this command to see information about the chaincode container.  
 I introduce here the *--no-trunc* option, which stands for *no truncation*, so you can see more information about the container::
 
- ubuntu@wsc00-14:~$ docker ps --no-trunc | grep dev-
+ bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-
  0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                10 minutes ago      Up 10 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
 
 The takeaway is that the chaincode execution has only run on peer0 of Org0MSP so far, and this is also the peer on which you instantiated the chaincode, so the Docker image for the chaincode, and the corresponding Docker container based on the image, have been created for only this peer.  
@@ -996,14 +996,14 @@ I put 12 leading zeros in front of the number 1 in case you wanted to stay late 
 
 **Step 10.8:**	In PuTTY session 2, issue the command to see that you have two Docker chaincode images::
 
- ubuntu@wsc00-14:~$ docker images dev-*
+ bcuser@ubuntu16045:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
  dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      latest              a6e05533ebcb        About a minute ago   137MB
  dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        13 minutes ago       137MB
  
 **Step 10.9:**	In PuTTY session 2, issue the command to see that you have two Docker chaincode containers::
 
- ubuntu@wsc00-14:~$ docker ps --no-trunc | grep dev-*
+ bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-*
  24bbb59d91135de98030780eba1422eb9bd7b020535647709b5eae7e141c5521   dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      "chaincode -peer.address=peer0.marblesinc.com:7052"                                                                                                                                                                                                                   About a minute ago   Up About a minute                                                                               dev-peer0.marblesinc.com-marbles-1.0
  0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                14 minutes ago       Up 14 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
  bcuser@ubuntu16045:~$ 
@@ -1058,7 +1058,7 @@ It should work this time::
  
 **Step 10.14:**	Go back to PuTTY session 2 and enter the Docker command that will show you that you now have your third chaincode-related Docker image, the one just built for peer1 of Org0::
 
- ubuntu@wsc00-14:~$ docker images dev-*
+ bcuser@ubuntu16045:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
  dev-peer1.unitedmarbles.com-marbles-1.0-dea1aa08dc7c6f282a31dd498670173c21d3e75ef0ef1d170b95e1212fbacb77   latest              c5eb7c1a465e        41 seconds ago      137MB
  dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      latest              a6e05533ebcb        16 minutes ago      137MB
@@ -1066,7 +1066,7 @@ It should work this time::
 
 **Step 10.15:**	Enter the Docker command that will show you that you now have your third chaincode-related Docker container, the one just built for peer1 of Org0::
 
- ubuntu@wsc00-14:~$ docker ps --no-trunc | grep dev-
+ bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-
  7de0c5552680a9a19ac0720041ada2904ba721b8e884e7c08fa968fb7e0cb1a4   dev-peer1.unitedmarbles.com-marbles-1.0-dea1aa08dc7c6f282a31dd498670173c21d3e75ef0ef1d170b95e1212fbacb77   "chaincode -peer.address=peer1.unitedmarbles.com:7052"                                                                                                                                                                                                                About a minute ago   Up About a minute                                                                               dev-peer1.unitedmarbles.com-marbles-1.0
  24bbb59d91135de98030780eba1422eb9bd7b020535647709b5eae7e141c5521   dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      "chaincode -peer.address=peer0.marblesinc.com:7052"                                                                                                                                                                                                                   17 minutes ago       Up 17 minutes                                                                                   dev-peer0.marblesinc.com-marbles-1.0
  0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                29 minutes ago       Up 29 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
@@ -1117,7 +1117,7 @@ Your command prompt should change to reflect that you are now back at your Linux
 
  root@acd1f96d8807:/opt/gopath/src/github.com/hyperledger/fabric/peer# exit
  exit
- ubuntu@wsc00-14:~/zmarbles$ 
+ bcuser@ubuntu16045:~/zmarbles$ 
 
 
 **Step 10.18:**	Congratulations!! 
