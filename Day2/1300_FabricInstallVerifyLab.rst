@@ -24,17 +24,17 @@ In this section, you will:
 
 **Step 2.1:** Create the following directory path with this command.  Make sure you are in your home directory when you enter it. If you are following these steps exactly, you already are.  If you strayed away from your home directory, I'm assuming you're smart enough to get back there or at least smart enough to ask for help::
 
- ubuntu@wsc00-14:~$ mkdir -p git/src/github.com/hyperledger
- ubuntu@wsc00-14:~$ 
+ bcuser@ubuntu16045:~$ mkdir -p git/src/github.com/hyperledger
+ bcuser@ubuntu16045:~$
  
 **Step 2.2:** Navigate to the directory you just created::
 
- ubuntu@wsc00-14:~$ cd git/src/github.com/hyperledger/
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger$
+ bcuser@ubuntu16045:~$ cd git/src/github.com/hyperledger/
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$
  
 **Step 2.3:** Use the software tool *git* to download the source code of the Hyperledger Fabric core package from the official place where it lives::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric
  Cloning into 'fabric'...
  remote: Counting objects: 79472, done
  remote: Finding sources: 100% (79472/79472)
@@ -47,45 +47,29 @@ In this section, you will:
 
 **Step 2.4:** Switch to the *fabric* directory, which is the top-level directory of where the *git* command put the code it just downloaded::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ cd fabric
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ 
- 
-**Step 2.4.1:** Use this *git* command to go to a specific commit level which is necessary for the (hopefully) smooth functioning of this lab::
-
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ git checkout f208ba2
- Note: checking out 'f208ba2'.
-
- You are in 'detached HEAD' state. You can look around, make experimental
- changes and commit them, and you can discard any commits you make in this
- state without impacting any branches by performing another checkout.
-
- If you want to create a new branch to retain commits you create, you may
- do so (now or later) by using -b with the checkout command again. Example:
-
-   git checkout -b <new-branch-name>
-
- HEAD is now at f208ba2... [FAB-11918] Add etcd/wal dependencies.
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ cd fabric
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$
 
 **Step 2.5:** You will use a program called *make*, which is used to build software projects, in order to build Docker images for Hyperledger Fabric.  But first, run this command to show that your system does not currently have any 
 Docker images stored on it.  The only output you will see is the column headings::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ docker images
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ docker images
  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
 **Step 2.6:** That will change in a few minutes.  Enter the following command, which will build the Hyperledger Fabric images.  You can ‘wrap’ the *make* command, which is what will do all the work, in a *time* command, which will give you a measure of the time, including ‘wall clock’ time, required to build the images::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ time make docker
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ time make docker
    .
    .  (output not shown here)
    .
  real	4m10.454s
  user	0m15.755s
  sys	0m1.330s
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ 
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ 
 
 **Step 2.7:** Run *docker images* again and you will see several Docker images that were just created. You will notice that many of the Docker images at the top of the output were created in the last few minutes.  These were created by the *make docker* command.  The Docker images that are several months old were downloaded from Hyperledger Fabric's public DockerHub repository.  Your output should look similar to that shown here, although the tags will be different if your instructor gave you a different level to checkout, and your *image ids* will be different either way, for those images that were created in the last few minutes::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ docker images
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ docker images
  REPOSITORY                     TAG                 IMAGE ID            CREATED              SIZE
  hyperledger/fabric-tools       latest                         eb61a4372d2d        49 seconds ago      1.52GB
  hyperledger/fabric-tools       s390x-1.4.0-snapshot-5caab9b   eb61a4372d2d        49 seconds ago      1.52GB
@@ -111,17 +95,17 @@ Docker images stored on it.  The only output you will see is the column headings
 
 **Step 2.8:** Navigate to the directory where the “end-to-end” test lives::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric$ cd examples/e2e_cli
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ cd examples/e2e_cli
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$
 
 **Step 2.9:** The end-to-end test that you are about to run will create several Docker containers.  A Docker container is what runs a process, and it is based on a Docker image.  Run this command, which shows all Docker containers. Right now there will be no output other than column headings, which indicates no Docker containers are currently running::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
 **Step 2.10:** Run the end-to-end test with this command::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ ./network_setup.sh up mychannel 10 couchdb
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ ./network_setup.sh up mychannel 10 couchdb
    .
    . (output not shown here)
    .
@@ -134,7 +118,7 @@ Docker images stored on it.  The only output you will see is the column headings
 
 **Step 2.11:** Run the *docker ps* command to see the Docker containers that the test created::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
  CONTAINER ID        IMAGE                                                                                                  COMMAND                  CREATED              STATUS                     PORTS                                                                       NAMES
  09b4a2c28e87        dev-peer1.org2.example.com-mycc-1.0-26c2ef32838554aac4f7ad6f100aca865e87959c9a126e86d764c8d01f8346ab   "chaincode -peer.add…"   About a minute ago   Up About a minute                                                                                       dev-peer1.org2.example.com-mycc-1.0
  6a8f1936acf3        dev-peer0.org1.example.com-mycc-1.0-384f11f484b9302df90b453200cfb25174305fce8f53f4e94d45ee3b6cab0ce9   "chaincode -peer.add…"   About a minute ago   Up About a minute                                                                                       dev-peer0.org1.example.com-mycc-1.0
@@ -163,11 +147,11 @@ You have successfully run the CLI end-to-end test.  You will clean things up now
 
 **Step 2.12:** Run the *network_setup.sh* script with different arguments to bring the Docker containers down::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ ./network_setup.sh down
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ ./network_setup.sh down
 
 **Step 2.15:** Try the *docker ps* command again and you should see that there are no longer any Docker containers running::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
 **Recap:** In this section, you:
@@ -188,12 +172,12 @@ The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s
 
 **Step 3.1:** Use *cd* to navigate three directory levels up, to the *hyperledger* directory::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ cd ~/git/src/github.com/hyperledger
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ 
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ cd ~/git/src/github.com/hyperledger
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$
 
 **Step 3.2:** Get the source code for the Fabric CA using *git*::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric-ca
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric-ca
  Cloning into 'fabric-ca'...
  remote: Counting objects: 1697, done
  remote: Finding sources: 100% (61/61)
@@ -204,23 +188,23 @@ The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s
 
 **Step 3.3:** Navigate to the *fabric-ca* directory, which is the top directory of where the *git* command put the code it just downloaded::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ cd fabric-ca
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca$
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ cd fabric-ca
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$
 
 **Step 3.4:** Enter the following command, which will build the Hyperledger Fabric CA images.  Just like you did with the *fabric* repo, ‘wrap’ the *make* command, which is what will do all the work, in a *time* command, which will give you a measure of the time, including ‘wall clock’ time, required to build the images. You may see a couple of warnings near the top of the output about cache being disabled. You may ignore these warnings.::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca $ time FABRIC_CA_DYNAMIC_LINK=true make docker
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca $ time FABRIC_CA_DYNAMIC_LINK=true make docker
    .
    .  (output not shown here)
    .
  real	1m29.510s
  user	0m0.313s
  sys	0m0.160s
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca$
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$
 
 **Step 3.5:** Enter the *docker images* command and you will see at the top of the output the Docker image that was just created for the Fabric Certificate Authority::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca$ docker images
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$ docker images
  REPOSITORY                      TAG                 IMAGE ID            CREATED              SIZE
  hyperledger/fabric-ca          latest                         7a3fa3cd6f4c        2 minutes ago       317MB
  hyperledger/fabric-ca          s390x-1.4.0-snapshot-bd7f997   7a3fa3cd6f4c        2 minutes ago       317MB
@@ -260,12 +244,12 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
 
 **Step 4.1:** Back up one directory level to the *~/git/src/github.com/hyperledger* directory::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-ca$ cd ~/git/src/github.com/hyperledger/
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger$ 
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$ cd ~/git/src/github.com/hyperledger/
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$
 
 **Step 4.2:** Now you will download the Hyperledger Fabric Node SDK source code from its official repository::
 
- ubuntu@wsc00-14: ~/git/src/github.com/hyperledger $ git clone https://gerrit.hyperledger.org/r/fabric-sdk-node
+ bcuser@ubuntu16045: ~/git/src/github.com/hyperledger $ git clone https://gerrit.hyperledger.org/r/fabric-sdk-node
  Cloning into 'fabric-sdk-node'...
  remote: Counting objects: 643, done
  remote: Finding sources: 100% (6/6)
@@ -276,39 +260,32 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
 
 **Step 4.3:** Change to the *fabric-sdk-node* directory which was just created::
 
- ubuntu@wsc00-14: ~/git/src/github.com/hyperledger $ cd fabric-sdk-node
- ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$
-
-**Step 4.3.1:** Run this *git* command to check out the *v1.3.0* version of the Fabric Node SDK to ensure (hopefully) smooth operation of this lab::
-
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ git checkout v1.3.0
- Note: checking out 'v1.3.0'.
-
- You are in 'detached HEAD' state. You can look around, make experimental
- changes and commit them, and you can discard any commits you make in this
- state without impacting any branches by performing another checkout.
-
- If you want to create a new branch to retain commits you create, you may
- do so (now or later) by using -b with the checkout command again. Example:
-
-   git checkout -b <new-branch-name>
-
- HEAD is now at 95b02d9... FABN-966 NodeSDK prepare for v1.3.0
+ bcuser@ubuntu16045: ~/git/src/github.com/hyperledger $ cd fabric-sdk-node
+ bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$
 
 **Step 4.4:** You are about to install the packages that the Hyperledger Fabric Node SDK would like to use. Before you start, 
 run *npm list* to see that you are starting with a blank slate::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
- fabric-sdk-node@1.3.0 /home/ubuntu/git/src/github.com/hyperledger/fabric-sdk-node
- └── (empty)
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
+ fabric-sdk-node@1.3.0-snapshot /home/bcuser/git/src/github.com/hyperledger/fabric-sdk-node
+ `-- (empty)
 
- ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$
+
+
+   ╭─────────────────────────────────────╮
+   │                                     │
+   │   Update available 5.6.0 → 6.4.1    │
+   │     Run npm i -g npm to update      │
+   │                                     │
+   ╰─────────────────────────────────────╯
+
+ bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$
 
 You may ignore the message concerning the available update to npm here and throughout the remainder of these labs.
 
 **Step 4.5:** Run *npm install* to install the required packages.  This will take a few minutes and will produce a lot of output::
 
- ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$ npm install
+ bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$ npm install
    .
    . (output not shown here)
    .
@@ -323,11 +300,11 @@ You may ignore the *WARN* messages throughout the output, and there may even be 
 
 **Step 4.6:** Repeat the *npm list* command.  The output, although not shown here, will be anything but empty.  This just proves what everyone suspected-  programmers would much rather use other peoples’ code than write their own.  Not that there’s anything wrong with that. You can even steal this lab if you want to.
 ::
- ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
+ bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
    .
    . (output not shown here, but surely you will agree it is not empty)
    .
- ubuntu@wsc00-14: ~/git/src/github.com/hyperledger/fabric-sdk-node$
+ bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$
 
 **Recap:** In this section, you:
 
@@ -342,13 +319,13 @@ The first test is a quick test that takes about a minute and does not bring up a
 
 **Step 5.1:** The first test is very simple and can be run simply by running *npm test*::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm test
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm test
    .
    . (initial output not shown)
    .
- 1..890
- # tests 890
- # pass  890
+ 1..640
+ # tests 640
+ # pass  640
 
  # ok
 
@@ -454,7 +431,7 @@ You may have seen some messages scroll by that looked like errors or exceptions,
 
 **Step 5.2:** Run the end-to-end tests with the *gulp test* command.  While this command is running, a little bit of the output may look like errors, but some of the tests expect errors, so the real indicator is, again, like the first test, whether or not all tests passed::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ gulp test
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ gulp test
    .
    . (lots of output not shown here)
    . 
@@ -562,26 +539,24 @@ You may have seen some messages scroll by that looked like errors or exceptions,
  Lines        : 91.79% ( 6449/7026 )
  ================================================================================
  [11:31:37] Finished 'test' after 18 min
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$
-
-**NOTE:** This test may fail on our "emergency" LinuxONE instances (at least it did for me) and due to time constraints I was not able to debug and resolve the failures.  Although less than ideal, this should not affect the remaining labs so let's move on.
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$
 
 **Step 5.3:** Enter this command to see what Docker containers were created as part of the test::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
 
 **Step 5.4:** Enter this command to see that quite a few Docker images for chaincode have been created as part of the test.  
 These are the images that start with *dev-*::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
  
 **Step 5.5:** You will now clean up. You will do this by running only the parts "hidden" within the *gulp test* command execution that do the initial cleanup::
  
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ gulp clean-up pre-test docker-clean
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ gulp clean-up pre-test docker-clean
  
 **Step 5.6:** Now observe that all Docker containers have been stopped and most have been removed by entering this command::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
  CONTAINER ID        IMAGE                                                                                                    COMMAND                  CREATED             STATUS                          PORTS               NAMES
  1401b5aeeceb        dev-peer0.org2.example.com-second-v10-5714f9445c9ccd0fd2642a3a170d60848b55d4c0efff20d5b2edb9dedfd6f4d7   "/bin/sh -c 'cd /usr…"   18 minutes ago      Exited (0) 9 minutes ago                            dev-peer0.org2.example.com-second-v10
  45480b06c3fe        dev-peer0.org1.example.com-second-v10-7ac564a300ba156f1849b973e08e3fb8661959e16651ae0b3ca349c870799248   "/bin/sh -c 'cd /usr…"   18 minutes ago      Exited (0) About a minute ago                       dev-peer0.org1.example.com-second-v10
@@ -590,9 +565,9 @@ These are the images that start with *dev-*::
 
 **Note:** The output of this command shows a few containers in the *Exited* state, but none in the *Up* state.  Over the course of the Hyperledger project, the cleanup command from *Step 5.5* tended to remove all containers, so that none were left behind even in the *Exited* state.  I suspect that this is just something that slipped through the cracks in a recent update and will probably be corrected in the future.
 
-**Step 5.7:** And enter this comand and see that only a few chaincode images remain- those starting with *dev-* remain- again, related to the note at the end of the previous step, I suspect that a future fix will ensure that these images are deleted::
+**Step 5.7:** And enter this comand and see that only a few chaincode images remain- those starting with *dev-* remain- again, related to the note at the end of the previous step, I suspect that a future fix will ensure that these images are deleted.
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
  REPOSITORY                                                                                               TAG                 IMAGE ID            CREATED             SIZE
  dev-peer0.org2.example.com-second-v10-5714f9445c9ccd0fd2642a3a170d60848b55d4c0efff20d5b2edb9dedfd6f4d7   latest              fbce3d7767e1        23 minutes ago      1.52GB
  dev-peer0.org1.example.com-second-v10-7ac564a300ba156f1849b973e08e3fb8661959e16651ae0b3ca349c870799248   latest              214cd785c0b8        23 minutes ago      1.52GB
@@ -601,7 +576,7 @@ These are the images that start with *dev-*::
  
 **Step 5.8:** Let's clean up the Docker containers and images that were left behind:: 
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker rm $(docker ps --all --quiet)
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker rm $(docker ps --all --quiet)
  1401b5aeeceb
  45480b06c3fe
  16c07e6b8661
@@ -609,12 +584,12 @@ These are the images that start with *dev-*::
 
 **Step 5.9:** Now verify that those containers are gone::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker ps --all
  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
 **Step 5.10:** Now remove the Docker chaincode images::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker rmi $(docker images --quiet dev-*)
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker rmi $(docker images --quiet dev-*)
  Untagged: dev-peer0.org2.example.com-second-v10-5714f9445c9ccd0fd2642a3a170d60848b55d4c0efff20d5b2edb9dedfd6f4d7:latest
  Deleted: sha256:fbce3d7767e1930da50b338d49775991aa15be18afa2e88eac18f726033f5a2f
  Deleted: sha256:777e3a6c96b5781545de94cff7848c9c30d0ce96c3cf64df58d4f9b26aa7ffff
@@ -638,7 +613,7 @@ These are the images that start with *dev-*::
  
 **Step 5.11:** Verify that the Docker chaincode images are gone::
 
- ubuntu@wsc00-14:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
 **Recap:** In this section,you ran the Hyperledger Fabric Node.js SDK end-to-end tests and then you cleaned up its leftover artifacts afterward. This completes this lab.  You have downloaded and built a Hyperledger Fabric network and verified that the setup is correct by successfully running two end-to-end tests-  the CLI end-to-end test and the Node.js SDK end-to-end test- and the shorter Node.js SDK test.
