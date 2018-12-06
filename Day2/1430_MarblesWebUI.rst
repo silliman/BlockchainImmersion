@@ -15,53 +15,54 @@ Section 2: Marbles user interface setup
 
 **Step 2.1:** Switch to the *~/zmarbles/marblesUI* directory::
 
- ubuntu@wsc00-14:~$ cd ~/zmarbles/marblesUI
- ubuntu@wsc00-14:~/zmarbles/marblesUI$
+ bcuser@ubuntu16045:~$ cd ~/zmarbles/marblesUI
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ 
 
-**Step 2.2:** **NICK CAN SKIP THIS STEP!!!** You will need to do an *npm install* to install the packages needed by the Marbles user interface.  
+
+**Step 2.2:** You will need to do an *npm install* to install the packages needed by the Marbles user interface.  
 First you will verify that the *node_modules* directory does not exist.  
 This directory will be created when you run an npm *install* in the next step, so right now it shouldn't exist::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI$ ls -l node_modules
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ ls -l node_modules
  ls: cannot access 'node_modules': No such file or directory
 
 **Step 2.3:** Now run the *npm install*::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI$ npm install
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ npm install
    .
    .  (output not shown here)
    .
 
 **Step 2.4:** When this command ends, list the *node_modules* directory again. It is there now::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI$ ls -l node_modules
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ ls -l node_modules
    .
    .  (output not shown here)
    .
 
-**Step 2.5:** **Skip this one too Nick** How much ‘there’ is there?  Run this command if you are curious.  I hope you are a speed reader::
+**Step 2.5:** How much ‘there’ is there?  Run this command if you are curious.  I hope you are a speed reader::
  
- ubuntu@wsc00-14:~/zmarbles/marblesUI$ ls -ltrR node_modules/
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ ls -ltrR node_modules/
    .
    .  (output not shown here)
    .
 
 **Step 2.6:** Change to the *config* directory::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI$ cd config
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ cd config
  bcuser@ubuntu16045;~/zmarbles/marblesUI/config$ 
 
 **Step 2.7:** There are four files in this directory::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ ls
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ ls
  blockchain_creds1.json  blockchain_creds2.json  marbles1.json  marbles2.json
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ 
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ 
  
 **Step 2.8:** There are two files for the first fictitious company, *United Marbles*, and two files for the second fictitious 
 company, *Marbles Inc.*  
 Look at this file with the *cat* command::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ cat marbles1.json 
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ cat marbles1.json 
  {
      "cred_filename": "blockchain_creds1.json",
      "use_events": false,
@@ -85,12 +86,12 @@ You can also use the *sed* command to change the name inline without entering *v
 Here is an example of a command to change the name *alice* to *vincent*.  
 **This step is optional- you do not have to do this is you prefer the name alice to vincent**::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ sed -i "s/alice/vincent/" marbles1.json   # optional
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ sed -i "s/alice/vincent/" marbles1.json   # optional
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$
 
 **Step 2.10:** Here is the file after I changed *alice* to *vincent* with the previous sed command::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ cat marbles1.json 
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ cat marbles1.json 
  {
      "cred_filename": "blockchain_creds1.json",
      "use_events": false,
@@ -120,7 +121,7 @@ This file is too large to fit in one screen, so I will teach you one more Linux 
 (Pun intended).  
 Type this::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ more blockchain_creds1.json
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ more blockchain_creds1.json
 
 This command will print as much of the file as it can on your screen but will pause until you hit enter before displaying the rest of the file’s contents.  
 I will go over the sections in this file- hit enter as my explanations go past what you currently see visible and the next screen’s worth of the file will be displayed.
@@ -206,11 +207,11 @@ Either use the *vi* editor if you are comfortable with that, or, you could use *
 For example, here is a *sed* command, to change the channel name from *mychannel* to *tim*, along with “before” and “after” *grep* commands to show the changes
 **(These commands are examples and only needed if you did not use the default channel name of mychannel)**::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ grep mychannel blockchain_creds[12].json 
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ grep mychannel blockchain_creds[12].json 
  blockchain_creds1.json:            "channel_id": "mychannel",
  blockchain_creds2.json:            "channel_id": "mychannel", 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ sed -i "s/mychannel/tim/" blockchain_creds[12].json 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ grep channel_id blockchain_creds[12].json 
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ sed -i "s/mychannel/tim/" blockchain_creds[12].json 
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ grep channel_id blockchain_creds[12].json 
  blockchain_creds1.json:            "channel_id": "tim",
  blockchain_creds2.json:            "channel_id": "tim",
 
@@ -243,7 +244,7 @@ If you would like to compare the differences between *blockchain_creds1.json* an
 This command lists sections of the two files that it finds different.  
 The lines from the first file, *blockchain_creds1.json*, start with ‘<’ (added by the diff command output, not in the actual file), and the lines from the second file, *blockchain_creds2.json*, start with ‘>’::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ diff blockchain_creds1.json blockchain_creds2.json 
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ diff blockchain_creds1.json blockchain_creds2.json 
  13,14c13,14
  <                 "api": "https://localhost:7054",
  <                 "msp_id": "Org0MSP",
@@ -292,12 +293,12 @@ The chosen topology is use-case dependent and beyond the scope of this lab.
 **Step 3.1:** You are now ready to start the server for UnitedMarbles.  
 Back up to the *~/zmarbles/marblesUI* directory::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ cd ..
- ubuntu@wsc00-14:~/zmarbles/marblesUI$
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ cd ..
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$
 
 **Step 3.2:** You will now use *gulp* to start up the server, with this command::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI$ gulp marbles1
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ gulp marbles1
  [13:06:55] Using gulpfile ~/zmarbles/marblesUI/gulpfile.js
  [13:06:55] Starting 'start_marbles1'...
  
@@ -369,7 +370,7 @@ You should see a screen that looks like this:
 Notice that you are greeted at the top as a “United Marbles admin”.  
 Smart money says that this line in *marble1.json* has something to do with it (you may need to open a new PuTTY session and switch to the directory shown in the command below if you want to run this)::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI/config$ grep company marbles1.json 
+ bcuser@ubuntu16045:~/zmarbles/marblesUI/config$ grep company marbles1.json 
      "company": "United Marbles",
 
 I have drawn an arrow to the *Login* button.
@@ -425,8 +426,8 @@ Remember, the “blockchain” is shared among all participants of the channel, 
 But the user names specified in *config/marbles2.json* are not created until you start the server for *marbles2* and log in the first time.  
 List the contents of *marbles2.json* file (switch to a free PuTTY session or start a new one), e.g.::
 
- ubuntu@wsc00-14:~$ cd ~/zmarbles/marblesUI
- ubuntu@wsc00-14:~/zmarbles/marblesUI$ cat config/marbles2.json 
+ bcuser@ubuntu16045:~$ cd ~/zmarbles/marblesUI
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ cat config/marbles2.json 
  {
      "cred_filename": "blockchain_creds2.json",
      "use_events": false,
@@ -443,7 +444,7 @@ List the contents of *marbles2.json* file (switch to a free PuTTY session or sta
 
 **Step 3.7:** Start the second server, the one for Marbles Inc::
 
- ubuntu@wsc00-14:~/zmarbles/marblesUI$ gulp marbles2
+ bcuser@ubuntu16045:~/zmarbles/marblesUI$ gulp marbles2
  [16:22:07] Using gulpfile ~/zmarbles/marblesUI/gulpfile.js
  [16:22:07] Starting 'start_marbles2'...  
 
