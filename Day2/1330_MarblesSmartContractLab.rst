@@ -61,13 +61,11 @@ This directory is also usually set in the $HOME environment variable, so *cd $HO
 
  2018-10-22 14:02:05 (23.0 MB/s) - 'zmarbles.tar.gz' saved [13320911/13320911]
 
-**Step 3.3:**	List the *zmarbles* directory with this *ls* command::
+**Step 3.3:**	The *zmarbles* directory should not yet exist.  Prove it with this *ls* command::
 
  bcuser@ubuntu16045:~$ ls zmarbles     
  ls: cannot access 'zmarbles': No such file or directory
  
-Don’t panic!  It wasn’t supposed to be there.  It will be after the next step.
-
 **Step 3.4:**	Extract the *zmarbles.tar.gz* file which will create the missing directory (and lots of subdirectories).  
 If you are not giddy yet, try tucking the “*v*” switch into the options in the command below.  That is, use *-xzvf* instead of *-xzf*.  
 So, enter the command below as shown, or feel free to substitute *-xzvf* for *-xzf* in the tar command (the “*v*” is for “*verbose*”)
@@ -233,7 +231,6 @@ You will use these inputs in *Section 7*.
 Actually, these files were created *before* the files listed in the prior step, *Step 4.3*, were created, because, among the many cryptographic artifacts created are the x.509 signing certificates for the organizations, which are baked into the *genesis.block* discussed in the prior step.
 
 You can see that there is a dizzying set of directories and files, containing things like CA root certificates, signing certificates, TLS certificates, corresponding private keys, and public keys, for certificate authorities, organizations, administrative and general users.  A thorough discussion of them is beyond the scope of this lab, but at some point in a glorious future the author hopes to document, perhaps in an appendix somewhere, the purpose of each file. The author wants world peace, too.  Shall we proceed?
-
 
 **Step 4.5:**	You are going to look inside the Docker Compose configuration file a little bit.   Enter the following command::
 
@@ -791,32 +788,34 @@ From PuTTY Session 2, enter this command and observe that all of your images beg
 
  bcuser@ubuntu16045:~$ docker images
  REPOSITORY                      TAG                 IMAGE ID            CREATED             SIZE
- hyperledger/fabric-ca          latest                         7a3fa3cd6f4c        4 hours ago         317MB
- hyperledger/fabric-ca          s390x-1.4.0-snapshot-bd7f997   7a3fa3cd6f4c        4 hours ago         317MB
- hyperledger/fabric-tools       latest                         eb61a4372d2d        5 hours ago         1.52GB
- hyperledger/fabric-tools       s390x-1.4.0-snapshot-5caab9b   eb61a4372d2d        5 hours ago         1.52GB
- hyperledger/fabric-tools       s390x-latest                   eb61a4372d2d        5 hours ago         1.52GB
- hyperledger/fabric-testenv     latest                         8bb2f2157a7f        5 hours ago         1.57GB
- hyperledger/fabric-testenv     s390x-1.4.0-snapshot-5caab9b   8bb2f2157a7f        5 hours ago         1.57GB
- hyperledger/fabric-testenv     s390x-latest                   8bb2f2157a7f        5 hours ago         1.57GB
- hyperledger/fabric-buildenv    latest                         d7ac7af63798        5 hours ago         1.47GB
- hyperledger/fabric-buildenv    s390x-1.4.0-snapshot-5caab9b   d7ac7af63798        5 hours ago         1.47GB
- hyperledger/fabric-buildenv    s390x-latest                   d7ac7af63798        5 hours ago         1.47GB
- hyperledger/fabric-ccenv       latest                         1fd333963a9c        5 hours ago         1.41GB
- hyperledger/fabric-ccenv       s390x-1.4.0-snapshot-5caab9b   1fd333963a9c        5 hours ago         1.41GB
- hyperledger/fabric-ccenv       s390x-latest                   1fd333963a9c        5 hours ago         1.41GB
- hyperledger/fabric-orderer     latest                         7269c1176d63        5 hours ago         145MB
- hyperledger/fabric-orderer     s390x-1.4.0-snapshot-5caab9b   7269c1176d63        5 hours ago         145MB
- hyperledger/fabric-orderer     s390x-latest                   7269c1176d63        5 hours ago         145MB
- hyperledger/fabric-peer        latest                         63177913a293        5 hours ago         151MB
- hyperledger/fabric-peer        s390x-1.4.0-snapshot-5caab9b   63177913a293        5 hours ago         151MB
- hyperledger/fabric-peer        s390x-latest                   63177913a293        5 hours ago         151MB
- hyperledger/fabric-zookeeper   latest                         5db059b03239        9 days ago          1.42GB
- hyperledger/fabric-kafka       latest                         3bbd80f55946        9 days ago          1.43GB
- hyperledger/fabric-couchdb     latest                         7afa6ce179e6        9 days ago          1.55GB
- hyperledger/fabric-couchdb     s390x-0.4.14                   7afa6ce179e6        9 days ago          1.55GB
- hyperledger/fabric-baseimage   s390x-0.4.14                   6e4e09df1428        9 days ago          1.38GB
- hyperledger/fabric-baseos      s390x-0.4.14                   4834a1e3ce1c        9 days ago          120MB
+ hyperledger/fabric-ca          latest                         4e2616487cde        2 hours ago         317MB
+ hyperledger/fabric-ca          s390x-1.3.0                    4e2616487cde        2 hours ago         317MB
+ hyperledger/fabric-tools       latest                         bdceed408af3        2 hours ago         1.48GB
+ hyperledger/fabric-tools       s390x-1.3.0-snapshot-ab0a67a   bdceed408af3        2 hours ago         1.48GB
+ hyperledger/fabric-tools       s390x-latest                   bdceed408af3        2 hours ago         1.48GB
+ hyperledger/fabric-testenv     latest                         3a5d26529b4b        2 hours ago         1.54GB
+ hyperledger/fabric-testenv     s390x-1.3.0-snapshot-ab0a67a   3a5d26529b4b        2 hours ago         1.54GB
+ hyperledger/fabric-testenv     s390x-latest                   3a5d26529b4b        2 hours ago         1.54GB
+ hyperledger/fabric-buildenv    latest                         97da0e9277ef        2 hours ago         1.45GB
+ hyperledger/fabric-buildenv    s390x-1.3.0-snapshot-ab0a67a   97da0e9277ef        2 hours ago         1.45GB
+ hyperledger/fabric-buildenv    s390x-latest                   97da0e9277ef        2 hours ago         1.45GB
+ hyperledger/fabric-ccenv       latest                         662ea5e33ace        2 hours ago         1.39GB
+ hyperledger/fabric-ccenv       s390x-1.3.0-snapshot-ab0a67a   662ea5e33ace        2 hours ago         1.39GB
+ hyperledger/fabric-ccenv       s390x-latest                   662ea5e33ace        2 hours ago         1.39GB
+ hyperledger/fabric-orderer     latest                         0958803f45ff        2 hours ago         142MB
+ hyperledger/fabric-orderer     s390x-1.3.0-snapshot-ab0a67a   0958803f45ff        2 hours ago         142MB
+ hyperledger/fabric-orderer     s390x-latest                   0958803f45ff        2 hours ago         142MB
+ hyperledger/fabric-peer        latest                         06a39ec85563        2 hours ago         149MB
+ hyperledger/fabric-peer        s390x-1.3.0-snapshot-ab0a67a   06a39ec85563        2 hours ago         149MB
+ hyperledger/fabric-peer        s390x-latest                   06a39ec85563        2 hours ago         149MB
+ hyperledger/fabric-zookeeper   latest                         5db059b03239        7 weeks ago         1.42GB
+ hyperledger/fabric-kafka       latest                         3bbd80f55946        7 weeks ago         1.43GB
+ hyperledger/fabric-couchdb     latest                         7afa6ce179e6        7 weeks ago         1.55GB
+ hyperledger/fabric-orderer     s390x-1.3.0                    49d86c13a64b        8 weeks ago         142MB
+ hyperledger/fabric-peer        s390x-1.3.0                    61d8cb315cff        8 weeks ago         149MB
+ hyperledger/fabric-couchdb     s390x-0.4.13                   6669aa085ff9        8 weeks ago         1.52GB
+ hyperledger/fabric-baseimage   s390x-0.4.13                   f93a607516a7        8 weeks ago         1.35GB
+ hyperledger/fabric-baseos      s390x-0.4.13                   8ed79b01636d        8 weeks ago         120MB
 
 **Note:** The tags in your output may differ from what is shown here, but you should not have any images that start with *dev-\**.
 
@@ -828,18 +827,18 @@ Hyperledger Fabric processes and CouchDB, but no chaincode-related Docker contai
 
  bcuser@ubuntu16045:~$ docker ps --all
  CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                                                       NAMES
- 91819c57c22c        hyperledger/fabric-tools                  "bash"                   30 minutes ago      Up 30 minutes                                                                                   cli
- b62ea5779b10        hyperledger/fabric-peer                   "peer node start"        30 minutes ago      Up 30 minutes       0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp      peer1.unitedmarbles.com
- d35dbd158520        hyperledger/fabric-peer                   "peer node start"        30 minutes ago      Up 30 minutes       0.0.0.0:7051-7053->7051-7053/tcp                                            peer0.unitedmarbles.com
- f4421a4ec662        hyperledger/fabric-peer                   "peer node start"        30 minutes ago      Up 30 minutes       0.0.0.0:10051->7051/tcp, 0.0.0.0:10052->7052/tcp, 0.0.0.0:10053->7053/tcp   peer1.marblesinc.com
- 0f3ab02c8ca9        hyperledger/fabric-peer                   "peer node start"        30 minutes ago      Up 30 minutes       0.0.0.0:9051->7051/tcp, 0.0.0.0:9052->7052/tcp, 0.0.0.0:9053->7053/tcp      peer0.marblesinc.com
- 974005b9fdcf        hyperledger/fabric-couchdb:s390x-0.4.14   "tini -- /docker-ent…"   30 minutes ago      Up 30 minutes       4369/tcp, 9100/tcp, 0.0.0.0:6984->5984/tcp                                  couchdb1
- 9eb2369169b1        hyperledger/fabric-couchdb:s390x-0.4.14   "tini -- /docker-ent…"   30 minutes ago      Up 30 minutes       4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp                                  couchdb0
- 1c99d4adb8d3        hyperledger/fabric-ca                     "sh -c 'fabric-ca-se…"   30 minutes ago      Up 30 minutes       0.0.0.0:7054->7054/tcp                                                      ca_Org0
- e33ac4f4a133        hyperledger/fabric-couchdb:s390x-0.4.14   "tini -- /docker-ent…"   30 minutes ago      Up 30 minutes       4369/tcp, 9100/tcp, 0.0.0.0:8984->5984/tcp                                  couchdb3
- 8adc89681b53        hyperledger/fabric-couchdb:s390x-0.4.14   "tini -- /docker-ent…"   30 minutes ago      Up 30 minutes       4369/tcp, 9100/tcp, 0.0.0.0:7984->5984/tcp                                  couchdb2
- 6d32410a76aa        hyperledger/fabric-orderer                "orderer"                30 minutes ago      Up 30 minutes       0.0.0.0:7050->7050/tcp                                                      orderer.blockchain.com
- fd5092d61ba8        hyperledger/fabric-ca                     "sh -c 'fabric-ca-se…"   30 minutes ago      Up 30 minutes       0.0.0.0:8054->7054/tcp                                                      ca_Org1
+ f78c6f5f3c26        hyperledger/fabric-tools                  "bash"                   6 minutes ago       Up 6 minutes                                                                                    cli
+ f4cf393f4551        hyperledger/fabric-peer                   "peer node start"        6 minutes ago       Up 6 minutes        0.0.0.0:10051->7051/tcp, 0.0.0.0:10052->7052/tcp, 0.0.0.0:10053->7053/tcp   peer1.marblesinc.com
+ 4a476224ddd1        hyperledger/fabric-peer                   "peer node start"        6 minutes ago       Up 6 minutes        0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp      peer1.unitedmarbles.com
+ 37df79435787        hyperledger/fabric-peer                   "peer node start"        6 minutes ago       Up 6 minutes        0.0.0.0:7051-7053->7051-7053/tcp                                            peer0.unitedmarbles.com
+ 502c9dd2fa11        hyperledger/fabric-peer                   "peer node start"        6 minutes ago       Up 6 minutes        0.0.0.0:9051->7051/tcp, 0.0.0.0:9052->7052/tcp, 0.0.0.0:9053->7053/tcp      peer0.marblesinc.com
+ 6bb22da9c588        hyperledger/fabric-ca                     "sh -c 'fabric-ca-se…"   6 minutes ago       Up 6 minutes        0.0.0.0:7054->7054/tcp                                                      ca_Org0
+ e362dce38155        hyperledger/fabric-couchdb:s390x-0.4.13   "tini -- /docker-ent…"   6 minutes ago       Up 6 minutes        4369/tcp, 9100/tcp, 0.0.0.0:6984->5984/tcp                                  couchdb1
+ f15be8759be9        hyperledger/fabric-orderer                "orderer"                6 minutes ago       Up 6 minutes        0.0.0.0:7050->7050/tcp                                                      orderer.blockchain.com
+ 7f06745d71f1        hyperledger/fabric-couchdb:s390x-0.4.13   "tini -- /docker-ent…"   6 minutes ago       Up 6 minutes        4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp                                  couchdb0
+ a1bc90cd0186        hyperledger/fabric-couchdb:s390x-0.4.13   "tini -- /docker-ent…"   6 minutes ago       Up 6 minutes        4369/tcp, 9100/tcp, 0.0.0.0:8984->5984/tcp                                  couchdb3
+ 5c91c2280a86        hyperledger/fabric-ca                     "sh -c 'fabric-ca-se…"   6 minutes ago       Up 6 minutes        0.0.0.0:8054->7054/tcp                                                      ca_Org1
+ 3a4944e8c58b        hyperledger/fabric-couchdb:s390x-0.4.13   "tini -- /docker-ent…"   6 minutes ago       Up 6 minutes        4369/tcp, 9100/tcp, 0.0.0.0:7984->5984/tcp                                  couchdb2
 
 **Step 9.4:** Entering this will make this fact stand out more as you should only see column headers in your output. 
 (The *--invert-match* argument for *grep* says “do not show me anything that contains the string “hyperledger”)::
@@ -881,13 +880,13 @@ To prove this to yourself, on PuTTY Session 2, enter this to see the new Docker 
 
  bcuser@ubuntu16045:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED              SIZE
- dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        5 minutes ago       137MB
+ dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              9f1fc6820d01        5 seconds ago       137MB
 
 **Step 9.8:** And enter this to see the Docker chaincode container created from the new Docker image::
 
  bcuser@ubuntu16045:~$ docker ps | grep --invert-match hyperledger 
  CONTAINER ID        IMAGE                                                                                                      COMMAND                  CREATED             STATUS              PORTS                                                                       NAMES
- 0929db7e5a83        dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.add…"   5 minutes ago       Up 5 minutes                                                                                    dev-peer0.unitedmarbles.com-marbles-1.0
+ 054fe600d195        dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.add…"   27 seconds ago      Up 26 seconds                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
  bcuser@ubuntu16045:~$ 
 
 The naming convention used by Hyperledger Fabric v1.3 for the Docker images it creates for chaincode is *HyperledgerFabricNetworkName-PeerName-ChaincodeName-ChaincodeVersion-SHA256Hash*. 
@@ -956,13 +955,13 @@ But it all starts with function calls inside the chaincode functions that ask fo
 
  bcuser@ubuntu16045:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
- dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        10 minutes ago      137MB
+ dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              9f1fc6820d01        About a minute ago   137MB
 
 **Step 10.5:** Enter this command to see information about the chaincode container.  
 I introduce here the *--no-trunc* option, which stands for *no truncation*, so you can see more information about the container::
 
  bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-
- 0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                10 minutes ago      Up 10 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
+ 054fe600d195101a4e735bd213f433b41b40d7c1496bf325425e81fa5f789955   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                About a minute ago   Up About a minute                                                                               dev-peer0.unitedmarbles.com-marbles-1.0
 
 The takeaway is that the chaincode execution has only run on peer0 of Org0MSP so far, and this is also the peer on which you instantiated the chaincode, so the Docker image for the chaincode, and the corresponding Docker container based on the image, have been created for only this peer.  
 You will see soon that other peers will have their own chaincode Docker image and Docker container built the first time they are needed.
@@ -998,14 +997,14 @@ I put 12 leading zeros in front of the number 1 in case you wanted to stay late 
 
  bcuser@ubuntu16045:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
- dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      latest              a6e05533ebcb        About a minute ago   137MB
- dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        13 minutes ago       137MB
+ dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      latest              10f11ae0735b        3 seconds ago       137MB
+ dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              9f1fc6820d01        2 minutes ago       137MB
  
 **Step 10.9:**	In PuTTY session 2, issue the command to see that you have two Docker chaincode containers::
 
  bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-*
- 24bbb59d91135de98030780eba1422eb9bd7b020535647709b5eae7e141c5521   dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      "chaincode -peer.address=peer0.marblesinc.com:7052"                                                                                                                                                                                                                   About a minute ago   Up About a minute                                                                               dev-peer0.marblesinc.com-marbles-1.0
- 0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                14 minutes ago       Up 14 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
+ 22d63701f033c108296dd5170b67d5a1a00a8bb8b93197bc95e8303bcfc5657a   dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      "chaincode -peer.address=peer0.marblesinc.com:7052"                                                                                                                                                                                                                   28 seconds ago      Up 27 seconds                                                                                   dev-peer0.marblesinc.com-marbles-1.0
+ 054fe600d195101a4e735bd213f433b41b40d7c1496bf325425e81fa5f789955   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                2 minutes ago       Up 2 minutes                                                                                    dev-peer0.unitedmarbles.com-marbles-1.0
  bcuser@ubuntu16045:~$ 
 
 **Step 10.10:**	You will create a new owner now.  
@@ -1060,16 +1059,16 @@ It should work this time::
 
  bcuser@ubuntu16045:~$ docker images dev-*
  REPOSITORY                                                                                                 TAG                 IMAGE ID            CREATED             SIZE
- dev-peer1.unitedmarbles.com-marbles-1.0-dea1aa08dc7c6f282a31dd498670173c21d3e75ef0ef1d170b95e1212fbacb77   latest              c5eb7c1a465e        41 seconds ago      137MB
- dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      latest              a6e05533ebcb        16 minutes ago      137MB
- dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              47aab04b87e2        29 minutes ago      137MB
+ dev-peer1.unitedmarbles.com-marbles-1.0-dea1aa08dc7c6f282a31dd498670173c21d3e75ef0ef1d170b95e1212fbacb77   latest              39d2292b2c9f        29 seconds ago      137MB
+ dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      latest              10f11ae0735b        16 minutes ago      137MB
+ dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   latest              9f1fc6820d01        19 minutes ago      137MB
 
 **Step 10.15:**	Enter the Docker command that will show you that you now have your third chaincode-related Docker container, the one just built for peer1 of Org0::
 
  bcuser@ubuntu16045:~$ docker ps --no-trunc | grep dev-
- 7de0c5552680a9a19ac0720041ada2904ba721b8e884e7c08fa968fb7e0cb1a4   dev-peer1.unitedmarbles.com-marbles-1.0-dea1aa08dc7c6f282a31dd498670173c21d3e75ef0ef1d170b95e1212fbacb77   "chaincode -peer.address=peer1.unitedmarbles.com:7052"                                                                                                                                                                                                                About a minute ago   Up About a minute                                                                               dev-peer1.unitedmarbles.com-marbles-1.0
- 24bbb59d91135de98030780eba1422eb9bd7b020535647709b5eae7e141c5521   dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      "chaincode -peer.address=peer0.marblesinc.com:7052"                                                                                                                                                                                                                   17 minutes ago       Up 17 minutes                                                                                   dev-peer0.marblesinc.com-marbles-1.0
- 0929db7e5a8317a13bf132e7c570623a95de96e989b5968dd5a64147803ee4a8   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                29 minutes ago       Up 29 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
+ 9fb400ec36af291ab8e153b9fc61d75536ac29f43d2f3f28e37a119adc09de31   dev-peer1.unitedmarbles.com-marbles-1.0-dea1aa08dc7c6f282a31dd498670173c21d3e75ef0ef1d170b95e1212fbacb77   "chaincode -peer.address=peer1.unitedmarbles.com:7052"                                                                                                                                                                                                                59 seconds ago      Up 58 seconds                                                                                   dev-peer1.unitedmarbles.com-marbles-1.0
+ 22d63701f033c108296dd5170b67d5a1a00a8bb8b93197bc95e8303bcfc5657a   dev-peer0.marblesinc.com-marbles-1.0-4077677f13838bacbfd8ff943e7348c00f3c4d6ca6e2838efd14204ca87ea12b      "chaincode -peer.address=peer0.marblesinc.com:7052"                                                                                                                                                                                                                   17 minutes ago      Up 17 minutes                                                                                   dev-peer0.marblesinc.com-marbles-1.0
+ 054fe600d195101a4e735bd213f433b41b40d7c1496bf325425e81fa5f789955   dev-peer0.unitedmarbles.com-marbles-1.0-7e92f069adb7469939a96dcba723fa2019745461f05a562e81cec38e46424aa1   "chaincode -peer.address=peer0.unitedmarbles.com:7052"                                                                                                                                                                                                                19 minutes ago      Up 19 minutes                                                                                   dev-peer0.unitedmarbles.com-marbles-1.0
  bcuser@ubuntu16045:~$ 
 
 **Step 10.16:**	Try some additional chaincode invocations. 
