@@ -1,6 +1,6 @@
 Section 1:  Lab Overview
 ========================
-In this lab, you will start with a basic Ubuntu 16.04.5 server instance running on an IBM z13 Server that resides in the IBM Washington Systems Center in Herndon, Virginia.  Ubuntu updates were applied such that at this time the level of Ubuntu is *16.04.5 LTS* and the Linux kernel is at level *4.4.0-137*.  In addtion, several software prerequisites have already been installed on this instance for you, including:
+In this lab, you will start with a basic Ubuntu 16.04.5 server instance running on an IBM z13 Server that resides in the IBM Washington Systems Center in Herndon, Virginia.  Ubuntu updates were applied such that at this time the level of Ubuntu is *16.04.5 LTS* and the Linux kernel is at level *4.4.0-139*.  In addtion, several software prerequisites have already been installed on this instance for you, including:
 
 *	Docker and Docker Compose
 *	Node.js and npm
@@ -34,14 +34,25 @@ In this section, you will:
  
 **Step 2.3:** Use the software tool *git* to download the source code of the Hyperledger Fabric core package from the official place where it lives::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ git clone -b v1.3.0 https://gerrit.hyperledger.org/r/fabric
  Cloning into 'fabric'...
- remote: Counting objects: 79472, done
- remote: Finding sources: 100% (79472/79472)
- remote: Total 79472 (delta 35136), reused 79434 (delta 35136)
- Receiving objects: 100% (79472/79472), 97.64 MiB | 26.29 MiB/s, done.
- Resolving deltas: 100% (35136/35136), done.
+ remote: Counting objects: 5663, done
+ remote: Finding sources: 100% (44/44)
+ remote: Total 83861 (delta 0), reused 83830 (delta 0)
+ Receiving objects: 100% (83861/83861), 103.24 MiB | 27.24 MiB/s, done.
+ Resolving deltas: 100% (36805/36805), done.
  Checking connectivity... done.
+ Note: checking out 'ab0a67ad7102f1281736e2c309e9a0ef91b08fd9'.
+
+ You are in 'detached HEAD' state. You can look around, make experimental
+ changes and commit them, and you can discard any commits you make in this
+ state without impacting any branches by performing another checkout.
+
+ If you want to create a new branch to retain commits you create, you may
+ do so (now or later) by using -b with the checkout command again. Example:
+
+   git checkout -b <new-branch-name>
+
 
 *Note:* The numbers in the various output messages may differ from what you see listed here, and this may be the case for any other times you do a *git clone* in the remainder of these labs.
 
@@ -71,27 +82,27 @@ Docker images stored on it.  The only output you will see is the column headings
 
  bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric$ docker images
  REPOSITORY                     TAG                 IMAGE ID            CREATED              SIZE
- hyperledger/fabric-tools       latest                         eb61a4372d2d        49 seconds ago      1.52GB
- hyperledger/fabric-tools       s390x-1.4.0-snapshot-5caab9b   eb61a4372d2d        49 seconds ago      1.52GB
- hyperledger/fabric-tools       s390x-latest                   eb61a4372d2d        49 seconds ago      1.52GB
- <none>                         <none>                         78ffc26ff38e        58 seconds ago      1.65GB
- hyperledger/fabric-testenv     latest                         8bb2f2157a7f        2 minutes ago       1.57GB
- hyperledger/fabric-testenv     s390x-1.4.0-snapshot-5caab9b   8bb2f2157a7f        2 minutes ago       1.57GB
- hyperledger/fabric-testenv     s390x-latest                   8bb2f2157a7f        2 minutes ago       1.57GB
- hyperledger/fabric-buildenv    latest                         d7ac7af63798        2 minutes ago       1.47GB
- hyperledger/fabric-buildenv    s390x-1.4.0-snapshot-5caab9b   d7ac7af63798        2 minutes ago       1.47GB
- hyperledger/fabric-buildenv    s390x-latest                   d7ac7af63798        2 minutes ago       1.47GB
- hyperledger/fabric-ccenv       latest                         1fd333963a9c        3 minutes ago       1.41GB
- hyperledger/fabric-ccenv       s390x-1.4.0-snapshot-5caab9b   1fd333963a9c        3 minutes ago       1.41GB
- hyperledger/fabric-ccenv       s390x-latest                   1fd333963a9c        3 minutes ago       1.41GB
- hyperledger/fabric-orderer     latest                         7269c1176d63        3 minutes ago       145MB
- hyperledger/fabric-orderer     s390x-1.4.0-snapshot-5caab9b   7269c1176d63        3 minutes ago       145MB
- hyperledger/fabric-orderer     s390x-latest                   7269c1176d63        3 minutes ago       145MB
- hyperledger/fabric-peer        latest                         63177913a293        4 minutes ago       151MB
- hyperledger/fabric-peer        s390x-1.4.0-snapshot-5caab9b   63177913a293        4 minutes ago       151MB
- hyperledger/fabric-peer        s390x-latest                   63177913a293        4 minutes ago       151MB
- hyperledger/fabric-baseimage   s390x-0.4.14                   6e4e09df1428        9 days ago          1.38GB
- hyperledger/fabric-baseos      s390x-0.4.14                   4834a1e3ce1c        9 days ago          120MB
+ hyperledger/fabric-tools       latest                         bdceed408af3        17 seconds ago      1.48GB
+ hyperledger/fabric-tools       s390x-1.3.0-snapshot-ab0a67a   bdceed408af3        17 seconds ago      1.48GB
+ hyperledger/fabric-tools       s390x-latest                   bdceed408af3        17 seconds ago      1.48GB
+ <none>                         <none>                         a1914bb59c76        24 seconds ago      1.62GB
+ hyperledger/fabric-testenv     latest                         3a5d26529b4b        2 minutes ago       1.54GB
+ hyperledger/fabric-testenv     s390x-1.3.0-snapshot-ab0a67a   3a5d26529b4b        2 minutes ago       1.54GB
+ hyperledger/fabric-testenv     s390x-latest                   3a5d26529b4b        2 minutes ago       1.54GB
+ hyperledger/fabric-buildenv    latest                         97da0e9277ef        2 minutes ago       1.45GB
+ hyperledger/fabric-buildenv    s390x-1.3.0-snapshot-ab0a67a   97da0e9277ef        2 minutes ago       1.45GB
+ hyperledger/fabric-buildenv    s390x-latest                   97da0e9277ef        2 minutes ago       1.45GB
+ hyperledger/fabric-ccenv       latest                         662ea5e33ace        2 minutes ago       1.39GB
+ hyperledger/fabric-ccenv       s390x-1.3.0-snapshot-ab0a67a   662ea5e33ace        2 minutes ago       1.39GB
+ hyperledger/fabric-ccenv       s390x-latest                   662ea5e33ace        2 minutes ago       1.39GB
+ hyperledger/fabric-orderer     latest                         0958803f45ff        3 minutes ago       142MB
+ hyperledger/fabric-orderer     s390x-1.3.0-snapshot-ab0a67a   0958803f45ff        3 minutes ago       142MB
+ hyperledger/fabric-orderer     s390x-latest                   0958803f45ff        3 minutes ago       142MB
+ hyperledger/fabric-peer        latest                         06a39ec85563        3 minutes ago       149MB
+ hyperledger/fabric-peer        s390x-1.3.0-snapshot-ab0a67a   06a39ec85563        3 minutes ago       149MB
+ hyperledger/fabric-peer        s390x-latest                   06a39ec85563        3 minutes ago       149MB
+ hyperledger/fabric-baseimage   s390x-0.4.13                   f93a607516a7        8 weeks ago         1.35GB
+ hyperledger/fabric-baseos      s390x-0.4.13                   8ed79b01636d        8 weeks ago         120MB
 
 **Step 2.8:** Navigate to the directory where the “end-to-end” test lives::
 
@@ -120,26 +131,26 @@ Docker images stored on it.  The only output you will see is the column headings
 
  bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric/examples/e2e_cli$ docker ps --all
  CONTAINER ID        IMAGE                                                                                                  COMMAND                  CREATED              STATUS                     PORTS                                                                       NAMES
- 09b4a2c28e87        dev-peer1.org2.example.com-mycc-1.0-26c2ef32838554aac4f7ad6f100aca865e87959c9a126e86d764c8d01f8346ab   "chaincode -peer.add…"   About a minute ago   Up About a minute                                                                                       dev-peer1.org2.example.com-mycc-1.0
- 6a8f1936acf3        dev-peer0.org1.example.com-mycc-1.0-384f11f484b9302df90b453200cfb25174305fce8f53f4e94d45ee3b6cab0ce9   "chaincode -peer.add…"   About a minute ago   Up About a minute                                                                                       dev-peer0.org1.example.com-mycc-1.0
- 5532a4d94a57        dev-peer0.org2.example.com-mycc-1.0-15b571b3ce849066b7ec74497da3b27e54e0df1345daff3951b94245ce09c42b   "chaincode -peer.add…"   About a minute ago   Up About a minute                                                                                       dev-peer0.org2.example.com-mycc-1.0
- a504007136dc        hyperledger/fabric-tools                                                                               "/bin/bash -c './scr…"   2 minutes ago        Exited (0) 48 seconds ago                                                                               cli
- ef1e3f73e632        hyperledger/fabric-orderer                                                                             "orderer"                2 minutes ago        Up 2 minutes                0.0.0.0:7050->7050/tcp                                                      orderer.example.com
- 0a65a1fae055        hyperledger/fabric-kafka                                                                               "/docker-entrypoint.…"   2 minutes ago        Up 2 minutes                9093/tcp, 0.0.0.0:32780->9092/tcp                                           kafka0
- cfd398ab4b8c        hyperledger/fabric-kafka                                                                               "/docker-entrypoint.…"   2 minutes ago        Up 2 minutes                9093/tcp, 0.0.0.0:32778->9092/tcp                                           kafka1
- 71b76b641f25        hyperledger/fabric-kafka                                                                               "/docker-entrypoint.…"   2 minutes ago        Up 2 minutes                9093/tcp, 0.0.0.0:32779->9092/tcp                                           kafka3
- 6963bd5d1ab9        hyperledger/fabric-kafka                                                                               "/docker-entrypoint.…"   2 minutes ago        Up 2 minutes                9093/tcp, 0.0.0.0:32777->9092/tcp                                           kafka2
- 429776cada25        hyperledger/fabric-peer                                                                                "peer node start"        2 minutes ago        Up 2 minutes                0.0.0.0:9051->7051/tcp, 0.0.0.0:9052->7052/tcp, 0.0.0.0:9053->7053/tcp      peer0.org2.example.com
- 434ac0f8aa04        hyperledger/fabric-peer                                                                                "peer node start"        2 minutes ago        Up 2 minutes                0.0.0.0:10051->7051/tcp, 0.0.0.0:10052->7052/tcp, 0.0.0.0:10053->7053/tcp   peer1.org2.example.com
- cdb9e8b9c885        hyperledger/fabric-peer                                                                                "peer node start"        2 minutes ago        Up 2 minutes                0.0.0.0:7051-7053->7051-7053/tcp                                            peer0.org1.example.com
- ed8f768148c7        hyperledger/fabric-peer                                                                                "peer node start"        2 minutes ago        Up 2 minutes                0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp      peer1.org1.example.com
- a3e9401ac3ef        hyperledger/fabric-zookeeper                                                                           "/docker-entrypoint.…"   2 minutes ago        Up 2 minutes                0.0.0.0:32775->2181/tcp, 0.0.0.0:32773->2888/tcp, 0.0.0.0:32771->3888/tcp   zookeeper0
- 3e549248300d        hyperledger/fabric-zookeeper                                                                           "/docker-entrypoint.…"   2 minutes ago        Up 2 minutes                0.0.0.0:32776->2181/tcp, 0.0.0.0:32774->2888/tcp, 0.0.0.0:32772->3888/tcp   zookeeper1
- ebbff1a3aa12        hyperledger/fabric-couchdb                                                                             "tini -- /docker-ent…"   2 minutes ago        Up 2 minutes                4369/tcp, 9100/tcp, 0.0.0.0:7984->5984/tcp                                  couchdb2
- 653584c0d8f3        hyperledger/fabric-couchdb                                                                             "tini -- /docker-ent…"   2 minutes ago        Up 2 minutes                4369/tcp, 9100/tcp, 0.0.0.0:8984->5984/tcp                                  couchdb3
- 82a9dba290e8        hyperledger/fabric-zookeeper                                                                           "/docker-entrypoint.…"   2 minutes ago        Up 2 minutes                0.0.0.0:32770->2181/tcp, 0.0.0.0:32769->2888/tcp, 0.0.0.0:32768->3888/tcp   zookeeper2
- fb0749622771        hyperledger/fabric-couchdb                                                                             "tini -- /docker-ent…"   2 minutes ago        Up 2 minutes                4369/tcp, 9100/tcp, 0.0.0.0:6984->5984/tcp                                  couchdb1
- ac659714affb        hyperledger/fabric-couchdb                                                                             "tini -- /docker-ent…"   2 minutes ago        Up 2 minutes                4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp                                  couchdb0
+ 983cc0fce2e8        dev-peer1.org2.example.com-mycc-1.0-26c2ef32838554aac4f7ad6f100aca865e87959c9a126e86d764c8d01f8346ab   "chaincode -peer.add…"   18 seconds ago       Up 17 seconds                                                                                          dev-peer1.org2.example.com-mycc-1.0
+ 19997254a1d4        dev-peer0.org1.example.com-mycc-1.0-384f11f484b9302df90b453200cfb25174305fce8f53f4e94d45ee3b6cab0ce9   "chaincode -peer.add…"   37 seconds ago       Up 35 seconds                                                                                          dev-peer0.org1.example.com-mycc-1.0
+ 080fc8a865ce        dev-peer0.org2.example.com-mycc-1.0-15b571b3ce849066b7ec74497da3b27e54e0df1345daff3951b94245ce09c42b   "chaincode -peer.add…"   55 seconds ago       Up 54 seconds                                                                                          dev-peer0.org2.example.com-mycc-1.0
+ e6f9a25aed07        hyperledger/fabric-tools                                                                               "/bin/bash -c './scr…"   About a minute ago   Exited (0) 3 seconds ago                                                                               cli
+ 7a3eb3056daf        hyperledger/fabric-orderer                                                                             "orderer"                About a minute ago   Up About a minute          0.0.0.0:7050->7050/tcp                                                      orderer.example.com
+ 7a27c6d12dce        hyperledger/fabric-kafka                                                                               "/docker-entrypoint.…"   About a minute ago   Up About a minute          9093/tcp, 0.0.0.0:32780->9092/tcp                                           kafka3
+ a725fbd039a2        hyperledger/fabric-kafka                                                                               "/docker-entrypoint.…"   About a minute ago   Up About a minute          9093/tcp, 0.0.0.0:32779->9092/tcp                                           kafka2
+ 690cfb96f8aa        hyperledger/fabric-kafka                                                                               "/docker-entrypoint.…"   About a minute ago   Up About a minute          9093/tcp, 0.0.0.0:32778->9092/tcp                                           kafka1
+ 253ec4228247        hyperledger/fabric-kafka                                                                               "/docker-entrypoint.…"   About a minute ago   Up About a minute          9093/tcp, 0.0.0.0:32777->9092/tcp                                           kafka0
+ 4c010968e221        hyperledger/fabric-peer                                                                                "peer node start"        About a minute ago   Up About a minute          0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp      peer1.org1.example.com
+ 90a84d2599bb        hyperledger/fabric-peer                                                                                "peer node start"        About a minute ago   Up About a minute          0.0.0.0:10051->7051/tcp, 0.0.0.0:10052->7052/tcp, 0.0.0.0:10053->7053/tcp   peer1.org2.example.com
+ 1fd9d9272298        hyperledger/fabric-peer                                                                                "peer node start"        About a minute ago   Up About a minute          0.0.0.0:9051->7051/tcp, 0.0.0.0:9052->7052/tcp, 0.0.0.0:9053->7053/tcp      peer0.org2.example.com
+ abeb31d61054        hyperledger/fabric-peer                                                                                "peer node start"        About a minute ago   Up About a minute          0.0.0.0:7051-7053->7051-7053/tcp                                            peer0.org1.example.com
+ 982b65d9eba8        hyperledger/fabric-couchdb                                                                             "tini -- /docker-ent…"   About a minute ago   Up About a minute          4369/tcp, 9100/tcp, 0.0.0.0:6984->5984/tcp                                  couchdb1
+ 721a24e18f49        hyperledger/fabric-couchdb                                                                             "tini -- /docker-ent…"   About a minute ago   Up About a minute          4369/tcp, 9100/tcp, 0.0.0.0:7984->5984/tcp                                  couchdb2
+ a95de76b94f1        hyperledger/fabric-zookeeper                                                                           "/docker-entrypoint.…"   About a minute ago   Up About a minute          0.0.0.0:32776->2181/tcp, 0.0.0.0:32775->2888/tcp, 0.0.0.0:32773->3888/tcp   zookeeper1
+ b5f4136194be        hyperledger/fabric-zookeeper                                                                           "/docker-entrypoint.…"   About a minute ago   Up About a minute          0.0.0.0:32774->2181/tcp, 0.0.0.0:32772->2888/tcp, 0.0.0.0:32771->3888/tcp   zookeeper2
+ ad1f5388032f        hyperledger/fabric-zookeeper                                                                           "/docker-entrypoint.…"   About a minute ago   Up About a minute          0.0.0.0:32770->2181/tcp, 0.0.0.0:32769->2888/tcp, 0.0.0.0:32768->3888/tcp   zookeeper0
+ bf377461afee        hyperledger/fabric-couchdb                                                                             "tini -- /docker-ent…"   About a minute ago   Up About a minute          4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp                                  couchdb0
+ c89871fcdef5        hyperledger/fabric-couchdb                                                                             "tini -- /docker-ent…"   About a minute ago   Up About a minute          4369/tcp, 9100/tcp, 0.0.0.0:8984->5984/tcp                                  couchdb3
 
 The first three Docker containers listed are chaincode containers-  The chaincode was run on three of the four peers, so they each had a Docker image and container created.  There were also four peer containers created, each with a couchdb container, and one orderer container. The orderer service uses *Kafka* for consensus, and so is supported by four Kafka containers and three Zookeeper containers. There was a container created to run the CLI itself, and that container stopped running ten seconds after the test ended.  (That was what the value *10* was for in the *./network_setup.sh* command you ran).
 
@@ -177,14 +188,24 @@ The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s
 
 **Step 3.2:** Get the source code for the Fabric CA using *git*::
 
- bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ git clone https://gerrit.hyperledger.org/r/fabric-ca
+ bcuser@ubuntu16045:~/git/src/github.com/hyperledger$ git clone -b v1.3.0 https://gerrit.hyperledger.org/r/fabric-ca
  Cloning into 'fabric-ca'...
- remote: Counting objects: 1697, done
- remote: Finding sources: 100% (61/61)
- remote: Total 11956 (delta 1), reused 11953 (delta 1)
- Receiving objects: 100% (11956/11956), 26.97 MiB | 20.56 MiB/s, done.
- Resolving deltas: 100% (4189/4189), done.
+ remote: Counting objects: 2082, done
+ remote: Finding sources: 100% (387/387)
+ remote: Total 12505 (delta 22), reused 12501 (delta 22)
+ Receiving objects: 100% (12505/12505), 28.35 MiB | 16.21 MiB/s, done.
+ Resolving deltas: 100% (4265/4265), done.
  Checking connectivity... done.
+ Note: checking out '8b93ae01aedda27162828ddeeeac9cbec27a5ad7'.
+
+ You are in 'detached HEAD' state. You can look around, make experimental
+ changes and commit them, and you can discard any commits you make in this
+ state without impacting any branches by performing another checkout.
+
+ If you want to create a new branch to retain commits you create, you may
+ do so (now or later) by using -b with the checkout command again. Example:
+
+   git checkout -b <new-branch-name>
 
 **Step 3.3:** Navigate to the *fabric-ca* directory, which is the top directory of where the *git* command put the code it just downloaded::
 
@@ -206,33 +227,33 @@ The next major goal in this lab is to run the Hyperledger Fabric Node.js SDK’s
 
  bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-ca$ docker images
  REPOSITORY                      TAG                 IMAGE ID            CREATED              SIZE
- hyperledger/fabric-ca          latest                         7a3fa3cd6f4c        2 minutes ago       317MB
- hyperledger/fabric-ca          s390x-1.4.0-snapshot-bd7f997   7a3fa3cd6f4c        2 minutes ago       317MB
- hyperledger/fabric-tools       latest                         eb61a4372d2d        38 minutes ago      1.52GB
- hyperledger/fabric-tools       s390x-1.4.0-snapshot-5caab9b   eb61a4372d2d        38 minutes ago      1.52GB
- hyperledger/fabric-tools       s390x-latest                   eb61a4372d2d        38 minutes ago      1.52GB
- hyperledger/fabric-testenv     latest                         8bb2f2157a7f        40 minutes ago      1.57GB
- hyperledger/fabric-testenv     s390x-1.4.0-snapshot-5caab9b   8bb2f2157a7f        40 minutes ago      1.57GB
- hyperledger/fabric-testenv     s390x-latest                   8bb2f2157a7f        40 minutes ago      1.57GB
- hyperledger/fabric-buildenv    latest                         d7ac7af63798        40 minutes ago      1.47GB
- hyperledger/fabric-buildenv    s390x-1.4.0-snapshot-5caab9b   d7ac7af63798        40 minutes ago      1.47GB
- hyperledger/fabric-buildenv    s390x-latest                   d7ac7af63798        40 minutes ago      1.47GB
- hyperledger/fabric-ccenv       latest                         1fd333963a9c        41 minutes ago      1.41GB
- hyperledger/fabric-ccenv       s390x-1.4.0-snapshot-5caab9b   1fd333963a9c        41 minutes ago      1.41GB
- hyperledger/fabric-ccenv       s390x-latest                   1fd333963a9c        41 minutes ago      1.41GB
- hyperledger/fabric-orderer     latest                         7269c1176d63        41 minutes ago      145MB
- hyperledger/fabric-orderer     s390x-1.4.0-snapshot-5caab9b   7269c1176d63        41 minutes ago      145MB
- hyperledger/fabric-orderer     s390x-latest                   7269c1176d63        41 minutes ago      145MB
- hyperledger/fabric-peer        latest                         63177913a293        42 minutes ago      151MB
- hyperledger/fabric-peer        s390x-1.4.0-snapshot-5caab9b   63177913a293        42 minutes ago      151MB
- hyperledger/fabric-peer        s390x-latest                   63177913a293        42 minutes ago      151MB
- hyperledger/fabric-zookeeper   latest                         5db059b03239        9 days ago          1.42GB
- hyperledger/fabric-kafka       latest                         3bbd80f55946        9 days ago          1.43GB
- hyperledger/fabric-couchdb     latest                         7afa6ce179e6        9 days ago          1.55GB
- hyperledger/fabric-baseimage   s390x-0.4.14                   6e4e09df1428        9 days ago          1.38GB
- hyperledger/fabric-baseos      s390x-0.4.14                   4834a1e3ce1c        9 days ago          120MB
+ hyperledger/fabric-ca          latest                         4e2616487cde        35 seconds ago      317MB
+ hyperledger/fabric-ca          s390x-1.3.0                    4e2616487cde        35 seconds ago      317MB
+ hyperledger/fabric-tools       latest                         bdceed408af3        10 minutes ago      1.48GB
+ hyperledger/fabric-tools       s390x-1.3.0-snapshot-ab0a67a   bdceed408af3        10 minutes ago      1.48GB
+ hyperledger/fabric-tools       s390x-latest                   bdceed408af3        10 minutes ago      1.48GB
+ hyperledger/fabric-testenv     latest                         3a5d26529b4b        11 minutes ago      1.54GB
+ hyperledger/fabric-testenv     s390x-1.3.0-snapshot-ab0a67a   3a5d26529b4b        11 minutes ago      1.54GB
+ hyperledger/fabric-testenv     s390x-latest                   3a5d26529b4b        11 minutes ago      1.54GB
+ hyperledger/fabric-buildenv    latest                         97da0e9277ef        12 minutes ago      1.45GB
+ hyperledger/fabric-buildenv    s390x-1.3.0-snapshot-ab0a67a   97da0e9277ef        12 minutes ago      1.45GB
+ hyperledger/fabric-buildenv    s390x-latest                   97da0e9277ef        12 minutes ago      1.45GB
+ hyperledger/fabric-ccenv       latest                         662ea5e33ace        12 minutes ago      1.39GB
+ hyperledger/fabric-ccenv       s390x-1.3.0-snapshot-ab0a67a   662ea5e33ace        12 minutes ago      1.39GB
+ hyperledger/fabric-ccenv       s390x-latest                   662ea5e33ace        12 minutes ago      1.39GB
+ hyperledger/fabric-orderer     latest                         0958803f45ff        12 minutes ago      142MB
+ hyperledger/fabric-orderer     s390x-1.3.0-snapshot-ab0a67a   0958803f45ff        12 minutes ago      142MB
+ hyperledger/fabric-orderer     s390x-latest                   0958803f45ff        12 minutes ago      142MB
+ hyperledger/fabric-peer        latest                         06a39ec85563        13 minutes ago      149MB
+ hyperledger/fabric-peer        s390x-1.3.0-snapshot-ab0a67a   06a39ec85563        13 minutes ago      149MB
+ hyperledger/fabric-peer        s390x-latest                   06a39ec85563        13 minutes ago      149MB
+ hyperledger/fabric-zookeeper   latest                         5db059b03239        7 weeks ago         1.42GB
+ hyperledger/fabric-kafka       latest                         3bbd80f55946        7 weeks ago         1.43GB
+ hyperledger/fabric-couchdb     latest                         7afa6ce179e6        7 weeks ago         1.55GB
+ hyperledger/fabric-baseimage   s390x-0.4.13                   f93a607516a7        8 weeks ago         1.35GB
+ hyperledger/fabric-baseos      s390x-0.4.13                   8ed79b01636d        8 weeks ago         120MB
 
-You may have noticed that for many of the images, the *Image ID* appears more than once, e.g., once with a tag of *latest*,  once with a tag such as *s390x-1.4.0-snapshot-5caab9b*, and once with a tag of *s390x-latest*. An image can actually be given any number of tags. Think of these *tags* as nicknames, or aliases.  In our case the *make* process first gave the Docker image it created a descriptive tag, *s390x-1.4.0-snapshot-5caab9b* in the case of the *fabric* repo, and *s390x-1.4.0-snapshot-bd7f997* in the case of the *fabric-ca* repo, and then it also ‘tagged’ it with a new tag, *latest*.  It did that for a reason.  When you are working with Docker images, if you specify an image without specifying a tag, the tag defaults to the name *latest*. So, for example, using the above output, you can specify either *hyperledger/fabric-ca*, *hyperledger/fabric-ca:latest*, or *hyperledger/fabric-ca:s390x-1.4.0-snapshot-bd7f997*, and in all three cases you are asking for the same image, the image with ID *7a3fa3cd6f4c*.
+You may have noticed that for many of the images, the *Image ID* appears more than once, e.g., once with a tag of *latest*,  once with a tag such as *s390x-1.3.0-snapshot-ab0a67a*, and once with a tag of *s390x-latest*. An image can actually be given any number of tags. Think of these *tags* as nicknames, or aliases.  In our case the *make* process first gave the Docker image it created a descriptive tag, *ss390x-1.3.0-snapshot-ab0a67a* in the case of the *fabric* repo, and *s390x-1.3.0* in the case of the *fabric-ca* repo, and then it also ‘tagged’ it with a new tag, *latest*.  It did that for a reason.  When you are working with Docker images, if you specify an image without specifying a tag, the tag defaults to the name *latest*. So, for example, using the above output, you can specify either *hyperledger/fabric-ca*, *hyperledger/fabric-ca:latest*, or *hyperledger/fabric-ca:s390x-1.3.0*, and in all three cases you are asking for the same image, the image with ID *4e2616487cde*.
 
 **Recap:** In this section, you downloaded the source code for the Hyperledger Fabric Certificate Authority and built it.  That was easy.
  
@@ -249,14 +270,24 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
 
 **Step 4.2:** Now you will download the Hyperledger Fabric Node SDK source code from its official repository::
 
- bcuser@ubuntu16045: ~/git/src/github.com/hyperledger $ git clone https://gerrit.hyperledger.org/r/fabric-sdk-node
+ bcuser@ubuntu16045: ~/git/src/github.com/hyperledger $ git clone -b v1.3.0 https://gerrit.hyperledger.org/r/fabric-sdk-node
  Cloning into 'fabric-sdk-node'...
- remote: Counting objects: 643, done
- remote: Finding sources: 100% (6/6)
- remote: Total 11208 (delta 0), reused 11203 (delta 0)
- Receiving objects: 100% (11208/11208), 7.93 MiB | 6.39 MiB/s, done.
- Resolving deltas: 100% (5482/5482), done.
+ remote: Counting objects: 1054, done
+ remote: Finding sources: 100% (34/34)
+ remote: Total 12920 (delta 3), reused 12904 (delta 3)
+ Receiving objects: 100% (12920/12920), 9.19 MiB | 9.68 MiB/s, done.
+ Resolving deltas: 100% (6222/6222), done.
  Checking connectivity... done.
+ Note: checking out '95b02d9b2ce508d8a3684792b6b040ae04a4067c'.
+
+ You are in 'detached HEAD' state. You can look around, make experimental
+ changes and commit them, and you can discard any commits you make in this
+ state without impacting any branches by performing another checkout.
+
+ If you want to create a new branch to retain commits you create, you may
+ do so (now or later) by using -b with the checkout command again. Example:
+
+   git checkout -b <new-branch-name>
 
 **Step 4.3:** Change to the *fabric-sdk-node* directory which was just created::
 
@@ -267,21 +298,10 @@ In this section, you will download the Hyperledger Fabric Node.js SDK and instal
 run *npm list* to see that you are starting with a blank slate::
 
  bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ npm list
- fabric-sdk-node@1.3.0-snapshot /home/bcuser/git/src/github.com/hyperledger/fabric-sdk-node
+ fabric-sdk-node@1.3.0 /home/bcuser/git/src/github.com/hyperledger/fabric-sdk-node
  `-- (empty)
-
-
-
-   ╭─────────────────────────────────────╮
-   │                                     │
-   │   Update available 5.6.0 → 6.4.1    │
-   │     Run npm i -g npm to update      │
-   │                                     │
-   ╰─────────────────────────────────────╯
-
+ 
  bcuser@ubuntu16045: ~/git/src/github.com/hyperledger/fabric-sdk-node$
-
-You may ignore the message concerning the available update to npm here and throughout the remainder of these labs.
 
 **Step 4.5:** Run *npm install* to install the required packages.  This will take a few minutes and will produce a lot of output::
 
@@ -323,9 +343,9 @@ The first test is a quick test that takes about a minute and does not bring up a
    .
    . (initial output not shown)
    .
- 1..640
- # tests 640
- # pass  640
+ 1..890
+ # tests 890
+ # pass  890
 
  # ok
 
@@ -436,9 +456,9 @@ You may have seen some messages scroll by that looked like errors or exceptions,
    . (lots of output not shown here)
    . 
  
- 1..1964
- # tests 1964
- # pass  1964
+ 1..2179
+ # tests 2179
+ # pass  2179
 
  # ok
 
@@ -563,9 +583,9 @@ These are the images that start with *dev-*::
  16c07e6b8661        dev-peer0.org1.example.com-first-v10-6d77548f00e63ff9ef8c69c1684578b171e0eb81d0135182da6245e0b0e66124    "/bin/sh -c 'cd /usr…"   20 minutes ago      Exited (0) 52 seconds ago                           dev-peer0.org1.example.com-first-v10
  a153ed0d5010        dev-peer0.org2.example.com-first-v10-089fb6ff0168a2b4fe602be3a12d069e056c2e136bc6a5978716b2bb48848615    "/bin/sh -c 'cd /usr…"   20 minutes ago      Exited (0) 52 seconds ago                           dev-peer0.org2.example.com-first-v10
 
-**Note:** The output of this command shows a few containers in the *Exited* state, but none in the *Up* state.  Over the course of the Hyperledger project, the cleanup command from *Step 5.5* tended to remove all containers, so that none were left behind even in the *Exited* state.  I suspect that this is just something that slipped through the cracks in a recent update and will probably be corrected in the future.
+**Note:** The output of this command shows a few containers in the *Exited* state, but none in the *Up* state.  In golden bygone days of lore (approximately summer of 2018, if you live in the northern hemisphere), the cleanup command from *Step 5.5* tended to remove all containers, so that none were left behind, even in the *Exited* state.  But then an evil dragon entered the land and caused the creation of new container names that the cleanup commands did not check for, allowing these containers to remain as a blight upon the land of Hyperledger Fabric Node.js SDK.  Until a future Prince Charming or Joan of Arc rises up to submit a change request to slay these wicked containers, we will have to take extraordinary steps (*5.8* and *5.10* to be precise) in order to rid our system of these containers and their associated images and free the Hyperledger Fabric peasantry of this pestilence.
 
-**Step 5.7:** And enter this comand and see that only a few chaincode images remain- those starting with *dev-* remain- again, related to the note at the end of the previous step, I suspect that a future fix will ensure that these images are deleted.
+**Step 5.7:** See the above note and then proceed, O' brave one!::
 
  bcuser@ubuntu16045:~/git/src/github.com/hyperledger/fabric-sdk-node$ docker images dev-*
  REPOSITORY                                                                                               TAG                 IMAGE ID            CREATED             SIZE
