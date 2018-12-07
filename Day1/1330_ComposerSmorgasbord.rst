@@ -26,7 +26,7 @@ The location within your environment's PATH where the *composer* program was fou
 **Step 2.2** Check to see what version of Hyperledger Composer is installed::
 
  bcuser@ubuntu16045:~$ composer --version
- v0.20.2
+ v0.20.4
 
 **Step 2.3:** Go to your home directory::
 
@@ -96,11 +96,11 @@ You just see column headings.  You do not yet have any Docker images on your sys
 
  bcuser@ubuntu16045:~/composer-tools/packages/fabric-dev-servers$ docker images
  REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
- hyperledger/fabric-ccenv     1.2.1               02f1c0afdcd3        3 weeks ago         1.44GB
- hyperledger/fabric-orderer   1.2.1               ceee6d466d47        3 weeks ago         141MB
- hyperledger/fabric-peer      1.2.1               75093b68fdf2        3 weeks ago         147MB
- hyperledger/fabric-ca        1.2.1               83761c9a2c08        3 weeks ago         215MB
- hyperledger/fabric-couchdb   0.4.10              76a35badf382        3 months ago        1.76GB
+ hyperledger/fabric-ccenv     1.2.1               02f1c0afdcd3        2 months ago        1.44GB
+ hyperledger/fabric-orderer   1.2.1               ceee6d466d47        2 months ago        141MB
+ hyperledger/fabric-peer      1.2.1               75093b68fdf2        2 months ago        147MB
+ hyperledger/fabric-ca        1.2.1               83761c9a2c08        2 months ago        215MB
+ hyperledger/fabric-couchdb   0.4.10              76a35badf382        5 months ago        1.76GB
 
 **Note:** I mentioned that this is a simple Hyperledger Fabric network.  There are several other Hyperledger Fabric Docker images that are necessary in a more complicated network.
 
@@ -153,7 +153,7 @@ A script has been provided to do this. Run the *createPeerAdminCard* script::
  FABRIC_VERSION is unset, assuming hlfv12
  FABRIC_START_TIMEOUT is unset, assuming 15 (seconds)
 
- Using composer-cli at v0.20.2
+ Using composer-cli at v0.20.4
 
  Successfully created business network card file to 
  	Output file: /tmp/PeerAdmin@hlfv1.card
@@ -435,13 +435,13 @@ I think I may have confused you enough for now.  Let's get started.
 **Step 3.3:** Check to see which version of Hyperledger Composer Playground is installed::
 
  bcuser@ubuntu16045:~$ composer-playground --version
- 0.20.2
+ 0.20.4
 
 **Step 3.4:** Start composer-playground by simply entering *composer-playground* without any arguments.  Notice that Composer Playground is listening on port 8080::
 
  bcuser@ubuntu16045:~$ composer-playground
- info: [Hyperledger-Composer] :LoadModule               :loadModule()              Loading composer-wallet-filesystem from /home/bcuser/lib/node_modules/composer-playground/node_modules/composer-wallet-filesystem
- info: [Hyperledger-Composer] :PlaygroundAPI            :createServer()            Playground API started on port 8080
+ 2018-12-07T15:06:55.551Z INFO    :LoadModule               :loadModule()              Loading composer-wallet-filesystem from /home/bcuser/lib/node_modules/composer-playground/node_modules/composer-wallet-filesystem {}$
+ 2018-12-07T15:06:55.565Z INFO    :PlaygroundAPI            :createServer()            Playground API started on port 8080 {}$
 
 **Step 3.5:** Open Chrome or Firefox and go to the *URL http://<your_hostname_or_IP>:8080* and you should first see a browser frame pop up that looks like this:
  
@@ -874,7 +874,7 @@ The Hyperledger Composer REST Server reads a Business Network definition and exp
 **Step 5.3:** See which version of the Hyperledger Composer REST server is installed::
 
  bcuser@ubuntu16045:~$ composer-rest-server --version
- v0.20.2
+ v0.20.4
 
 **Step 5.4:** Start the Hyperledger Composer REST Server and it will prompt you to enter some information.  Enter the information as shown here::
 
@@ -1016,7 +1016,7 @@ In this section, you will use tools that will allow you to generate a simple fro
 
  bcuser@ubuntu16045:~$ npm ls -g generator-hyperledger-composer
  /home/bcuser/lib
- `-- generator-hyperledger-composer@0.20.2
+ `-- generator-hyperledger-composer@0.20.4
 
  
 **Step 6.4:** Enter the following command to begin the generation of an AngularJS application based on your Hyperledger Composer Business Network::
