@@ -1,6 +1,6 @@
 Section 1: Prerequisite installation overview
 =============================================
-This document describes the installation of software prerequisites in support of Hyperledger Fabric 1.4 onto an Ubuntu 16.04.4 LTS Linux on IBM Z instance. This Ubuntu instance is at Linux kernel level *4.4.0-139*.
+This document describes the installation of software prerequisites in support of Hyperledger Fabric 1.4 onto an Ubuntu 16.04.5 LTS Linux on IBM Z instance. This Ubuntu instance is at Linux kernel level *4.4.0-139*.
 
 The necessary software prerequisites to suppor Hyperledger Fabric include:
 
