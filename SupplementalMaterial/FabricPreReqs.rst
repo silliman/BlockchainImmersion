@@ -1,8 +1,8 @@
 Section 1: Prerequisite installation overview
 =============================================
-This document describes the installation of software prerequisites required by Hyperledger Fabric 1.1.x and Hyperledger Composer 0.19.x onto an Ubuntu 16.04.4 LTS Linux on IBM Z instance. This Ubuntu instance is at Linux kernel level *4.4.0-139*.
+This document describes the installation of software prerequisites in support of Hyperledger Fabric 1.4 onto an Ubuntu 16.04.4 LTS Linux on IBM Z instance. This Ubuntu instance is at Linux kernel level *4.4.0-139*.
 
-The necessary software prerequisites to build and test Hyperledger Fabric and Hyperledger Composer include:
+The necessary software prerequisites to suppor Hyperledger Fabric include:
 
 *	Docker
 *	PIP, a python installer program (needed to install Docker Compose)
@@ -10,7 +10,6 @@ The necessary software prerequisites to build and test Hyperledger Fabric and Hy
 *	Docker Compose
 *	Golang compiler
 * Node.js and npm
-* The gulp and istanbul npm packages
 
 **Note:** The procedures described here to install Node.js and npm and Golang should work on RHEL 7.x and SLES 12.3.x as well. Docker and Docker Compose installation on RHEL and SLES will differ and is not discussed here.
 
